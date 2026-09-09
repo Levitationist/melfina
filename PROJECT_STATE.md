@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-09
+Last updated: 2026-09-10
 
 ---
 
@@ -19,12 +19,62 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: DEEP RESEARCH — RESEARCH MISSION 001 complete (first pass), awaiting
-user review. No further research until the user gives the next mission.**
+**Phase: DEEP RESEARCH — RESEARCH MISSION 001 accepted as checkpoint; RESEARCH
+MISSION 002 (deeper pass) complete, awaiting user review. No further research and
+no move to PERSONAL REQUIREMENTS until the user explicitly authorises it.**
 
-We are NOT coding the application. No architecture has been chosen. No framework
-or runtime dependency has been adopted. Nothing in the research output is a
+We are NOT coding the application. No architecture has been chosen. No language
+(C vs C++) chosen. No storage substrate (SQLite or other) chosen. No framework or
+runtime dependency adopted. `src/` untouched. Nothing in the research output is a
 requirement or a design commitment.
+
+### RESEARCH MISSION 002 — summary of outcome (2026-09-10)
+
+Deeper pass targeting Mission 001's evidence gaps. Output: `RESEARCH_MASTER.md`
+**§§20–32 + `RESEARCH CHECKPOINT 002`**; **Second-Pass Evidence Updates** in
+`CONFLICTS.md`; **Second Pass Additions** in `BIBLIOGRAPHY.md`.
+
+- **Evidence strengthened:** autism EF meta-analysis primary-verified (g = 0.48,
+  235 studies; attenuates but persists into adulthood; informant-report tracks
+  real-world difficulty better than lab tests); adult autism life outcomes (EF +
+  daily-living skills predict independent living/employment/mental health;
+  ~20% "good outcome"); autonomy-support upgraded to **[E]** (SDT meta-analyses);
+  cognitive-offloading benefits (2025 meta-analysis); PIM literature (keeping/
+  filing is the costly, abandonment-prone part; people prefer navigation+context
+  over search for their own data); attention residue (Leroy 2009 — a *credible*
+  completion path removes the load, same shape as Masicampo); notification
+  batching (Fitz 2019 RCT); AI reassurance risk (IOCDF guidance + MIT–OpenAI
+  preprint RCT); self-tracking as genuinely two-sided; reminder efficacy
+  RCT-level only in memory-impaired neurological patients (NeuroPage).
+- **Claims corrected (none disproven):** notification batching *can* help
+  wellbeing (Pass 1 said no evidence); alert-fatigue magnitude was overstated
+  (real: ~10% lower acceptance per +5pp repeat-share, Ancker 2017); autism EF
+  "stable across lifespan" → attenuates somewhat in adulthood; AuDHD
+  co-occurrence figures refined (ADHD-in-autism ≈ 22–34%); ADHD+OCD co-occurrence
+  lower/more uncertain than implied, and neurofunctionally opposite; implementation
+  intentions for **adults with ADHD** downgraded to **[U]** (child-only evidence).
+- **Musician/pianist context (new):** deliberate-practice *amount* explains only
+  ~21–26% of music-performance variance and is contested (Ericsson vs
+  Macnamara/Hambrick — contradiction preserved); the evidenced leverage is
+  **session structure, planning, reflective self-evaluation, and autonomy**, not
+  hour-logging; perfectionistic **concerns** (not strivings) drive music
+  performance anxiety and overlap with OCD constructs; autonomous motivation
+  protects against practice dropout, controlled motivation predicts it.
+- **New tier introduced:** **[U] — unknown / insufficient evidence.**
+- **Contradictions preserved** (7 listed): deliberate practice; offloading
+  long-term effect; mood/self-tracking; notification batching (smartphone vs
+  email); "problematic AI use" as a construct; prospective memory in autism;
+  adaptive UIs.
+- **Largest evidence gap:** the specific **ADHD + autism + OCD combination** is
+  unmeasured on every design-relevant variable; controlled assistive-tech
+  efficacy in adults with these conditions is sparse to absent.
+
+Confidence levels for the major conclusions are tabulated in `RESEARCH CHECKPOINT
+002`. High confidence: EF/PM/time differences warrant external scaffolding; a
+trusted capture/resurfacing system frees attention; predictability + autonomy
+support as defaults. Low confidence: specific assistive features help adults;
+foregrounding practice-hours for a musician; anything specific to the 3-way
+combination.
 
 ### RESEARCH MISSION 001 — summary of outcome
 
@@ -101,15 +151,18 @@ capacity-state adaptation; music mapping; what sustains long-term engagement.
 
 **PERSONAL REQUIREMENTS** — with the user: elicit real personal frictions and
 needs in the user's own terms; place the user on each `CONFLICTS.md` axis; decide
-which implications become requirements and at what priority. Optionally a second
-research pass first (library-database access) to close the gaps above.
+which implications become requirements and at what priority.
 **Do not start until the user gives the requirements mission.**
+
+A further (third) research pass is possible if the user wants the remaining `[U]`
+gaps chased with library-database access — but Missions 001+002 are judged
+sufficient to begin requirements when the user chooses.
 
 ### Pipeline
 
 ```
-DEEP RESEARCH            <-- MISSION 001 done (1st pass); awaiting review
-  -> PERSONAL REQUIREMENTS   <-- next, on user's go
+DEEP RESEARCH            <-- MISSION 001 + 002 done; awaiting review
+  -> PERSONAL REQUIREMENTS   <-- next, on user's explicit go
   -> HUMAN / CENTRAL MODEL
   -> SYSTEM DESIGN
   -> ARCHITECTURE
@@ -214,5 +267,20 @@ Facts, for reference. Not commitments.
   `research/RESEARCH_MASTER.md`, `research/CONFLICTS.md`, `research/BIBLIOGRAPHY.md`;
   updated `research/README.md`. Scoping literature synthesis on designing for the
   ADHD + autism + OCD overlap. No requirements, no design, no architecture, no
-  dependencies, no code. `src/` untouched. Awaiting user review before the
-  PERSONAL REQUIREMENTS mission.
+  dependencies, no code. `src/` untouched.
+- **2026-09-09** — Repo connected to GitHub remote
+  `https://github.com/Levitationist/melfina` as `origin`; history pushed to
+  `origin/main`. Permanent MELFINA git/GitHub workflow rule adopted (task → work →
+  verify → update state → checkpoint → review diff → commit → push → verify clean
+  tree). Mission 001 accepted by the user as a checkpoint.
+- **2026-09-10** — **RESEARCH MISSION 002 complete (second, deeper pass).**
+  Appended `RESEARCH_MASTER.md` §§20–32 + `RESEARCH CHECKPOINT 002`; added
+  Second-Pass sections to `CONFLICTS.md` and `BIBLIOGRAPHY.md`; updated
+  `research/README.md`. Adult-specific evidence, the 3-way overlap, musician/
+  pianist context, CSCW/PIM, PKM/offloading trade-offs, controlled adult
+  assistive-tech evidence, notification/reminder evidence, AI compulsion risk,
+  self-tracking, academic prior art, and an evidence-quality audit of Mission 001
+  (2 claims corrected, several refined, 1 partly downgraded to `[U]`; none
+  disproven). New tier `[U]`. Contradictions preserved. No requirements, no
+  design, no architecture, no language/storage choice, no dependencies, no code.
+  `src/` untouched. Awaiting user review before the PERSONAL REQUIREMENTS mission.

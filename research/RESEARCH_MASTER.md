@@ -1327,5 +1327,920 @@ Carried forward. Roughly prioritised.
 
 ---
 
-*End of RESEARCH MASTER. Bibliography: `research/BIBLIOGRAPHY.md`. Supporting
-detail on the conflict catalogue: `research/CONFLICTS.md`.*
+<a id="second-research-pass"></a>
+
+# SECOND RESEARCH PASS
+
+**RESEARCH MISSION 002 — deeper pass on the evidence gaps of Pass 1.**
+Date: 2026-09-10. Status: complete, pending review.
+
+**Purpose:** strengthen the evidence base, not redesign anything. No requirements,
+no architecture, no code. Sections 20–32 below supplement §§1–19; where a Pass-1
+claim is corrected, the change is stated explicitly and also logged in §31 and in
+`RESEARCH CHECKPOINT 002`.
+
+**New evidence tier used from here on:** **[U] — Unknown / insufficient evidence.**
+A question where credible sources are absent, too weak, or too conflicting to
+support any tier. `[DI]`/`[H]` are never promoted to `[E]`.
+
+**Governing principle for this pass:** *preserve contradictions.* Where two
+credible sources disagree, both are recorded and the disagreement is named.
+
+---
+
+## 20. Method and scope of this pass
+
+- Second scoping search (Sept 2026), same source hierarchy. ~55 additional
+  queries; ~15 full texts or systematic summaries read; several primary sources
+  (Nature family) still abstract-only.
+- Two Pass-1 primary sources were retrieved in full this time: **Demetriou 2018**
+  (autism EF meta-analysis, PMC5984099) and **Macnamara & Maitra 2019** (deliberate
+  practice replication, PMC6731745). Effect sizes below are now primary-verified.
+- Still not a systematic review. Still English-language, US-indexed. Still no
+  clinician or user contact (correct for this phase).
+- New domains searched that Pass 1 did not cover: music/deliberate practice,
+  academic personal-information-management (PIM), academic memory-augmentation
+  prototypes, problematic-AI-use literature, self-tracking outcome meta-analyses,
+  camouflaging/masking, adult autism life outcomes, JITAI (just-in-time adaptive
+  intervention) evidence.
+
+---
+
+## 21. Adult-specific evidence (ADHD, autism)
+
+Pass 1 flagged that most cognitive research is on children. This pass looked
+specifically for adult data.
+
+### 21.1 Autism — executive function (Demetriou 2018, now primary-verified)
+
+- **[E]** 235 studies, 14,081 participants (6,816 autistic, 7,265 control). Overall
+  **Hedges g = 0.48 (95% CI 0.43–0.53)** — moderate. EF impairment did **not
+  fractionate**: concept formation/set-shifting, flexibility, fluency, planning,
+  response inhibition, and working memory all showed small-to-moderate effects of
+  similar size → "broad executive dysfunction," not a specific deficit.
+- **[E] — correction to Pass 1 §4.2.** Pass 1 said EF impairment is "relatively
+  stable across the lifespan." More precisely: **adults with autism show *smaller*
+  EF effect sizes than children** ("adults with ASD perform better in EF than
+  younger age groups"), with a notable adolescent dip for working memory. The
+  impairment **attenuates with age but does not disappear** — it persists into
+  adulthood at a reduced magnitude. Revised claim: *EF differences are present
+  across the lifespan and diminish somewhat in adulthood.*
+- **[E]** EF task performance had **poor diagnostic utility**; the one measure with
+  clinical promise was the **BRIEF**, an *informant-report* questionnaire. The
+  authors suggest **ecologically valid, report-based EF measures track real-world
+  difficulty better than lab tests.** This converges with the Pass-1 findings that
+  *self-perceived* EF (not lab EF) predicts anxiety and that autistic traits track
+  perceived-but-not-measured EF. **[DI] unchanged and strengthened:** design should
+  respond to the user's *reported* friction, not to any inferred or tested profile.
+- IQ differences between groups did not moderate the effect. Studies using a
+  single diagnostic instrument found smaller effects (broader inclusion → milder
+  apparent dysfunction).
+
+### 21.2 Autism — adult life outcomes
+
+- **[E]** Adult outcomes are, on average, poor. Meta-analytic and review data
+  (Howlin & Magiati; Steward): roughly **~20% of autistic adults meet a "good
+  outcome"** definition (independent living + employment + meaningful
+  relationships); ~50% of "high-functioning" autistic adults are employed;
+  ~50% live with parents; many need substantial daily-living support.
+- **[E]** **Daily-living skills and executive function independently predict adult
+  outcomes** (living independently, employment, education, mental health). Adaptive
+  function often lags well behind IQ ("the adaptive–cognitive gap").
+- **[DI]** This is a substantive strengthening of the rationale for MELFINA:
+  external executive/daily-living scaffolding for autistic adults is targeting a
+  variable with demonstrated predictive weight on life outcomes — not a
+  convenience.
+
+### 21.3 Autism — camouflaging / masking
+
+- **[E]** Meta-analysis and systematic reviews: **higher self-reported camouflaging
+  is associated with worse mental health** — anxiety, depression, and (in several
+  studies) suicidality; it is also linked to exhaustion and to delayed diagnosis.
+  Findings for specific components (masking vs compensation vs assimilation) are
+  **mixed**. Camouflaging has short-term social benefits (stigma avoidance,
+  connection) and long-term costs. Cross-sectional; causal direction not
+  established.
+- **[DI]** Reinforces Pass-1 §4.5 (burnout) and P9 (graceful degradation): a system
+  that increases the felt demand to "perform" or keep up appearances — even
+  privately — works against this. A private, low-demand tool that reduces the
+  executive cost of daily life is, on this evidence, plausibly protective; a
+  demanding one is plausibly harmful. Not directly tested.
+
+### 21.4 ADHD — adults
+
+- **[E]** Working-memory deficits in adults confirmed again (Alderson 2013: verbal
+  g ≈ 0.55, visuospatial g ≈ 0.49). Emotion dysregulation confirmed as a core
+  adult feature (Beheshti 2020).
+- **[E]** **CBT / organisational-skills training for adult ADHD** has repeated
+  meta-analytic support: medium-to-large within-group and small-to-medium
+  between-group symptom reduction, with functional gains specifically in **time
+  management and organisation**. Environmental scaffolding is part of the standard
+  of care (NICE NG87), not a workaround.
+- **[E, children only] / [U, adults]** — **correction to Pass 1 §3.4/§7.6.**
+  Implementation intentions were cited as *d* = 0.65 (general population) and
+  presented as targeting the ADHD initiation gap. Direct evidence in ADHD exists
+  **only in children** (Gawrilow & Gollwitzer 2008: implementation intentions
+  normalised Go/No-Go response inhibition in children with ADHD; replicated in
+  small studies). **Not studied in adults with ADHD.** Older-adult data indicates
+  **executive-function prerequisites** — if EF is too impaired, forming and
+  retrieving the if-then plan itself fails. Revised: *if-then planning is a
+  promising scaffold with strong general-population evidence and child-ADHD
+  evidence, but adult-ADHD efficacy is [U], and it may require baseline EF that
+  fluctuates.*
+
+### 21.5 Prospective memory — adult, condition-specific
+
+- **[E, with a caveat]** Autism, adults: meta-analysis (Landsiedel 2017) — **large
+  time-based PM impairment, small event-based impairment.** **Contradiction:** a
+  2026 study found **no autistic/neurotypical PM difference after controlling for
+  verbal ability** — i.e. some of the apparent PM deficit may be explained by other
+  cognitive factors, not PM per se. Both stand.
+- **[E]** ADHD: time-based PM impaired, event-based inconsistent (consistent with
+  Pass 1).
+- **[DI] unchanged:** event/context-anchored, specific cues are more robust than
+  bare time alarms — but see §27 for the reminder-fatigue and field-efficacy
+  caveats.
+
+---
+
+## 22. The combined profile — comorbidity and conflict, revisited
+
+Pass 1 §6 is broadly upheld; two figures are refined and one caution is added.
+
+### 22.1 Co-occurrence figures — refined
+
+- **[E] — refinement of Pass 1 §6.1.** ADHD + autism: systematic-review pooled
+  prevalence of **ADHD in autistic samples ≈ 22% (community) to ≈ 34% (clinical)**;
+  some child samples run to 40–50%. Pass 1's "~30–40% each direction" was at the
+  upper end and sample-dependent. **Robust finding: when ADHD and autism co-occur,
+  adaptive functioning, quality of life, and symptom burden are all worse than
+  either alone** (co-occurring conditions "amplify autistic symptoms" and impair
+  adaptive function). Comorbidity in autism generally is **the norm** — ~70% of
+  autistic people have ≥1 co-occurring psychiatric condition.
+- **[E] — refinement of Pass 1 §6.1.** ADHD + OCD: co-occurrence is **lower and
+  more uncertain than Pass 1 implied** — OCD in ADHD samples ≈ 1–13%; ADHD in OCD
+  samples ≈ 0–23%; wide variance, partly because **inattention symptoms in OCD are
+  mistaken for ADHD**. The disorders show **opposite fronto-striatal activation**
+  (ADHD hypo-, OCD hyper-frontostriatal). They *can* co-occur, and when they do,
+  treatment is genuinely complicated (may require SSRI + stimulant together;
+  literature is sparse). Revised: *ADHD+OCD co-occurrence is real but less common
+  and less well characterised than ADHD+autism or autism+OCD; the two are in some
+  respects neurofunctional opposites.*
+- **[E]** Autism + OCD (Pass 1 figure holds): ~17–25% in several samples, lower
+  with careful differential rating; distinct subgroup (earlier onset,
+  symmetry/ordering/checking).
+
+### 22.2 The "don't assume single-condition findings transfer" caution — now evidenced
+
+- **[E/DI]** The mission asked us not to assume findings from one condition apply
+  to the combined profile. The comorbidity-amplification evidence (22.1) supports
+  this: **the combined profile is not the union of three feature lists — it is
+  generally *more* impaired in adaptive function, with interacting demands.**
+  Nothing found in this pass measures the *specific* ADHD+autism+OCD combination on
+  any design-relevant variable. That remains **[U]** and is the single largest
+  evidence gap (see checkpoint).
+- **[H]** The Pass-1 conflict catalogue (`CONFLICTS.md`) is therefore best treated
+  as a set of *individually-calibrated axes*, because the interaction is
+  unmeasured and the profile is heterogeneous even within itself.
+
+### 22.3 Autonomy — now with meta-analytic support
+
+- **[E] — upgrade from Pass 1 [E/clinical].** Self-determination theory autonomy
+  support has **multilevel meta-analytic support** (e.g. 192-study MASEM; workplace
+  and education meta-analyses): perceived need support → need satisfaction →
+  autonomous motivation → better performance *and* wellbeing; need-thwarting
+  predicts the maladaptive path. This moves "autonomy-supportive framing" (P2, P10,
+  §16.1) from mostly-clinical-inference toward **evidence-supported** as a general
+  principle. (Still not tested on this specific population or on a "life OS.")
+
+---
+
+## 23. Musician / classical-pianist context
+
+New area. **Caution: musician-specific findings do not automatically generalise to
+this user, and the deliberate-practice literature is actively contested.**
+
+### 23.1 Deliberate practice — contested
+
+- **[E]** Meta-analysis (Macnamara, Hambrick & Oswald 2014, *Psychological
+  Science*): deliberate practice explained **~21% of performance variance in music**
+  (26% games, 18% sports, <4% education/professions). Most variance is **not**
+  explained by practice amount.
+- **[E, primary-verified]** Replication of the foundational Ericsson 1993 violin
+  study (Macnamara & Maitra 2019, *Royal Society Open Science*, n = 39,
+  double-blind): deliberate practice accounted for **26% of the ability difference
+  between skill groups, vs 48% in the original**; among the *most accomplished*
+  players, practice amount did **not** distinguish the best from the merely good.
+- **Contradiction — preserved.** Ericsson and colleagues dispute both the
+  operationalisation of "deliberate practice" in these meta-analyses and the
+  analytic choices (see the 2021 exchange in *Psychological Research*). The
+  Ericsson camp maintains DP is dominant when strictly defined; the
+  Macnamara/Hambrick camp maintains it is important but far from sufficient. **Both
+  positions are live in the literature.**
+- **[DI]** Whatever the exact share, **practice *quality*/structure matters and
+  practice *amount* alone is a weak predictor.** A system that foregrounds *hours
+  logged* would be optimising a weak variable (and see §11 over-justification, §29
+  self-tracking). A system that supports *how* a session is structured (goals,
+  problem identification, strategy, self-evaluation) is aligned with the stronger
+  part of the evidence — **but this is a design inference, not a demonstrated
+  intervention effect for this user.**
+
+### 23.2 Self-regulated practice, planning, goal-setting
+
+- **[E]** PRISMA review of self-regulated learning in advanced musicians (dos
+  Santos Silva & Marinho 2025) and intervention studies: expert practice involves
+  **planning, problem identification, strategy selection, progress monitoring,
+  self-evaluation, and task decomposition**. Many students arrive with **little or
+  no experience of goal-setting or planning** for practice.
+- **[E]** Psychological-skills / SRL interventions with musicians produced: more
+  realistic and hierarchical goals, more structured and goal-directed practice,
+  greater practice efficiency and focus, more proactive performance preparation.
+  Goal-setting correlated with self-efficacy, time management, self-evaluation,
+  coping. (Small studies, mostly pre/post, some without controls.)
+- **[E]** Students with **lower baseline self-regulation gain the most** from
+  self-monitoring support.
+- **[DI]** If MELFINA ever touches practice, the evidenced leverage points are
+  **planning and structuring a session** and **reflective self-evaluation** — not
+  time-logging. Offered, not required (autonomy, §22.3; PDA, §4.5).
+
+### 23.3 Practice logging / self-monitoring in music
+
+- **[E, mixed]** Practice diaries and audio/video self-review are the most-used
+  tools in music-SRL research and can foster self-monitoring and strategy
+  awareness. **But** the same literature notes the risk of turning "visible
+  external evidence" into "invisible internal questioning" (i.e. self-surveillance
+  and doubt) — a music-domain echo of the OCD checking concern (§5.3). Evidence is
+  from intervention studies with students, not from a general "logging is good"
+  claim.
+- **[DI]** Consistent with Pass-1 restraint on history/metrics surfaces (§16.5):
+  reflective review *chosen by the user* may help; a standing, always-visible
+  practice log inviting comparison and re-inspection carries the self-monitoring
+  risk.
+
+### 23.4 Flow
+
+- **[E]** Flow-condition–experience model: the antecedents are **skill–challenge
+  balance, clear goals, and clear feedback**. In performing musicians these
+  antecedents explain a large share of flow-state variance (one study: 54% in
+  performing). Flow correlates **negatively with music performance anxiety** and
+  positively with perceived performance quality and creativity.
+- **[E]** Flow is **disrupted by negative/self-evaluative thoughts** and by
+  interruption; a 2026 study distinguishes **boredom** (robustly linked to *poorer*
+  practice outcomes) and **flow** (linked to *better* outcomes), while **trait/state
+  mind-wandering during practice was *not* associated with outcomes** — a
+  distinction worth keeping.
+- **[DI]** For a monotropic and/or ADHD musician, this converges with Pass-1 §7.3
+  (protect focus, minimise interruption). A tool that interjects during a practice
+  or creative session — notifications, prompts, check-ins — is acting against a
+  state that is hard to enter and valuable when entered. "Clear goals + clear
+  feedback" are also the two flow antecedents a support tool could plausibly help
+  set *before* a session (not during).
+
+### 23.5 Perfectionism and music performance anxiety
+
+- **[E]** Music performance anxiety (MPA) is common: **~15–60% of musicians report
+  it; roughly a third have severe problems.** Classical musicians may be *more*
+  perfectionistic than other performers (score fidelity, "no mistakes").
+- **[E]** The **perfectionistic strivings vs perfectionistic concerns**
+  distinction matters: *concerns* (fear of mistakes, doubts, others' evaluation)
+  are consistently linked to MPA, negative affect, and cognitive anxiety;
+  *strivings* (high personal standards) are more mixed and sometimes adaptive.
+  Perfectionistic concerns overlap conceptually with OCD's intolerance-of-
+  uncertainty and "not-just-right" constructs (§5).
+- **[DI]** This is direct support for Pass-1 §16.5 in the user's own creative
+  domain: metrics, completion states, error-highlighting, and comparative history
+  are exactly the surfaces that feed perfectionistic *concerns*. The design
+  restraint at those surfaces is not just about OCD in the abstract — it plausibly
+  matters at the piano.
+
+### 23.6 ADHD musicians (small qualitative base)
+
+- **[E, qualitative, small]** Phenomenological work with graduate music students
+  with ADHD: **structured solo practice is a hard context** (initiation, sustained
+  attention, planning); **interest-based motivation** is the reported workaround;
+  **hyperfocus** is described as an asset for long immersive practice; notably,
+  during **active music-making and performance, ADHD symptoms were not evident in
+  behaviour** — context-dependence is strong (Wilde & Welch 2022).
+- **[DI/H]** The friction to support is in *practice organisation and initiation*,
+  not in playing itself. Consistent with the whole document's direction: scaffold
+  the approach to the work, then get out of the way.
+
+### 23.7 Practice adherence / dropout
+
+- **[E]** ~50% of music students stop lessons/activities by age 17. **Autonomous
+  motivation protects against dropout; controlled motivation predicts it**
+  (SDT again). Unwillingness to practise and loss of motivation are the internal
+  drivers; need-thwarting (autonomy/competence/relatedness) precedes decline.
+- **[DI]** A tool that adds *controlled* pressure to practise (obligation framing,
+  streaks, guilt) is pushing the lever that predicts *dropout*. Supporting
+  autonomous motivation (connection to the user's own goals, competence feedback,
+  choice) is the evidenced direction — and matches P2/P7/§22.3.
+
+---
+
+## 24. Task management, CSCW, personal information management
+
+### 24.1 Task lists (foundational CSCW)
+
+- **[E]** Bellotti et al. 2004, "What a to-do: studies of task management towards
+  the design of a personal task list manager" (CHI): to-do items are heterogeneous
+  and constantly re-prioritised; **many tasks are never recorded** (kept in the
+  head or in the world); lists are abandoned when they drift out of sync with
+  reality; "the list" competes with email, paper, and memory as task media.
+- **[E]** Later CSCW/PIM work is consistent: task and information tools fail at the
+  **keeping/capture** boundary and at **staying current**; ~60% of people use
+  to-do lists in some form, but few use one system consistently.
+
+### 24.2 Personal Information Management (Bergman & Whittaker)
+
+- **[E]** *The Science of Managing Our Digital Stuff* (Bergman & Whittaker 2016)
+  and Whittaker's "information curation" framework: PIM has three activities —
+  **keeping** (decide what to retain and where), **organising**, and **retrieving**
+  — and the *same person* does all three, which makes it different from library/
+  web information management.
+- **[E]** Empirically, people **prefer navigation (folders) over search** for their
+  *own* information, even though search is objectively often faster, because
+  navigation provides context, incremental decisions, and a sense of control.
+  Tag-based and pure-search approaches that work for public information
+  **underperform for personal information**.
+- **[E]** "Keeping" is cognitively costly and error-prone: people both over-keep
+  (hoard) and under-keep (lose things); filing decisions at capture time are a
+  known friction and abandonment point.
+- **[DI]** Converges hard with Pass-1 §10.1–§10.2 and `CONFLICTS.md` C9: **defer
+  organisation, don't force filing at capture, support navigation/context for
+  retrieval, don't assume search solves personal retrieval.** This is now backed by
+  a substantial PIM literature, not just practitioner consensus.
+
+### 24.3 Interruption, resumption, attention residue
+
+- **[E]** Attention residue (Leroy 2009, *OBHDP*): after switching from Task A to
+  Task B, cognition about A persists and **degrades B performance (accuracy, speed,
+  depth) for a sustained period**, not just briefly. **Key moderator:** people who
+  believed they would have **ample time to finish A later** showed **no residue**.
+- **[E]** Memory-for-goals / resumption-lag findings (Pass 1 §7.3) replicated and
+  extended: longer, more demanding, more frequent interruptions → larger resumption
+  cost; cues and a rehearsal opportunity at the breakpoint help.
+- **[DI] strengthened:** the Leroy moderator is the same shape as Masicampo
+  (§7.2) — **a credible path to completion neutralises the ongoing cost of an
+  unfinished thing.** A capture system's real job is to *be that credible path*.
+  And: minimise forced switches; when the user switches, help them leave a cue and
+  believe the thing is safely held.
+
+---
+
+## 25. Personal knowledge management & cognitive offloading — when it helps vs. becomes overhead
+
+The mission asked specifically: when does externalisation help, and when does
+maintaining the system become the cognitive load?
+
+### 25.1 Offloading helps — strengthened
+
+- **[E]** Meta-analysis (2025, *Memory & Cognition*): cognitive offloading
+  **improves memory-based task performance** and reduces interindividual
+  variability. Offloading is "value-based decision-making" — people weigh expected
+  cognitive effort against expected benefit (Boldt & Gilbert 2024).
+- **[E]** The decision to offload is driven by **confidence in one's own memory**,
+  and this holds **even when confidence is unrelated to actual ability** — i.e.
+  people with low memory confidence (common in ADHD; *induced* by checking in OCD,
+  §5.3) will offload more, sometimes more than optimal, sometimes less.
+- **[E]** Brief **metacognitive training** (as few as ~5 practice trials) improved
+  how well people calibrated their offloading decisions.
+
+### 25.2 …but the *system* can become the load — the maintenance-burden question
+
+- **[E, weak / practitioner-heavy]** There is **little rigorous longitudinal
+  research** on PKM ("second brain") systems specifically. What exists:
+  - The PIM literature (24.2): keeping/filing/upkeep is costly and a known
+    abandonment point.
+  - Personal-informatics abandonment research (Pass 1 §10.4): lapses usually start
+    at collection; abandonment is normal.
+  - Note-taking research: **studies rarely include delayed retention tests**, so
+    which capture strategies produce *durable* benefit is largely **[U]**.
+  - Strong, consistent **practitioner** signal (multiple independent sources,
+    2024–2026): elaborate PKM systems collapse under upkeep; "second brain fatigue"
+    / "the maintenance tax" / "the archive rots"; the recommended fix is **emergent
+    structure** (organise from use, not up front) and **minimal capture friction**.
+- **[DI]** Best-supported synthesis: **externalisation helps when (a) capture is
+  near-frictionless, (b) the user trusts retrieval will work, and (c) upkeep is not
+  required to keep the system coherent.** It becomes overhead when it demands
+  filing decisions at capture, periodic full reviews/reorganisation, or an
+  elaborate structure that must be maintained. This matches Pass-1 §10 and
+  `CONFLICTS.md` C2/C9; the new contribution is that the PIM literature makes the
+  "keeping is the expensive part" claim [E], while the "big systems collapse" claim
+  stays **[practitioner-strong, E-weak]**.
+
+### 25.3 The offloading-dependency concern (Pass 1 open question #2) — still open
+
+- **[E, emerging, mixed]** Some recent work: heavy AI assistance **reduced task
+  persistence and independent performance** afterward (2026); "the memory paradox"
+  discourse warns of skill/knowledge erosion.
+- **[E, counter]** Other work: deliberate, planful integration of digital tools is
+  associated with **better** planning behaviour and metacognition, functioning as a
+  "regulatory aid."
+- **[U]** Net effect over months/years, **for this population**, on unaided memory
+  / metacognition / agency: **unknown.** Contradictory short-term general-population
+  findings. This stays a top open question.
+
+---
+
+## 26. Digital assistive technology — controlled evidence in adults
+
+The mission asked for controlled studies, adults, technology-supported EF /
+planning / memory.
+
+- **[E] — the strongest evidence is not in ADHD/autism.** **NeuroPage** (Wilson et
+  al.; RCT-level, n = 143, acquired brain injury and other neurological
+  conditions): a pager sending reminders for user-chosen target behaviours at
+  agreed times **significantly increased achievement of those behaviours vs
+  baseline**, with benefit fading somewhat after withdrawal. This is the most
+  robust "reminders work" result — but the population is memory-impaired
+  neurological patients, **not adults with ADHD/autism/OCD**.
+- **[E, pilot]** **AppReminders** (2023, pilot feasibility RCT, n = 29, ABI):
+  Google Calendar vs a purpose-built app; most participants (19/21) learned an app
+  from a 30-min tutorial; retention 66%, adherence 74%. Design features (clear
+  workflow, structure) plausibly improve uptake. Feasibility, not efficacy.
+- **[E, single-case]** Multiple **single-case experimental designs** show Google
+  Calendar and similar mainstream tools support prospective remembering in
+  individual memory-impaired adults.
+- **[E, older adults with MCI/dementia]** RCT (n = 52, 4 weeks): those who used a
+  reminder app **more frequently** showed better prospective memory and better
+  instrumental activities of daily living — benefit **depended on the user's
+  checking behaviour**, not just on the reminder firing.
+- **[E]** **Smartphone-assisted psychoeducation for adult ADHD** (RCT, n = 60):
+  both smartphone- and brochure-assisted formats reduced core symptoms; the
+  smartphone did not clearly add benefit over the brochure.
+- **[U] — the direct question.** *Controlled* evidence that a task/planning/memory
+  app improves outcomes **for adults with ADHD, autism, or OCD specifically** is
+  **sparse to absent.** Extrapolation from ABI/MCI populations is reasonable **[DI]**
+  but not evidence.
+- **[DI]** Cross-population pattern that does hold up: reminder/prompt aids help
+  when (a) the user is trained to use them, (b) content is specific and
+  user-chosen, (c) delivery is at an agreed/appropriate time, and (d) the user
+  actually engages with the aid. Bare, generic, unengaged reminders do little.
+
+---
+
+## 27. Notification and reminder design — strengthened
+
+### 27.1 Interruption cost — solid
+
+- **[E]** Reduced notification-interruption frequency → higher task performance and
+  **lower strain**; the mechanism is task-switching effort + resumption lag +
+  attention residue (§24.3). Notification-disabling interventions increase
+  *intentional* phone use and reduce felt "checking habit strength."
+- **[E]** Moderators: fear-of-missing-out and "telepressure" (felt social pressure
+  to respond quickly) worsen the impact and change what interventions work.
+
+### 27.2 Batching — CORRECTION to Pass 1 §8.2
+
+- **Pass 1 said:** "No consistent evidence that email/notification batching lowers
+  stress." **This was too strong.**
+- **[E]** **Fitz et al. 2019** (*Computers in Human Behavior*, randomised field
+  experiment, n = 237, 2 weeks, 4 arms): notifications **batched 3×/day** produced
+  **lower inattention, higher concentration, better mood, more felt control, and
+  higher perceived productivity** vs as-they-arrive. **Hourly** batching was less
+  beneficial. **Switching notifications off entirely produced *more* anxiety and
+  FoMO.**
+- **[E]** Email-specific batching studies remain **mixed** — some find no stress
+  benefit, and effects depend on the person (e.g. FoMO level) and context ("for
+  whom and under what circumstances," 2022).
+- **Revised claim:** *Batching notifications into a few predictable daily windows
+  has at least one good RCT showing wellbeing and attention benefits for smartphone
+  notifications; email-batching evidence is mixed and moderator-dependent;
+  eliminating notifications entirely has its own cost (anxiety, FoMO).* The robust
+  design point is **predictable, user-controlled delivery timing** — not "batch
+  everything" and not "silence everything."
+
+### 27.3 Alert fatigue — CORRECTION to Pass 1 §10.5 / §16.4-17
+
+- **Pass 1 said:** "responsiveness to a repeated alert can drop ~30% per repetition."
+  **The specific number was an overstatement** from a loose secondary source.
+- **[E]** **Ancker et al. 2017** (*BMC Med Inform Decis Mak*; 112 clinicians,
+  retrospective cohort): for every **5-percentage-point increase in the proportion
+  of a clinician's alerts that were within-patient repeats**, the odds of accepting
+  an alert dropped by **~10%**. Higher workload and more low-value alerts also
+  lowered acceptance.
+- **Revised claim:** *Repeated and low-information alerts measurably reduce
+  responsiveness (desensitisation is real and quantified in the clinical-alert
+  literature); the exact magnitude in a personal-tool context is unknown, but the
+  direction is well established.* The design implication (don't rely on repeated
+  identical alerts; keep prompts high-value) is unchanged.
+
+### 27.4 Context-sensitive / just-in-time reminders — modest and mixed
+
+- **[E]** Location-based reminders: used, liked in principle, but **"still not an
+  effective tool"** in daily life (imprecise triggering, right place/wrong moment)
+  — Pass 1 finding holds.
+- **[E, mixed]** JITAIs (sensor/EMA-triggered support at moments of need): **mixed
+  evidence on behaviour change; few studies adequately powered.** Notably,
+  **triggers based on self-reported need are rated as better-timed and more helpful
+  than triggers based on inferred distress**, despite firing less often.
+- **[DI]** For MELFINA: **user-declared "now is a good time / I need this now"
+  beats system-inferred timing** on the current evidence. Inference-heavy
+  context-awareness is not a solved problem and risks wrong-moment intrusion
+  (which, for this population, is costly — §4.4, §24.3).
+
+### 27.5 User control of notifications
+
+- **[E]** "Alert Now or Never" (Mehrotra et al., *ACM TOCHI* 2021) and related:
+  notification acceptance is highly individual and context-dependent; **when users
+  lack *granular* control they resort to switching a whole channel off.** Granular,
+  per-source, per-context control raises long-term opt-in and makes the alerts that
+  do arrive feel intentional.
+- **[DI]** Strong support for Pass-1 §16.4: few things interrupt; the user sets
+  what, per source, predictably; a calm pull surface for everything else.
+
+---
+
+## 28. AI and compulsive-behaviour risk — strengthened, with the state of evidence
+
+### 28.1 What is now [E]
+
+- **[E]** **MIT–OpenAI RCT** (2025; ~1,000 participants; 4 weeks; **preprint, not
+  peer-reviewed**): higher daily chatbot use correlated with **higher loneliness,
+  higher emotional dependence, more problematic use, and lower real-world
+  socialisation.** Users with stronger attachment tendencies and higher trust in
+  the bot showed more dependence. (Within-trial associations; the RCT manipulated
+  some features, but the dose–response is correlational.)
+- **[E]** Narrative reviews (2025–2026, e.g. *Frontiers in Public Health*): heavier
+  generative-AI-chatbot use is associated with elevated loneliness and emotional
+  dependence and reduced offline social engagement; proposed mechanisms —
+  **emotional attachment, anthropomorphism, instant reinforcement, parasocial
+  dynamics, infinite availability, endless response variation.**
+- **[E]** LLM **overreliance** driven by fluency/confident tone; LLMs frequently
+  **poorly calibrated**; calibrated linguistic uncertainty can help appropriate
+  reliance (Pass 1 §13.3, holds).
+
+### 28.2 What is [G] (professional guidance, not trial evidence)
+
+- **[G]** **IOCDF** (2026) and multiple OCD-specialist clinics: AI chatbots have
+  the properties that make reassurance-seeking maximally reinforcing (always
+  available, never frustrated, instant, will re-answer the same question in
+  different words). Recommendation: clinicians should **ask patients about AI use**;
+  patients with OCD generally prefer AI as an **adjunct with human oversight**, not
+  a standalone.
+- **[G]** Systematic review "Artificial Intelligence in OCD" (2025): potential AI
+  applications must **actively prevent** supporting reassurance/ritualising;
+  context-specific clinician guidelines do not yet exist.
+
+### 28.3 What is contested / [U]
+
+- **Contradiction — preserved.** A "problematic AI use" / "AI addiction" construct
+  is **emerging but disputed.** ≥4 measurement scales exist (mostly modelled on
+  substance-use criteria); critics ("People are not becoming 'AIholic'") argue the
+  addiction framing is premature and pathologises normal tool use. The clinical
+  entity is **not established**; the *phenomenon* of compulsive/dependent use in
+  vulnerable individuals has converging support.
+- **[U]** Whether specific design safeguards (naming the pattern; refusing to
+  re-answer settled questions; deferring to the user's own prior decision; rate
+  limits) actually reduce compulsive querying **without frustrating legitimate
+  use** — untested. Pass 1 §13.4 safeguards remain **[H]/[DI]**.
+
+### 28.4 Net for MELFINA
+
+- **[DI]** The direction of Pass 1 §13 is reinforced, now with an RCT (preprint)
+  and professional guidance behind the concern: **an AI layer with memory of the
+  user's worries, always available, is a high-risk configuration for this profile.**
+  Optional, restrained, suggest-don't-act, non-anthropomorphic, honest about
+  uncertainty, does not keep the user in conversation, and can name a
+  reassurance-seeking pattern. All of that is defensible on current evidence; none
+  of it is *proven* to help.
+
+---
+
+## 29. Quantified self / self-tracking — the double-edged evidence
+
+Pass 1 leaned on the harms. This pass found the benefit evidence too; the honest
+picture is genuinely two-sided.
+
+### 29.1 Benefits — [E], generally small
+
+- **[E]** Meta-analyses: wearable activity trackers produce a **small but
+  significant** positive effect on physical activity and on "sense of
+  accomplishment"/perceived health; self-monitoring is one of the more effective
+  behaviour-change techniques for diet and some weight outcomes.
+- **[E]** Self-quantification can **increase self-awareness and self-knowledge**;
+  in *clinically depressed* samples, mood self-monitoring has increased emotional
+  self-awareness and **reduced** depressive/anxious symptoms in some studies.
+
+### 29.2 Harms — [E], concentrated in vulnerable users
+
+- **[E]** Systematic-review evidence of self-tracking harms: **negative emotional
+  reactions** (guilt, anxiety, stress, pressure, frustration) and **maladaptive
+  cognition** (rumination, body-image dissatisfaction); **disordered eating and
+  compulsive exercise** as behavioural outcomes; social isolation in some cases.
+- **[E]** Mood self-monitoring can **induce depressive rumination and worsen
+  symptoms** — the same act that helps some users harms others. Whether electronic
+  mood-tracking net helps or harms clinically **is explicitly unresolved** in the
+  literature.
+- **[E]** **Orthorexia** (rigid "healthy eating" preoccupation) sits on the
+  OCD/anxiety spectrum and is associated with **perfectionism and
+  obsessive-compulsive traits**; self-tracking of food is implicated as an
+  aggravator.
+- **[E]** RCT: giving people a self-tracking device did **not** reliably improve
+  health outcomes over a year — the device is not self-justifying.
+
+### 29.3 Synthesis
+
+- **Contradiction — preserved.** Self-tracking is **beneficial on average by small
+  margins for behaviour change and self-knowledge, and harmful for a minority —
+  disproportionately people with perfectionism, OCD/anxiety traits, or depression**,
+  via rumination and compulsive monitoring.
+- **[DI]** For a user who describes OCD and is a (perfectionism-prone) classical
+  musician, the risk/benefit runs unfavourable **by default**. Pass-1 §16.5 stands
+  and is now better evidenced: no default metrics; any tracking is user-initiated,
+  private, non-comparative, interruptible, forgettable, and easy to stop. Mood
+  logging in particular should be treated as a **known-double-edged** feature, not
+  a safe default.
+
+---
+
+## 30. Prior art — academic prototypes and their design logic
+
+Deeper than Pass 1 §14. Analysed for underlying design bet.
+
+| System (year) | Bet | What it got right | What it got wrong / limits |
+|---|---|---|---|
+| **Memex** (Bush 1945, concept) | Associative trails mirror how mind links ideas | Linking > rigid hierarchy; personal augmentation as a goal | Purely conceptual; assumed capture is free |
+| **Forget-me-not** (Lamming & Flynn 1994) | Log *context* (who/where/what device) as episodic retrieval keys | Context, not content, is the retrieval cue; wearable/ambient capture | Retrieval UI weak; privacy of continuous logging unaddressed |
+| **Remembrance Agent / JITIR** (Rhodes 1996–2000) | Continuously surface notes relevant to *current* context, unprompted | Proactive, just-in-time, zero-query retrieval; ranked by relevance | Relevance/noise trade-off unsolved; constant suggestion can distract |
+| **CybreMinder** (Dey & Abowd 2000) | Reminders triggered by rich context (location, time, social, activity), not just time | Multi-context triggers; user-defined situations | Context detection unreliable → wrong-moment firing (still true, §27.4) |
+| **Memory Glasses** (DeVaul 2003) | Context-aware, *interruption-sensitive* reminder delivery | Recognised that *when* to deliver is the hard part; sub-threshold cues | Hardware-bound; lab-stage |
+| **MyLifeBits** (Gemmell/Bell 2001–2007) | Capture everything, sort later | Proved feasibility of lifetime personal store | "Data in, little usable out"; retrieval bottleneck; total capture = total noise (Sellen & Whittaker 2010) |
+| **NeuroPage** (Wilson 1990s–2000s) | Dead-simple paged reminders, user-chosen targets, agreed times | **The one RCT-level success** (§26); simplicity + user-chosen content + human setup | Requires a person to help set targets; benefit fades after withdrawal |
+| **Memoro** (CHI 2024) | LLM turns rambling voice capture into concise notes + retrieves on demand | Lowers *capture* friction (speak, don't type/file); query-time synthesis | Depends on LLM reliability; new failure modes (hallucinated recall) |
+| **ProMemAssist** (UIST 2025) | Model the user's *working memory* from multimodal sensing; assist proactively at the right moment | Explicit working-memory model; timing-aware proactivity | Heavy sensing; proactivity/intrusion trade-off; early-stage |
+| **"Executive Dysfunction by Design"** (ASSETS 2025) | Analyses how mainstream productivity tools *cause* executive dysfunction for neurodivergent users; contrasts AI support with healthcare-access barriers | Names the anti-pattern: tools that assume the executive function they're supposed to support | Analysis, not a system |
+
+**Cross-cutting lessons [DI]:**
+1. **Retrieval and timing are the unsolved hard problems**, repeatedly, for 30+
+   years. Capture and storage are comparatively easy. A new system should invest
+   its cleverness in *resurfacing the right thing at the right moment* and in
+   *not* firing at the wrong moment.
+2. **The one clear success (NeuroPage) is the simplest system**, with user-chosen
+   content and a human in the setup loop. Complexity has a poor track record here.
+3. **Context inference has never become reliable enough** to trust for
+   intrusion-timing. User-declared context/availability is the safer bet on
+   current evidence (§27.4).
+4. **Total capture is a known dead end.** Design from how memory cues
+   reconstruction, not from completeness.
+5. **LLM-era prototypes** genuinely reduce capture and synthesis friction but
+   introduce **hallucinated-recall** risk — a personal-memory tool that
+   *confabulates your past* is a serious failure mode, especially against OCD
+   memory-distrust (§5.3).
+
+---
+
+## 31. Evidence-quality audit of Pass 1
+
+Reviewed the load-bearing claims of §§1–19. Outcome per claim: **upheld**,
+**refined**, **corrected**, or **downgraded**.
+
+| Pass-1 claim | Audit outcome |
+|---|---|
+| ADHD working memory persists into adulthood (g≈0.5) | **Upheld.** Alderson 2013 figures stand. |
+| Autism EF: medium, domain-general, ~stable across lifespan | **Refined.** g = 0.48 (CI 0.43–0.53) now primary-verified (Demetriou 2018, 235 studies / 14,081 pp). Domain-general: upheld. "Stable across lifespan" → **corrected** to "present across the lifespan, **attenuates somewhat in adulthood**." Added: lab EF has poor diagnostic utility; informant-report (BRIEF) tracks real-world difficulty better. |
+| ADHD time perception atypical (accuracy g>0.4, precision g=0.66) | **Upheld** (child/adolescent data; adult data still thinner). |
+| Writing a specific plan removes open-loop intrusion (Masicampo & Baumeister 2011) | **Upheld and reinforced** by the Leroy 2009 attention-residue moderator (ample-time-to-finish belief removes residue). |
+| Repeated checking worsens memory confidence (van den Hout & Kindt) | **Upheld.** |
+| Reassurance / family accommodation predict worse OCD outcomes | **Upheld.** |
+| AI as a novel reassurance vector | **Upheld and strengthened** — now IOCDF guidance + an RCT (preprint) + reviews. Still: harm mechanism [E], "AI addiction" as a clinical entity [contested/U]. |
+| IU ↔ anxiety in autism (r≈0.62) | **Upheld** (Jenkinson 2020). |
+| Gamification effects small/fragile; streaks = loss-avoidance | **Upheld.** Sailer & Homner figures stand; over-justification risk now cross-referenced to musician over-justification evidence. |
+| Users prefer adaptable > adaptive; autonomy support reduces demand avoidance | **Upheld; autonomy-support half upgraded** from [E/clinical] to **[E]** via SDT meta-analyses (192-study MASEM etc.). Adaptable>adaptive: Findlater & McGrenere stands; note some newer studies find adaptive UIs help *some* users under high load. |
+| Notifications: deliver at breakpoints; user controls interruption | **Upheld** (Iqbal & Bailey; Mehrotra TOCHI 2021). |
+| "No consistent evidence batching lowers stress" (§8.2) | **CORRECTED.** Fitz et al. 2019 RCT shows batching 3×/day improves attention/mood/control for smartphone notifications; email evidence mixed; full silence raises anxiety/FoMO. Revised to "predictable, user-controlled timing; neither 'batch all' nor 'silence all'." |
+| "~30% drop in responsiveness per repeated alert" (§10.5) | **CORRECTED / downgraded.** Real figure (Ancker 2017): ~10% lower odds of acceptance per +5pp within-patient-repeat share. Direction upheld, magnitude was overstated. |
+| Implementation intentions target the ADHD initiation gap (d=0.65) | **Refined / partly downgraded.** d=0.65 is general-population. ADHD evidence is **children only** (response-inhibition normalisation); **adults with ADHD: [U]**; may need baseline EF to work. |
+| GTD is theoretically motivated but has ~no outcome evidence | **Upheld** (Heylighen & Vidal; no RCTs). |
+| Local-first as a coherent paradigm (Kleppmann 2019) | **Upheld** (paradigm-level, not an efficacy claim). |
+| Cognitive offloading improves task performance (Risko & Gilbert) | **Upheld and strengthened** — 2025 meta-analysis; "value-based decision-making" model; metacognitive training calibrates it. |
+| "Total capture" is a dead end (Sellen & Whittaker) | **Upheld and reinforced** by 30 years of prototype history (§30). |
+| Conflicting needs across the three profiles | **Upheld; caution added** — comorbidity *amplifies* impairment, and the specific 3-way combination is unmeasured on any design variable ([U]). |
+| Prior-art "design bets" table (§14) | **Expanded** (§30) with academic prototypes; core lessons unchanged, "retrieval & timing are the hard problems" now explicit. |
+
+**No Pass-1 claim was disproven.** Two were corrected (batching, alert-fatigue
+magnitude), several refined, one partly downgraded to [U] for the adult-ADHD case
+(implementation intentions).
+
+---
+
+## 32. Updated notes to the conflict catalogue
+
+Full detail in `CONFLICTS.md` (updated). Summary of what Pass 2 changes there:
+
+- **C2 (externalise vs compulsion)** and **C9 (rich capture vs noise/friction):**
+  strengthened — the **PIM literature** now makes "keeping/filing is the expensive
+  part" **[E]**, and 30 years of prototypes make "retrieval & timing are the
+  bottleneck" **[E/DI]**.
+- **C3 (reminders vs overload):** refined — batching correction (§27.2); alert-
+  fatigue magnitude correction (§27.3); **user-declared timing beats inferred
+  timing** (§27.4); the strongest reminder-efficacy evidence (NeuroPage) is in a
+  different population.
+- **C5 (measurement vs compulsive monitoring):** strengthened both directions —
+  self-tracking has **small real benefits** *and* **real harms concentrated in
+  perfectionism/OCD/depression**; mood-tracking is explicitly double-edged;
+  musician perfectionistic-concerns evidence makes the harm side concrete for the
+  user's creative domain.
+- **C6 (automation vs autonomy):** autonomy side upgraded to **[E]** (SDT
+  meta-analyses); automation side reinforced (AI-assistance-reduces-persistence
+  finding).
+- **C7 (completion vs "not-just-right"):** reinforced — Leroy moderator + Masicampo
+  both say a *credible completion path*, not actual completion, is what relieves
+  the load; perfectionistic-concerns ↔ NJRE overlap now explicit.
+- **New cross-cutting note:** because the 3-way combined profile is unmeasured,
+  every axis should be individually user-calibrated; category presets are
+  contraindicated (now [E]-adjacent via comorbidity-amplification, not just [DI]).
+
+---
+
+# RESEARCH CHECKPOINT 002
+
+### What evidence was strengthened
+
+1. **Autism EF impairment** — now primary-verified: g = 0.48 (CI 0.43–0.53), 235
+   studies / 14,081 participants, broad (non-fractionated), attenuating but
+   persistent into adulthood; **informant-report EF measures track lived
+   difficulty better than lab tests.**
+2. **Adult autism life outcomes** — EF and daily-living skills are **evidenced
+   predictors** of independent living, employment, and mental health; ~20% "good
+   outcome" rate. External executive scaffolding targets a high-stakes variable.
+3. **Autonomy support** — upgraded from clinical inference to **[E]** via SDT
+   meta-analyses (need support → autonomous motivation → performance + wellbeing;
+   need-thwarting → the maladaptive path).
+4. **Cognitive offloading** — 2025 meta-analysis confirms it improves memory-based
+   performance; framed as value-based decision-making; metacognitive training can
+   calibrate it.
+5. **PIM as a field** — "keeping/filing is the costly, abandonment-prone part";
+   "people prefer navigation+context over search for their own information";
+   defer-organisation is now [E]-backed, not just practitioner consensus.
+6. **Attention residue (Leroy 2009)** — task-switching cost is sustained, not
+   brief; **belief in ample time to finish later removes it** — same shape as
+   Masicampo. Strong warrant for "be a credible completion path."
+7. **Notification batching** — one good RCT (Fitz 2019) shows wellbeing/attention
+   benefit from predictable batched delivery; full silence backfires.
+8. **AI reassurance risk** — professional guidance (IOCDF) + a large preprint RCT
+   (MIT–OpenAI: use ↔ loneliness/dependence/problematic use) + review literature.
+9. **Self-tracking** — now evidenced as genuinely two-sided: small average
+   benefits; real harms concentrated in perfectionism/OCD/depression.
+10. **Musician-domain support** — the leverage is **session structure, planning,
+    reflective self-evaluation, and autonomy**, not practice-hour logging;
+    perfectionistic *concerns* (not strivings) drive performance anxiety and
+    overlap with OCD constructs.
+11. **Reminder efficacy** — RCT-level support exists (NeuroPage, n=143) but in
+    memory-impaired neurological patients, with user-chosen content and human
+    setup.
+
+### What claims were weakened / corrected (none disproven)
+
+- **CORRECTED:** "No evidence batching lowers stress" → batching into predictable
+  windows has RCT support for smartphone notifications; email evidence mixed;
+  silence has its own cost.
+- **CORRECTED / downgraded:** "~30% drop per repeated alert" → Ancker 2017's actual
+  figure is ~10% lower acceptance odds per +5pp repeat-share; direction holds,
+  magnitude was overstated.
+- **REFINED:** "Autism EF stable across lifespan" → present across the lifespan,
+  **attenuates somewhat in adulthood.**
+- **PARTLY DOWNGRADED to [U]:** implementation intentions for **adults with ADHD**
+  — direct evidence is children-only; adult-ADHD efficacy unknown; may require
+  baseline EF.
+- **REFINED:** AuDHD co-occurrence "~30–40% each way" → ADHD-in-autism ≈ 22%
+  (community) to 34% (clinical), sample-dependent; ADHD+OCD co-occurrence is
+  **lower and more uncertain** than Pass 1 implied (and the two show opposite
+  fronto-striatal activation).
+- **CONTESTED, flagged:** deliberate practice as the dominant driver of musical
+  expertise — meta-analyses put it at ~21–26% of variance; the Ericsson camp
+  disputes the methodology. Both positions live.
+
+### Important contradictions (preserved, not resolved)
+
+1. **Deliberate practice:** dominant (Ericsson) vs important-but-far-from-
+   sufficient (Macnamara/Hambrick). ~21–26% of music-performance variance in the
+   meta-analytic camp.
+2. **Cognitive offloading long-term:** "reduces persistence / erodes independent
+   skill" vs "planful use improves metacognition and planning." Net effect for this
+   population: **[U].**
+3. **Mood / self-tracking:** increases self-awareness and can reduce symptoms
+   (some depressed samples) vs induces rumination and worsens symptoms (others).
+   Net clinical effect "explicitly unresolved" in the source literature.
+4. **Notification batching:** wellbeing benefit (Fitz, smartphone) vs no stress
+   benefit (several email studies). Moderator-dependent.
+5. **"Problematic AI use":** a real emerging phenomenon in vulnerable users vs an
+   over-pathologising construct ("not becoming AIholic"). The clinical entity is
+   not established.
+6. **Prospective memory in autism:** large time-based deficit (2017 meta-analysis)
+   vs no deficit after controlling for verbal ability (2026 study).
+7. **Adaptive UIs:** disliked / slower / unpredictable (Findlater & McGrenere) vs
+   helpful for some users under high cognitive load (later IUI work).
+
+### Remaining evidence gaps ([U])
+
+1. **The specific ADHD + autism + OCD combination** — not measured on *any*
+   design-relevant variable. Everything about the combined profile is inferred from
+   single-condition or two-way-comorbidity data. **Largest gap.**
+2. **Controlled efficacy of task/planning/memory software for adults with ADHD,
+   autism, or OCD** — sparse to absent; extrapolated from ABI/MCI populations.
+3. **Long-term (months–years) effect of heavy cognitive offloading** on unaided
+   memory, metacognition, and agency — for anyone, and especially this population.
+4. **Whether the Pass-1 §13.4 AI safeguards** (name the pattern, refuse to
+   re-answer, defer to prior decisions, rate-limit) reduce compulsive querying
+   without frustrating legitimate use — untested.
+5. **Reminder design for reminder-fatigued / demand-avoidant users** — what
+   content/timing/modality keeps prospective-memory support effective.
+6. **Whether any progress representation** delivers ADHD salience benefit without
+   OCD/perfectionism cost — still no evidence it exists; "none" remains the safe
+   answer.
+7. **The neutral-primitives hypothesis** (§16.8 P13) — untested; partly a
+   requirements/prototyping question.
+8. **"Anchored flexibility"** (structure ↔ novelty resolution, C1) — recurs in
+   clinical/lived-experience writing; no experimental test.
+9. **Capacity-state adaptation** — whether a manual low/normal/high switch that
+   changes several axes at once helps; and whether *detecting* capacity is possible
+   without surveillance (probably not, on §27.4 evidence).
+10. **Longitudinal PKM outcomes** — almost no rigorous data; note-taking studies
+    rarely test delayed retention.
+11. **Music practice organisation for *this* user** — musician findings are
+    group-level and must not be assumed to transfer; the ADHD-musician base is tiny
+    and qualitative.
+
+### Implications now sufficiently supported to carry into requirements ([DI], evidence-backed)
+
+- **External structure that holds memory, plans, time, and context out of the
+  head** — supported by EF/PM evidence (ADHD + autism, adult), offloading
+  meta-analysis, PIM literature, Masicampo, Leroy, and (for autistic adults) the
+  outcome-prediction evidence for EF/daily-living skills.
+- **Near-frictionless capture, deferred organisation, navigation+context for
+  retrieval** — PIM literature + prototype history + practitioner consensus.
+- **Be a credible completion path** (so open loops stop costing attention) —
+  Masicampo + Leroy.
+- **Predictable, deterministic, no-surprise system behaviour** — IU evidence
+  (autism + OCD), adaptive-UI evidence, context-inference-unreliability history.
+- **Autonomy-supportive framing; suggest don't impose; no obligation/pressure
+  framing** — SDT meta-analyses (now [E]), PDA/clinical, music-dropout evidence.
+- **Quiet by default; few interruptions; predictable, user-controlled,
+  granular delivery timing; user-declared "now" over inferred timing** —
+  interruption/residue evidence, Fitz RCT, Mehrotra TOCHI, JITAI evidence,
+  alert-fatigue evidence.
+- **No default metrics/streaks/scores/comparative history; restraint at
+  completion, confirmation, history surfaces** — gamification meta-analysis,
+  self-tracking harm evidence, musician perfectionistic-concerns evidence, NJRE.
+- **AI layer optional, restrained, non-anthropomorphic, honest about uncertainty,
+  not a reassurance oracle, does not keep the user in conversation** — AI-reliance
+  evidence, MIT–OpenAI preprint, IOCDF guidance.
+- **Local-first, open formats, encrypted, exportable, no telemetry, data
+  minimisation** — local-first paradigm, privacy-by-design, and the OCD-relevant
+  point that the user's own future access to exhaustive self-logs is a design
+  choice.
+- **Personalisation via individually-calibrated axes, not diagnostic presets** —
+  adaptable>adaptive, COGA objective 8, comorbidity-amplification (the combined
+  profile is not a union of presets), heterogeneity within each condition.
+- **Graceful degradation during low-capacity periods; lapses are normal** —
+  personal-informatics abandonment research, autistic burnout, camouflaging-harm
+  evidence, emotion dysregulation.
+
+### Remaining hypotheses ([H] — plausible, not established)
+
+- Neutral primitives (open loop / session / note / thread / commitment) accommodate
+  real neurodivergent life, including music, better than task/habit/project.
+- "Anchored flexibility" resolves the structure↔novelty tension.
+- The specific AI safeguards reduce compulsion without frustrating use.
+- A manual capacity-state switch is useful and sufficient.
+- Supporting *session structure and reflection* (not logging) is the right way to
+  touch music practice, if at all.
+- Body doubling / co-presence features help (mechanism plausible; outcome evidence
+  thin).
+
+### Confidence level of major conclusions
+
+| Conclusion | Confidence | Basis |
+|---|---|---|
+| EF/PM/time differences are real, persist into adulthood, and warrant external scaffolding | **High** | Multiple meta-analyses, both conditions, adult data, outcome-prediction evidence |
+| For this profile, the key design risk is features that become compulsion / rigidity / overload engines | **Moder–High** | Strong mechanism evidence per condition; the *combination* is inferred, not measured |
+| A trusted capture/resurfacing system frees attention (even before doing) | **High** | Masicampo + Leroy + offloading meta-analysis, converging |
+| Predictability and autonomy-support should be design defaults | **High** | IU evidence + SDT meta-analyses + adaptive-UI evidence |
+| No streaks / metrics / scorekeeping by default | **Moderate–High** | Gamification meta-analysis + self-tracking harm evidence + perfectionism evidence; "is there a safe form?" unresolved |
+| Quiet-by-default, user-controlled, predictably-timed prompts | **Moderate–High** | Interruption/residue + Fitz RCT + Mehrotra + alert-fatigue; exact parameters unknown |
+| AI layer is high-risk and must be optional/restrained | **Moderate** | Professional guidance + preprint RCT + reliance studies; "AI addiction" contested; safeguard efficacy untested |
+| Reminders help | **Moderate** | RCT-level only in memory-impaired neurological patients; adult ADHD/autism/OCD [U]; field efficacy of context-triggers is weak |
+| Specific assistive features (visual timers, body doubling, location reminders) help adults | **Low** | Mechanism plausible; controlled adult evidence sparse to absent |
+| Deliberate-practice-amount is worth foregrounding for a musician | **Low / negative** | Meta-analyses: ~21–26% of variance; amount alone is a weak lever; over-justification risk |
+| The neutral-primitives life model | **Not assessed (design hypothesis)** | No evidence either way; a requirements/prototyping question |
+| Any conclusion specific to the ADHD+autism+OCD *combination* | **Low (inferred)** | No direct evidence exists |
+
+---
+
+## Boundary reaffirmed
+
+```
+   RESEARCH FINDING  →  POSSIBLE DESIGN IMPLICATION  →  [STOP]
+```
+
+Pass 2 strengthened the evidence under many Pass-1 implications and corrected two
+claims. It did **not** produce requirements, choose an architecture, choose a
+language or storage substrate, or design MELFINA. The next phase (PERSONAL
+REQUIREMENTS) remains gated on the user's explicit authorisation.
+
+---
+
+*End of RESEARCH MASTER (Pass 2). Bibliography: `research/BIBLIOGRAPHY.md`.
+Conflict catalogue: `research/CONFLICTS.md`.*

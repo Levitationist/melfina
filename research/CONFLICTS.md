@@ -189,3 +189,118 @@ feature entirely.
   several axes at once, and if so what it changes.
 - How the eventual music/creative-practice use rides on the general resolution
   (it should not get its own conflict set).
+
+---
+
+## SECOND-PASS EVIDENCE UPDATES (RESEARCH MISSION 002, 2026-09-10)
+
+Pass 2 did not add or remove conflicts. It changed the evidence weight on several,
+corrected two sub-claims, and added one cross-cutting caution. Full detail:
+`RESEARCH_MASTER.md` §§20–32. Tier `[U]` = unknown / insufficient evidence.
+
+### Cross-cutting
+
+- **The combined ADHD + autism + OCD profile is unmeasured on every
+  design-relevant variable [U].** All axis reasoning is inferred from
+  single-condition or two-way-comorbidity data. Comorbidity **amplifies** adaptive
+  impairment (co-occurring conditions worsen functioning and quality of life) —
+  which makes **individually-calibrated axes** the safe approach and **diagnostic
+  "modes" contraindicated** (now evidence-adjacent, not just inference).
+- **Autonomy-support** moved from `[E/clinical]` to **`[E]`** (self-determination
+  theory meta-analyses: need support → autonomous motivation → performance +
+  wellbeing; need-thwarting → the maladaptive path). Strengthens the "offer, don't
+  impose" stance behind **C6** and **C8** and the whole catalogue.
+
+### Per-conflict
+
+- **C1 (structure ↔ novelty).** "Anchored flexibility" remains **[H]** — it recurs
+  in AuDHD clinical/lived-experience writing but has no experimental test. New:
+  autism EF impairment **attenuates somewhat in adulthood** (Demetriou 2018, g =
+  0.48, now primary-verified) but persists; music-dropout evidence ties *controlled*
+  motivation (pressure, obligation) to dropout and *autonomous* motivation to
+  persistence — relevant if "structure" is ever delivered as pressure.
+
+- **C2 (externalise ↔ compulsion)** and **C9 (rich capture ↔ noise/friction).**
+  Strengthened on the "helps" side and the "how" side:
+  - Cognitive-offloading **improves** memory-based task performance (2025
+    meta-analysis); it is value-based decision-making driven by memory *confidence*
+    (low confidence → more offloading) — and OCD checking *lowers* memory
+    confidence (§5.3), so the two mechanisms interact.
+  - The **PIM literature** now makes it **`[E]`** (not just practitioner consensus)
+    that *keeping/filing is the expensive, abandonment-prone part*, and that people
+    **prefer navigation + context over search for their own information**.
+  - 30+ years of academic prototypes (§30): **retrieval and timing, not capture,
+    are the unsolved problems**; **total capture is a known dead end**.
+  - Candidate approach reinforced: near-frictionless capture, **defer
+    organisation**, support navigation/context for retrieval, record-once.
+
+- **C3 (reminders ↔ overload).** Three refinements:
+  - **Batching correction:** Pass 1 said no evidence batching helps stress. **Fitz
+    et al. 2019** (RCT, n = 237) shows notifications batched into a few predictable
+    daily windows improve attention, mood, and felt control; **full silence raises
+    anxiety/FoMO**; email-batching evidence stays mixed. Revised target:
+    **predictable, user-controlled delivery timing** — not "batch all," not
+    "silence all."
+  - **Alert-fatigue magnitude correction:** the "~30% per repeat" figure was
+    overstated. Ancker 2017: ~10% lower odds of acting per +5 pp of within-context
+    repeat alerts. Direction (desensitisation is real) holds.
+  - **User-declared timing beats inferred timing:** JITAI evidence — triggers based
+    on *self-reported need* are rated better-timed and more helpful than
+    distress-inferred triggers; location reminders remain "not effective" in the
+    field. Context inference has never become reliable enough to trust for
+    intrusion timing.
+  - Strongest reminder-efficacy evidence (**NeuroPage**, RCT, n = 143) is in
+    memory-impaired neurological patients with *user-chosen* content and human
+    setup — adult ADHD/autism/OCD efficacy is **[U]**.
+
+- **C5 (measurement ↔ compulsive monitoring).** Strengthened **both** directions,
+  net still unfavourable-by-default for this user:
+  - Benefit side `[E]`: self-tracking has **small** positive effects on behaviour
+    change and self-knowledge/"sense of accomplishment."
+  - Harm side `[E]`: systematic-review evidence of guilt/anxiety/stress, rumination,
+    body-image harm, disordered eating, compulsive exercise; **mood-tracking can
+    induce depressive rumination and worsen symptoms** — "explicitly unresolved"
+    whether it net helps. Harms concentrate in **perfectionism / OCD-anxiety
+    traits / depression**.
+  - **Musician-specific:** perfectionistic *concerns* (fear of mistakes, doubt,
+    evaluation) — not perfectionistic *strivings* — drive music performance anxiety
+    and overlap with OCD's intolerance-of-uncertainty and "not-just-right"
+    constructs. Metrics/completion/error-highlighting/comparative history are the
+    surfaces that feed *concerns* — at the piano, not just in the abstract.
+  - Deliberate-practice **amount** explains only ~21–26% of music-performance
+    variance (contested; Ericsson camp disputes) — foregrounding "hours practised"
+    optimises a weak variable.
+
+- **C6 (automation ↔ autonomy).** Autonomy side → **`[E]`** (SDT meta-analyses).
+  Automation side reinforced: a 2026 study found AI assistance **reduced task
+  persistence and independent performance** afterward. "Suggest ≫ act" holds.
+
+- **C7 (completion ↔ "not-just-right").** Reinforced: **attention residue** (Leroy
+  2009) shows task-switching cost is *sustained*, and — crucially — **believing you
+  will have ample time to finish later removes the residue**. Same shape as
+  Masicampo: a *credible completion path*, not actual completion, is what relieves
+  the load. "Handed off to the system" > "perfectly finished." Perfectionistic-
+  concerns ↔ NJRE overlap now explicit.
+
+- **C8 (prompting ↔ pressure/avoidance).** Autonomy-support `[E]`; **camouflaging /
+  masking** meta-analysis: higher masking → worse mental health (anxiety,
+  depression, sometimes suicidality) and exhaustion — a system that raises the felt
+  demand to "keep up appearances," even privately, works against this. Music-dropout
+  evidence: *controlled* pressure to practise predicts dropout.
+
+- **C10 (predictable ↔ stale interface).** Autistic-adult web-user studies (AASPIRE
+  Web Accessibility Guidelines; animated-UI-element study): avoid clutter, moving
+  images, decorative churn; **irrelevant animation measurably hurts task
+  performance** for autistic users — even on short tasks. "Keep system behaviour
+  and layout stable; let the user restyle surface appearance for novelty" is
+  supported.
+
+### New corrections logged
+
+| Was (Pass 1) | Now (Pass 2) |
+|---|---|
+| "No evidence notification batching lowers stress" | Batching into predictable windows has RCT support (smartphone); silence backfires; email mixed |
+| "~30% drop in responsiveness per repeated alert" | ~10% lower acceptance odds per +5 pp repeat-share (Ancker 2017); direction holds, magnitude overstated |
+| Implementation intentions target the adult-ADHD initiation gap | Child-ADHD evidence only; **adult ADHD = [U]**; may need baseline EF |
+| Autism EF "stable across lifespan" | Present across the lifespan, **attenuates somewhat in adulthood** |
+| AuDHD "~30–40% each direction" | ADHD-in-autism ≈ 22% community / 34% clinical; ADHD+OCD lower & more uncertain, and neurofunctionally opposite |
