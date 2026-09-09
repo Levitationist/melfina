@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-10
+Last updated: 2026-09-10 (PERSONAL REQUIREMENTS MISSION 001)
 
 ---
 
@@ -19,14 +19,96 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: DEEP RESEARCH — RESEARCH MISSION 001 accepted as checkpoint; RESEARCH
-MISSION 002 (deeper pass) complete, awaiting user review. No further research and
-no move to PERSONAL REQUIREMENTS until the user explicitly authorises it.**
+**Phase: PERSONAL REQUIREMENTS — MISSION 001 complete (first pass), awaiting user
+review. Next phase is HUMAN / CENTRAL MODEL, and it does not start until the user
+explicitly authorises it.**
 
-We are NOT coding the application. No architecture has been chosen. No language
-(C vs C++) chosen. No storage substrate (SQLite or other) chosen. No framework or
-runtime dependency adopted. `src/` untouched. Nothing in the research output is a
-requirement or a design commitment.
+Research Missions 001 + 002 are done and pushed (commit `d3160f0`). PERSONAL
+REQUIREMENTS MISSION 001 produced a requirements specification, not architecture.
+
+We are NOT coding the application. No architecture chosen. No language (C vs C++)
+chosen. No storage substrate (SQLite or other) chosen. No framework, model, or UI
+toolkit chosen. `src/` untouched. The requirements are implementation-independent
+and explicitly defer all technology decisions to later phases.
+
+### PERSONAL REQUIREMENTS MISSION 001 — summary of outcome (2026-09-10)
+
+Mission = base brief (30 requirement areas, MUST/SHOULD/MAY/MUST NOT, IDs,
+conflicts, anti-requirements, musician requirements, AI requirements) +
+autonomous-reasoning addendum (cognitive / decision / execution autonomy) +
+local-only / network-isolation addendum + autonomous-personal-intelligence
+extension (assistant, autonomous automation, adaptation, skills, scientific
+thinking, teaching, world understanding, deep reasoning, emotional understanding,
+software engineering, computer agency, controlled self-improvement, general
+capability, extreme-capability-+-lightweightness, capability model).
+
+Output in `requirements/`:
+- `REQUIREMENTS_MASTER.md` — **203 requirements** (`MEL-REQ-001…203`) across 44
+  areas + **16 anti-requirements** (`MEL-AR-01…16`) + the **MELFINA Capability
+  Model** (15 capabilities) + the **autonomy triad** (cognitive / decision /
+  execution, never collapsed) + the **action pipeline**
+  (THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY) + a feasibility classification +
+  `REQUIREMENTS CHECKPOINT 001`.
+- `CONFLICTS.md` — 10 research-level tensions (RC1–RC10) + 7 vision-level tensions
+  (VC1–VC7) as configurable dimensions / constraints / safeguards / open
+  questions. Not resolved by fiat.
+- `OPEN_QUESTIONS.md` — OQ-1…OQ-15 + the deliberately-undecided list.
+- `README.md` — index.
+
+Priority mix: ~95 MUST · ~70 SHOULD · ~18 MAY · ~20 MUST NOT (incl. the 16 AR).
+
+**Highest-priority MUSTs:** local-only core (stronger than "local-first" — the core
+has no notion of a remote; MEL-REQ-014, 164–166); user is the authority /
+scaffold-don't-steer / more-than-a-tracker (001–005); no diagnostic modes,
+descriptive-not-judgemental data model (006, 008); predictable-deterministic core,
+quiet by default, no scorekeeping by default, restraint at the hazard surfaces,
+graceful degradation (010–013, 015); OCD checking/reassurance safeguards, "I don't
+know" is first-class, no compelled engagement (055–060); AI operates under the
+permission model not as owner, fully usable with AI disabled, no self-authored
+objectives / no core self-modification / no self-replication (149–150, 153–154);
+least-authority + capability-based permissions + audit + autonomous-action budgets
++ assume-prompt-injection + emergency stop (179–187); data is local/open/
+exportable/deletable/encrypted/durable (160–170).
+
+**Anti-requirements:** compulsive tracking · gamification/streaks · notification
+spam · rigid methodology · endless configuration · reassurance machine · AI
+dependency/deskilling · opaque adaptive drift · surveillance · maintenance-heavy
+PKM · feature-heavy dashboard · cloud dependency/phone-home · unrestricted
+autonomous agent · manipulation/false-intimacy/relationship-replacement ·
+grandiose claims · self-authored goals / core self-modification.
+
+**Rejected interpretations (recorded):** autonomy = unrestricted execution;
+adapt-with = collect-all-data; general intelligence = one giant model;
+self-improvement = self-modification/replication; emotional understanding = the
+system has feelings; "local-first is enough" (→ local-only core); more capability
+always better; diagnostic research → diagnostic product modes; explanations fix
+over-reliance.
+
+**Evidence discipline:** every requirement tagged `[E]/[G]/[DI]/[H]/[U]` and
+provenance-classed `A` (evidence) / `B` (user goal) / `C` (hypothesis) / `D`
+(unknown) / `E` (deliberately undecided). No `[U]`/`[H]` finding was promoted to a
+MUST/SHOULD.
+
+**Local-first vs local-only distinction (documented, per the addendum):**
+local-first = works offline, syncs when online, cloud assumed present.
+**Local-only core (MELFINA's requirement)** = the core has no notion of a remote at
+all; removing the network changes nothing about its ability to understand, reason,
+remember, retrieve, plan, decide, teach, and act locally; no cloud component it
+defers to or degrades toward. Any future network capability is a separate,
+isolated, off-by-default add-on that can never form the "lethal trifecta" with
+core data and is never a core dependency (MEL-REQ-166, 167).
+
+**Confidence:** high for local-only / no-scorekeeping / predictability+autonomy /
+the autonomy triad + least-authority security / external-structure-is-worth-
+building. Low for the neutral-primitives life model (hypothesis), specific
+assistive-feature efficacy for this adult, the emotional-understanding *capability*
+(the constraints are high-confidence), and the deep-reasoning/rediscovery
+aspiration (narrow formal case only). Unknowable now: whether MELFINA actually
+improves this user's life — only REAL-WORLD USE answers that.
+
+### RESEARCH MISSION 002 — summary of outcome (2026-09-10)
+
+Deeper pass targeting Mission 001's evidence gaps. Output: `RESEARCH_MASTER.md`
 
 ### RESEARCH MISSION 002 — summary of outcome (2026-09-10)
 
@@ -161,9 +243,9 @@ sufficient to begin requirements when the user chooses.
 ### Pipeline
 
 ```
-DEEP RESEARCH            <-- MISSION 001 + 002 done; awaiting review
-  -> PERSONAL REQUIREMENTS   <-- next, on user's explicit go
-  -> HUMAN / CENTRAL MODEL
+DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed (d3160f0)
+  -> PERSONAL REQUIREMENTS   <-- MISSION 001 done (1st pass); awaiting review
+  -> HUMAN / CENTRAL MODEL   <-- next, on user's explicit go
   -> SYSTEM DESIGN
   -> ARCHITECTURE
   -> LOW-LEVEL FOUNDATIONS
@@ -229,9 +311,9 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 
 | Path            | Holds                                                        |
 |-----------------|-------------------------------------------------------------|
-| `research/`     | Deep-research findings, surveys, source notes, comparisons. |
-| `requirements/` | The user's real, personal requirements once elicited.       |
-| `model/`        | The human / central life model — core abstractions.         |
+| `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
+| `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001). First pass done. |
+| `model/`        | The human / central life model — core abstractions. **Next phase.** |
 | `design/`       | System design and architecture work.                        |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
@@ -251,11 +333,26 @@ Facts, for reference. Not commitments.
 
 ## 8. Open decisions (not yet made)
 
+Deferred by design. Requirements are implementation-independent; these are for
+SYSTEM DESIGN / ARCHITECTURE and later, and only after HUMAN / CENTRAL MODEL.
+
+- The neutral primitive set / life model (`requirements/OPEN_QUESTIONS.md` OQ-1).
 - Core language(s) and their boundaries.
 - Storage substrate (flat files, embedded DB, custom format, ...).
-- Interface shape (pure CLI, TUI, local daemon + clients, ...).
-- Whether/how an AI assistant layer participates.
+- Interface medium(s) — requirements say only "multi-modal, user-choosable,
+  consistent with the CLI-first leaning".
+- Which local reasoning components / model sizes (OQ-11).
+- The permission-grant mechanism (object-capability *style* is required by
+  `MEL-REQ-180`; the mechanism is not chosen).
+- The default consequential/routine action boundary (OQ-12).
+- Whether an isolated network add-on is ever built (OQ-11; `MEL-REQ-167`).
+- Whether any optional progress representation ships (OQ-6).
 - Licensing (deferred).
+
+The AI/assistant layer's *role* is now specified at requirements level (Parts II,
+IV, V of `REQUIREMENTS_MASTER.md`): under the permission model, not owner; the
+autonomy triad; optional; local reasoning for the core. *How* it is built is not
+decided.
 
 ## 9. Checkpoints
 
@@ -283,4 +380,21 @@ Facts, for reference. Not commitments.
   (2 claims corrected, several refined, 1 partly downgraded to `[U]`; none
   disproven). New tier `[U]`. Contradictions preserved. No requirements, no
   design, no architecture, no language/storage choice, no dependencies, no code.
-  `src/` untouched. Awaiting user review before the PERSONAL REQUIREMENTS mission.
+  `src/` untouched.
+- **2026-09-10** — Research Missions 001 + 002 accepted as a checkpoint by the
+  user and pushed (`d3160f0` on `origin/main`).
+- **2026-09-10** — **PERSONAL REQUIREMENTS MISSION 001 complete (first pass).**
+  Created `requirements/REQUIREMENTS_MASTER.md` (203 requirements `MEL-REQ-001…203`
+  + 16 anti-requirements `MEL-AR-01…16` + MELFINA Capability Model + autonomy triad
+  + action pipeline + feasibility classification + `REQUIREMENTS CHECKPOINT 001`),
+  `requirements/CONFLICTS.md` (RC1–RC10 + VC1–VC7 as configurable dimensions /
+  constraints / safeguards / open questions), `requirements/OPEN_QUESTIONS.md`
+  (OQ-1…OQ-15 + deliberately-undecided list); updated `requirements/README.md` and
+  this file. Includes a §18 deep research pass (~40 sources on autonomous agents,
+  cognitive architectures, computer-use/coding agents, capability-based security,
+  corrigibility, adjustable autonomy, ITS/learning science, local AI, continual
+  learning, affective computing, computational creativity, automated discovery,
+  agent memory, deskilling, XAI, prompt-injection/lethal-trifecta, BDI, abstention,
+  self-improvement). **No architecture. No language (C/C++/Rust/…). No storage
+  (SQLite/…). No framework, model, or UI toolkit. No dependencies. No code. `src/`
+  untouched.** Awaiting user review before HUMAN / CENTRAL MODEL.
