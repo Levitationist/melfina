@@ -9,21 +9,26 @@ Last updated: 2026-09-09
 
 ## 1. What this is
 
-A long-term effort to build a **lightweight, local-first personal life operating
-system** ("Personal OS") designed around the actual needs and cognitive friction
-of one user, rather than around a generic productivity methodology.
+**MELFINA** — a long-term effort to build a **lightweight, local-first personal
+life operating system** designed around the actual cognitive, behavioral,
+environmental, and practical needs of one user, rather than around a generic
+productivity methodology.
 
-The name "Personal OS" is a working title, not a commitment.
+MELFINA is the official project name (set 2026-09-09). Earlier notes may say
+"Personal OS"; that was a placeholder.
 
 ## 2. Current phase
 
-**Phase: DEEP RESEARCH — not yet started.**
+**Phase: DEEP RESEARCH — RESEARCH MISSION 001 in progress (issued 2026-09-09).**
 
 We are NOT coding the application. No architecture has been chosen. No framework
 or runtime dependency has been adopted.
 
-The research mission has **not** been issued yet. Work does not proceed past
-repository setup until the user explicitly gives that mission.
+RESEARCH MISSION 001: deep medical / clinical / cognitive-science / HCI research
+into how a personal computing system should be designed to reduce cognitive
+friction and support daily functioning for a person with lived experience of
+ADHD, autism, and OCD, without reinforcing harmful patterns. Output lands in
+`research/`. Research only — no design, no requirements, no code.
 
 ### Pipeline
 
