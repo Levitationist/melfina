@@ -1,0 +1,38 @@
+# Build output
+/build/
+build/
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+compile_commands.json
+.cache/
+
+# Experiments: keep sources, ignore their build trees
+experiments/**/build/
+experiments/**/*.o
+experiments/**/a.out
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.clangd/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python (tooling / scratch only)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local, non-shared notes
+*.local.md
+/scratch/
