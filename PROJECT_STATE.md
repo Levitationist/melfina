@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-10 (PERSONAL REQUIREMENTS MISSION 001 + dynamic-self-directed correction)
+Last updated: 2026-09-10 (HUMAN / CENTRAL MODEL MISSION 001)
 
 ---
 
@@ -19,17 +19,97 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: PERSONAL REQUIREMENTS — MISSION 001 complete (first pass), awaiting user
-review. Next phase is HUMAN / CENTRAL MODEL, and it does not start until the user
-explicitly authorises it.**
+**Phase: HUMAN / CENTRAL MODEL — MISSION 001 complete (first pass), awaiting user
+review. Next phase is SYSTEM DESIGN / ARCHITECTURE, and it does not start until the
+human/central model is reviewed and explicitly accepted.**
 
-Research Missions 001 + 002 are done and pushed (commit `d3160f0`). PERSONAL
-REQUIREMENTS MISSION 001 produced a requirements specification, not architecture.
+Research Missions 001 + 002 and PERSONAL REQUIREMENTS MISSION 001 (+ its
+dynamic-self-directed correction) are done and pushed (commit `120567a`).
 
 We are NOT coding the application. No architecture chosen. No language (C vs C++)
-chosen. No storage substrate (SQLite or other) chosen. No framework, model, or UI
-toolkit chosen. `src/` untouched. The requirements are implementation-independent
-and explicitly defer all technology decisions to later phases.
+chosen. No storage substrate chosen — and the model explicitly must survive any
+choice (relational / graph / document / triple / hypergraph — none implied). No
+framework, model, or UI toolkit chosen. `src/` untouched.
+
+### HUMAN / CENTRAL MODEL MISSION 001 — summary of outcome (2026-09-10)
+
+Determined the smallest coherent conceptual model of a human life from which
+MELFINA's capabilities emerge. Not built around application categories (tasks,
+habits, notes, calendars, projects, goals, reminders, journals, dashboards, music
+practice) — those emerge as views.
+
+Output in `model/`:
+- `HUMAN_CENTRAL_MODEL.md` — the model (18 sections + `MODEL CHECKPOINT 001`).
+- `MODEL_ALTERNATIVES.md` — 4 candidate models (A event-centric · B entity/
+  relationship-centric · C state/transition-centric · D three-primitive) compared
+  rigorously; conclusion: no single one is sufficient, a synthesis is necessary.
+- `MODEL_OPEN_QUESTIONS.md` — `OQ-M1 … OQ-M12`.
+- `README.md` — index.
+
+**Leading model — E²CI. Four primitives:**
+- **ENTITY** — anything that persists and can be referred to (`kind` is an open
+  attribute: person / place / thing / work / concept / capability / workflow /
+  source / `self` / `melfina` / …). Grounded in BFO continuant; personal
+  knowledge graphs.
+- **EVENT** — something that occurs at/over time, with participants in roles,
+  possibly bringing about or ending conditions; includes observations, actions,
+  sessions, decisions, and *expected* future events. Grounded in BFO occurrent;
+  event calculus; W3C PROV.
+- **CLAIM** — a statement held by an agent, with an origin and an epistemic
+  **status** (observed / reported / inferred / hypothesised / open / stipulated /
+  decided / recalled), a **confidence**, full **provenance**, and **bitemporal**
+  coordinates (valid-time / transaction-time). *All of MELFINA's knowledge is
+  claims.* Relationships and "what holds now" (state) are claims. Grounded in
+  epistemic/doxastic logic; PROV; AGM belief revision; bitemporal modelling.
+- **INTENTION** — an agent's directedness toward a future condition or action —
+  the world-to-mind stance, distinct from a belief by *direction of fit*. Goals,
+  tasks, plans, commitments (an intention with a creditor), routines, reminders
+  are cases. Grounded in Anscombe/Searle; BDI; Castelfranchi social commitment.
+
+Plus: **TIME** is a bitemporal *dimension* (not a primitive — "calendar"
+dissolves into a view). **CONTEXT** is *derived per situation* by a relevance
+trade-off (Sperber & Wilson) — never stored.
+
+**Key decisions (open to challenge):** `State` folded into `Claim` (OQ-M2);
+`Relation` folded into `Claim` — carrying its own time/provenance/confidence
+(OQ-M1); `Intention` kept (direction of fit) — folding it is rejected;
+four primitives — three is insufficient, five/six not clearly necessary (OQ-M8).
+
+**Strongest test-case results:** music needs **zero** music-specific primitives
+(work/movement/section/passage = `part-of`-linked entities; practice session = a
+`session` event; technical problem = a user-worded descriptive claim;
+interpretation = `stipulated` claims MELFINA never overwrites; progression = a
+`supersedes` chain — no streak, no hours headline). Scientific reasoning maps
+cleanly (hypothesis/evidence/experiment are *labels + a discipline*, not model
+extensions). The agency pipeline (USER intends → MELFINA reasons → proposes →
+USER authorises → MELFINA acts → world changes → MELFINA observes → updates) maps
+exactly, and the autonomy triad is naturally separated. The dynamic self-directed
+MELFINA is supported without freezing today's agent tech (strategies and skills
+are claims/entities, never enums).
+
+**What the model deliberately does NOT contain:** the self-modification
+meta-invariant rules (external to MELFINA's reasoning by design); any enforcement
+mechanism (permissions are represented, not guarded); any evaluative verdict the
+user did not enter; any diagnostic category (ADHD/autism/OCD not reified); any
+implementation choice.
+
+**Top unresolved semantic questions:** is `State` a fifth primitive (OQ-M2); is
+`Relation` (OQ-M1); is four genuinely minimum-sufficient (OQ-M8, a prototyping
+question); recurrence identity (OQ-M3); structure of `confidence` (OQ-M4); how
+worries / intrusive thoughts / affect are represented (OQ-M5) — flagged for user
+input; "what matters" beyond `Intention` + relevance (OQ-M7).
+
+**Confidence:** Moderate–High that the four *kinds* of thing (referents /
+happenings / claims / directedness) are right — converges across BFO, event
+calculus, epistemic logic, direction-of-fit, PROV. High that claims carry
+provenance + status + bitemporal coordinates, and that context is derived not
+stored. Moderate on `State`- and `Relation`-folding and on whether four is
+genuinely minimal. Unknown whether E²CI holds *this user's* life well — only
+real-world use tells.
+
+`requirements/` was **not edited** — issues with requirements are logged as model
+open questions, not changed (research and requirements kept as immutable prior
+checkpoints).
 
 ### PERSONAL REQUIREMENTS MISSION 001 — summary of outcome (2026-09-10)
 
@@ -275,24 +355,19 @@ efficacy; reminder design for reminder-fatigued users; AI reassurance safeguards
 whether any safe progress representation exists; the life-model primitives;
 capacity-state adaptation; music mapping; what sustains long-term engagement.
 
-### Next phase
+### Next phase (as recommended at the close of Mission 002; since completed)
 
-**PERSONAL REQUIREMENTS** — with the user: elicit real personal frictions and
-needs in the user's own terms; place the user on each `CONFLICTS.md` axis; decide
-which implications become requirements and at what priority.
-**Do not start until the user gives the requirements mission.**
-
-A further (third) research pass is possible if the user wants the remaining `[U]`
-gaps chased with library-database access — but Missions 001+002 are judged
-sufficient to begin requirements when the user chooses.
+**PERSONAL REQUIREMENTS** — done (see the PERSONAL REQUIREMENTS MISSION 001 summary
+above). A further (third) research pass remains possible for the `[U]` gaps but
+was judged unnecessary to proceed.
 
 ### Pipeline
 
 ```
-DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed (d3160f0)
-  -> PERSONAL REQUIREMENTS   <-- MISSION 001 done (1st pass); awaiting review
-  -> HUMAN / CENTRAL MODEL   <-- next, on user's explicit go
-  -> SYSTEM DESIGN
+DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
+  -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed (120567a)
+  -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done (1st pass); awaiting review
+  -> SYSTEM DESIGN           <-- next, only after the model is explicitly accepted
   -> ARCHITECTURE
   -> LOW-LEVEL FOUNDATIONS
   -> CORE ENGINE
@@ -359,8 +434,8 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 |-----------------|-------------------------------------------------------------|
 | `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
 | `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001). First pass done. |
-| `model/`        | The human / central life model — core abstractions. **Next phase.** |
-| `design/`       | System design and architecture work.                        |
+| `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done. |
+| `design/`       | System design and architecture work. **Next phase**, on model acceptance. |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -465,4 +540,33 @@ decided.
   self-generated workflow orchestration, adaptive/self-RAG, self-improving-agent
   evaluation, monotonic confinement / external guardrails). **Still no
   architecture, no language, no storage, no framework/model/UI, no dependencies,
-  no code. `src/` untouched.** Awaiting user review before HUMAN / CENTRAL MODEL.
+  no code. `src/` untouched.**
+- **2026-09-10** — Research Missions 001+002 and PERSONAL REQUIREMENTS MISSION 001
+  (+ correction) accepted as a checkpoint by the user and pushed (`120567a` on
+  `origin/main`).
+- **2026-09-10** — **HUMAN / CENTRAL MODEL MISSION 001 complete (first pass).**
+  Created `model/HUMAN_CENTRAL_MODEL.md` (the model, 18 sections + `MODEL
+  CHECKPOINT 001`), `model/MODEL_ALTERNATIVES.md` (4 candidate models compared —
+  A event-centric · B entity/relationship-centric · C state/transition-centric ·
+  D three-primitive — concluding a synthesis is necessary), `model/
+  MODEL_OPEN_QUESTIONS.md` (`OQ-M1…OQ-M12`); updated `model/README.md` and this
+  file. **Leading model E²CI: four primitives — ENTITY · EVENT · CLAIM ·
+  INTENTION — in a bitemporal TIME dimension, with CONTEXT derived per situation
+  (relevance theory), never stored.** All application categories (task / habit /
+  note / calendar / project / goal / reminder / journal / dashboard / practice
+  session / experiment / decision / hypothesis / capability / automation /
+  strategy) emerge as *views or patterns*, not primitives. Grounded in BFO
+  continuant/occurrent, event calculus, W3C PROV, epistemic/doxastic logic, AGM
+  belief revision, bitemporal modelling, Anscombe/Searle direction of fit,
+  Castelfranchi social commitment, activity theory, Sperber & Wilson relevance
+  theory, Allen's interval algebra, Conway's self-memory system (grounding pass,
+  ~15 sources). Music needs **zero** music-specific primitives; the agency
+  pipeline and the dynamic self-directed MELFINA are both supported without
+  freezing today's agent tech. The model deliberately does **not** contain the
+  self-modification meta-invariant rules, any enforcement mechanism, any
+  evaluative verdict, or any diagnostic category. Top open questions: is `State` a
+  fifth primitive (OQ-M2); is `Relation` (OQ-M1); is four genuinely
+  minimum-sufficient (OQ-M8); how are worries/affect represented (OQ-M5).
+  `requirements/` and `research/` **not edited**. **No architecture, no
+  technology, no schema, no format, no code. `src/` untouched.** Awaiting user
+  review and explicit acceptance before SYSTEM DESIGN / ARCHITECTURE.
