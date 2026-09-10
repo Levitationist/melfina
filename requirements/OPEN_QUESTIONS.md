@@ -10,6 +10,9 @@ it, and where it should be resolved.
 **Classes:** **C** design hypothesis · **D** unknown needing experimentation ·
 **E** deliberately undecided (a real decision, just not now).
 
+**OQ-1 … OQ-15** are from the base + earlier addenda; **OQ-16 … OQ-21** were added
+by the dynamic-self-directed correction.
+
 ---
 
 ## OQ-1 — What are MELFINA's primitives? (the life model)
@@ -158,6 +161,78 @@ it, and where it should be resolved.
 
 ---
 
+## Added by the dynamic-self-directed correction (OQ-16 … OQ-21)
+
+## OQ-16 — Can dynamic strategy selection be made predictable enough for this user?
+- **Question:** MELFINA is required to choose its own approach (reasoning depth,
+  speed, context breadth, decomposition, verification effort, autonomy-within-
+  bounds) per situation (`MEL-REQ-204–209`), *and* to remain predictable and
+  non-surprising (`MEL-REQ-253`). How much strategic variability can this user
+  tolerate before it reads as erratic / untrustworthy? What makes a strategic
+  choice feel "explained" vs "arbitrary" to them?
+- **Why open:** individual; "surprise is a cost" for this profile (IU evidence);
+  the balance is a lived-experience question.
+- **Class:** D.
+- **Depends:** VC8, VC11, VC12; `MEL-REQ-204–213`, `251–253`.
+- **Resolve in:** REAL-WORLD USE + ITERATION, with a user-set bound on dynamism.
+
+## OQ-17 — How is a genuine capability gap distinguished from the model just preferring to build something?
+- **Question:** `MEL-REQ-217` requires recognising when existing capabilities are
+  insufficient. LLM self-knowledge is weak and models exhibit "over-helpfulness"
+  (building/acting rather than acknowledging limits). What signals reliably
+  indicate a real gap (repeated failure on a task class, explicit user need,
+  verifiable inadequacy) vs the model's inclination to create?
+- **Class:** D.
+- **Depends:** VC9; `MEL-REQ-217`, `219`, `220`.
+- **Resolve in:** SYSTEM DESIGN (gating rules) + REAL-WORLD USE (calibration).
+  Meanwhile: compose-before-code + test + human-authorise for risk.
+
+## OQ-18 — Can a system that grows its own capabilities stay within one-maintainer comprehension?
+- **Question:** `MEL-REQ-192` requires that one person can hold the whole system
+  in their head; `MEL-REQ-218–224` let MELFINA construct and evolve capabilities.
+  Do compose-before-code, retire-the-obsolete, no-duplication, and on-demand
+  loading actually keep the system comprehensible — or does self-generated
+  capability inevitably erode that?
+- **Class:** H / D.
+- **Depends:** VC9; `MEL-REQ-192–195`, `218–224`, `128`.
+- **Resolve in:** ARCHITECTURE (complexity budget) + REAL-WORLD USE.
+
+## OQ-19 — Does the self-modification meta-invariant actually hold against a highly capable MELFINA?
+- **Question:** `MEL-REQ-235` requires that MELFINA cannot redefine the rules
+  governing its own self-modification (external, monotonic, versioned, audited).
+  Research shows external immutable rules *may* be circumventable over time — "a
+  self-modifying system can preserve constitutional behaviour on familiar tests
+  while altering internal abstractions so principles cease to generalise"
+  (`MEL-REQ-239`). Is the meta-invariant + grading + audit a *sufficient* safety
+  envelope, or only a *necessary* one? Possibly unknowable in advance.
+- **Class:** D / U.
+- **Depends:** VC10; `MEL-REQ-233–239`.
+- **Resolve in:** cannot be fully resolved by design. Mitigation: keep tiers 6–9
+  non-autonomous, rare, human-driven, heavily audited; treat any evidence of
+  circumvention attempts as a stop condition.
+
+## OQ-20 — What is the right authorisation granularity for the nine self-change tiers?
+- **Question:** `MEL-REQ-233` defines nine tiers with escalating authorisation.
+  What exactly requires a click, a typed confirmation, a review period, a
+  human-authored diff? How are tiers 3–5 (skill/workflow creation and
+  modification) gated without making the system unusable?
+- **Class:** E (a real decision) + D (needs use).
+- **Depends:** VC10; `MEL-REQ-233`, `234`.
+- **Resolve in:** SYSTEM DESIGN (initial scheme) + ITERATION.
+
+## OQ-21 — How much of the dynamic self-direction is feasible with *local* reasoning components?
+- **Question:** metareasoning, dynamic context selection, capability-gap
+  recognition, and self-evaluation are demonstrated mostly with large models.
+  Small local models can do multi-step reasoning but are weaker. Which of
+  `MEL-REQ-204–253` degrade acceptably on local components, and which effectively
+  require capability MELFINA won't have locally (and should therefore decline,
+  per `MEL-REQ-155`)?
+- **Class:** D.
+- **Depends:** VC3, VC8; `MEL-REQ-155`, `204–253`.
+- **Resolve in:** ARCHITECTURE + AI LAYER + ITERATION. Overlaps OQ-11.
+
+---
+
 ## Deliberately-undecided list (E-class, consolidated)
 
 Recorded so no later document treats these as already-decided:
@@ -177,3 +252,15 @@ Recorded so no later document treats these as already-decided:
 9. Whether any optional progress representation ships (OQ-6).
 10. Sync between the user's own devices, if ever — not a core concern
     (local-only core); would be an isolated capability like any network feature.
+11. The dynamic-dispatch / metareasoning mechanism (`MEL-REQ-204–209`).
+12. The capability lifecycle mechanism — create / test / promote / version /
+    retire (`MEL-REQ-219–227`).
+13. The external permission-monitor design that enforces the meta-invariant
+    (`MEL-REQ-235`) — required to be external, deterministic, monotonic; the
+    mechanism is not chosen.
+14. Authorisation granularity for the nine self-change tiers (OQ-20).
+15. Whether MELFINA ever performs tier 6+ (code / subsystem / architecture)
+    self-modification at all, or those stay human-only indefinitely
+    (`MEL-REQ-236` keeps them non-autonomous regardless).
+16. The fixed regression / verification harness for capabilities
+    (`MEL-REQ-221`, `226`).

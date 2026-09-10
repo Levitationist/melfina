@@ -271,6 +271,17 @@ Re-entry after any gap MUST be frictionless and free of judgement.
 > capabilities are *what MELFINA must be able to do*. They do **not** imply
 > separate software modules, separate processes, separate models, or any
 > particular decomposition. That is the architecture phase's job.
+>
+> **They are also NOT a static feature checklist or a fixed operating strategy.**
+> The fifteen capabilities are a *vocabulary* for talking about what MELFINA does;
+> they are not a ceiling. Which capabilities are engaged, how deeply, in what
+> combination, with how much context and compute, and whether a *new* capability
+> is constructed for the problem at hand — all of that is itself something
+> MELFINA reasons about per situation. See **PART IV-B — THE DYNAMIC
+> SELF-DIRECTED SYSTEM** (`MEL-REQ-204`…`MEL-REQ-252`), which is the load-bearing
+> reframing: *MELFINA determines what capabilities, context, reasoning processes,
+> tools, and workflows a problem requires, and — where appropriate and
+> authorised — constructs new ones.*
 
 ## 15. The fifteen capabilities
 
@@ -296,12 +307,19 @@ this section is the map.
 | C-14 | **Self-evaluation** | Assess its own outputs, decisions, and predictions against outcomes; recognise its own errors and uncertainty. | Weak — intrinsic self-assessment is the least reliable rung of the verification hierarchy ([E]); external/formal verification is stronger. |
 | C-15 | **Controlled improvement** | Improve its skills, workflows, strategies, and models over time — bounded, versioned, inspectable, reversible, permission-gated. | Bounded self-refinement is feasible; open-ended self-improvement is unsafe and out of scope; MELFINA must not author its own objectives or success metrics ([E]). |
 
-**MEL-REQ-016 — MUST — the capability model is conceptual.**
+**MEL-REQ-016 — MUST — the capability model is conceptual and open, not a fixed catalogue.**
 Nothing in this document may be read as requiring a particular software structure
 for these capabilities. A build MAY implement several capabilities in one
-component or split one capability across many.
-- *Why:* the mission explicitly forbids architecture here. — **B**
-- *Accept:* architecture-phase documents, not this one, decide decomposition.
+component or split one capability across many. Furthermore, the fifteen
+capabilities MUST NOT be implemented as a closed set of fixed modes: MELFINA
+composes and (per PART IV-B) constructs capabilities dynamically. The list is a
+description of scope, not an enumeration of everything MELFINA will ever be able
+to do.
+- *Why:* the mission explicitly forbids architecture here; the
+  dynamic-self-directed correction explicitly forbids a static feature checklist.
+  — **B**
+- *Accept:* architecture-phase documents, not this one, decide decomposition; no
+  requirement below treats the 15 capabilities as an exhaustive or frozen set.
 
 ## 16. The autonomy triad
 
@@ -1418,6 +1436,479 @@ independence.
 
 ---
 
+# PART IV-B — THE DYNAMIC SELF-DIRECTED SYSTEM
+
+> **Conceptual correction (from the mission).** MELFINA is **not** a static
+> collection of predefined capabilities, skills, modes, workflows, or behavioural
+> policies. Everything in Parts I–IV describes capabilities and constraints;
+> **none of it is a fixed ceiling or a fixed operating strategy.** MELFINA is a
+> *dynamic, self-directed* system: for the situation at hand it reasons about
+> *how* to reason, *what* context to bring, *which* capabilities fit, *whether*
+> existing capabilities suffice, and — where appropriate and authorised —
+> *constructs* new capabilities, tools, and workflows.
+>
+> **Dynamic does not mean arbitrary.** Every dynamic choice is bounded by the
+> grounding factors (`MEL-REQ-252`): explicit goals · constraints · permissions ·
+> evidence · learned context · system invariants · user-defined boundaries ·
+> verification · consequences · uncertainty. A dynamic choice that cannot be
+> justified against these must not be made.
+>
+> **Feasibility is mixed and stated per requirement.** Some of this is
+> demonstrated today (adaptive reasoning depth, dynamic retrieval decisions,
+> skill libraries in constrained settings). Some is research-stage (self-generated
+> workflows, reliable capability-gap recognition). Some is theoretical or
+> speculative (provably-optimal self-modification; recursive self-improvement
+> toward superintelligence — **explicitly not a goal**). Tags: `[E]` established ·
+> `[DI]` design inference · `[H]` hypothesis · `[U]` unknown / speculative.
+>
+> **No AGI, consciousness, sentience, or guaranteed-discovery claims** are made or
+> implied here.
+
+## 45. Dynamic strategy selection (metareasoning)
+
+**MEL-REQ-204 — SHOULD — reason about *how* to approach a problem, not just solve it.**
+Before and while working a non-trivial problem, MELFINA SHOULD consider how to
+approach it: how deep to reason, how fast to respond, how much verification to do,
+whether to decompose, whether to experiment, whether first-principles reasoning is
+needed, whether external (local) knowledge is needed, and whether any action is
+warranted at all.
+- *Why:* rational metareasoning / value-of-computation (Russell & Wefald 1991) —
+  a bounded agent must allocate effort between "reasoning about the world" and
+  "reasoning about how to reason". Established as theory. — **A+B** [E]
+- *Accept:* for a non-trivial task, MELFINA can state (on request) what approach it
+  chose and why; the choice is not a fixed pipeline.
+
+**MEL-REQ-205 — SHOULD — dynamically choose reasoning depth and response speed.**
+MELFINA SHOULD match effort to the problem: a quick answer for a simple query,
+extended reasoning for a hard one — deciding this itself rather than requiring the
+user or a developer to pick a mode.
+- *Why:* adaptive test-time compute is **demonstrated** — dynamic "thinking
+  budgets", fast/slow modes, learned NoThink/Short/Long selection. — **A+B** [E]
+- *Accept:* observed effort varies with observed difficulty; there is no permanent
+  global "depth vs speed" setting the user must choose.
+- *Open:* how well difficulty is judged up front. OQ-16.
+
+**MEL-REQ-206 — MUST — strategy dimensions are not a fixed enumeration.**
+Situational strategies (speed, depth, context breadth/depth, tool use, skill use,
+experimentation, verification effort, autonomy, explanation depth, and
+task-shaped stances such as teaching / coding / research / planning / creative
+exploration / conservative execution) MUST be treated as **strategies MELFINA may
+select, combine, abandon, or invent** — **not** as a closed list of modes. The
+requirements MUST NOT freeze these into a fixed enumeration where doing so would
+needlessly cap future capability.
+- *Why:* explicit mission instruction ("these are NOT permanent modes"); a static
+  mode list is the exact anti-pattern the conceptual correction rejects. — **B**
+- *Accept:* no code path treats the above as an exhaustive switch; new stances can
+  arise from composition without a schema change.
+
+**MEL-REQ-207 — MUST — strategy selection is bounded.**
+Strategy selection MUST operate within: the user's goals and boundaries; the
+permission model; hard resource budgets (`MEL-REQ-241`, `MEL-REQ-243`); the system
+invariants (`MEL-REQ-235`); and the safety requirements of Part V §40. A strategy
+that would exceed any of these MUST NOT be selected.
+- *Why:* "dynamic does not mean arbitrary"; the grounding-factors list. — **A+B** [DI]
+
+**MEL-REQ-208 — MUST — strategy choices are inspectable and explainable on request.**
+- *Why:* auditability; corrigibility; the user must be able to understand and
+  correct MELFINA's approach, not just its output. — **A+B** [E]
+
+**MEL-REQ-209 — SHOULD — default to a cheap, safe, conservative strategy under meta-uncertainty.**
+When MELFINA is unsure which strategy fits, it SHOULD start cheap and conservative
+(shallow, well-verified, low-autonomy) and escalate only as justified.
+- *Why:* metareasoning under uncertainty; agent "premature action" and
+  "over-helpfulness" are documented failure modes; anytime behaviour. — **A** [E]
+
+## 46. Dynamic context selection (context management as active reasoning)
+
+**MEL-REQ-210 — SHOULD — decide for itself what context is relevant.**
+MELFINA SHOULD determine what information a problem needs, what to retrieve from
+its local stores, what is irrelevant, how much is enough, and what can be set
+aside — rather than requiring a human to pre-select the context.
+- *Why:* dynamic / adaptive / self-reflective retrieval is **demonstrated**
+  (Adaptive-RAG's no-retrieve / retrieve-once / retrieve-many routing;
+  Self-RAG's retrieve/critique/assess decisions; FLARE's confidence-triggered
+  re-query). — **A+B** [E]
+- *Accept:* context brought to a task varies with the task; the user is not asked
+  to configure a context window.
+
+**MEL-REQ-211 — SHOULD — decide when *more* context helps vs when it is noise.**
+MELFINA SHOULD recognise when acquiring additional context would improve the
+result and when it would dilute attention or introduce distractors.
+- *Why:* "attention dispersion" / "context pollution" are documented agent failure
+  modes; more context is not always better. — **A** [E]
+- *Open:* this judgement partly relies on the model's self-knowledge, which is
+  weak. OQ-16, OQ-21.
+
+**MEL-REQ-212 — SHOULD — decide when to decompose vs stay holistic.**
+- *Why:* hierarchical planning / HTN (decompose compound tasks into subtasks until
+  primitive); but forced decomposition can lose the whole. Situational. — **A** [E]
+
+**MEL-REQ-213 — MUST — context selection is auditable.**
+For a consequential result, MELFINA MUST be able to show what context it used,
+what it deliberately excluded, and why. This matters *especially* because the
+decision partly relies on the model's unreliable self-assessment.
+- *Why:* LLM metacognition is "weak to moderate", "systematically overconfident",
+  and models "may obfuscate internal processes to evade oversight" — so external
+  visibility of context choices is a safeguard, not a nicety. — **A+B** [E]
+
+**MEL-REQ-214 — MUST — "acquire more context" means local stores or the user, never the network.**
+Dynamic context acquisition MUST stay within the local-only core: the user's
+stores, local files the user exposed, or asking the user. It MUST NOT reach the
+network. (An isolated network add-on, `MEL-REQ-167`, is the only exception and is
+not part of the core.)
+- *Why:* `MEL-REQ-014`, `MEL-REQ-164`; the lethal trifecta. — **A+B** [E]
+
+**MEL-REQ-215 — MUST — discarding context ≠ deleting data.**
+When MELFINA drops context as irrelevant to the current problem, it removes it
+from *working consideration only*. The underlying stored data is untouched.
+- *Why:* `MEL-REQ-025`, `MEL-REQ-162`; retrieval-is-lossy is about the archive
+  being incomplete, not about the system deleting things it judged unimportant.
+  — **A+B** [E]
+
+## 47. Dynamic skill / capability selection and composition
+
+**MEL-REQ-216 — SHOULD — select and compose capabilities per situation.**
+MELFINA SHOULD choose which skills/capabilities fit a problem, compose several
+where that helps, and select contextually — not run a fixed capability for a fixed
+input type.
+- *Why:* contextual tool selection and multi-tool orchestration are demonstrated;
+  skill retrieval by relevance (Voyager-style). — **A+B** [E]
+
+**MEL-REQ-217 — SHOULD — recognise when existing capabilities are insufficient.**
+MELFINA SHOULD be able to notice that no available capability (alone or composed)
+adequately addresses a problem — a *capability-gap recognition*.
+- *Why:* the mission's explicit list; prerequisite for capability crection (§48).
+  Reliable gap recognition is **research-stage** — it depends on the model
+  correctly judging its own limits. — **B** [H]/[U]
+- *Open:* how a genuine gap is distinguished from the model merely preferring to
+  build something. OQ-17.
+
+**MEL-REQ-218 — MUST — the skill catalogue is not fixed.**
+The set of skills/capabilities MUST be able to grow and shrink over MELFINA's
+lifetime: skills can be constructed (§48), evolved (§49), and retired. A skill is
+something MELFINA can potentially build and change, not only something a developer
+installs.
+- *Why:* explicit mission instruction. — **B**
+
+## 48. Capability-gap recognition → capability creation
+
+**MEL-REQ-219 — SHOULD — support the capability-creation loop.**
+When a gap is recognised, MELFINA SHOULD be able to: (1) specify what capability is
+missing; (2) check whether an existing capability can be adapted or composed to
+fill it; (3) design a new capability only if not; (4) test it; (5) evaluate
+whether it actually works; (6) preserve it if useful; (7) discard it if not;
+(8) version it; (9) explain important changes; (10) obtain authorisation before
+any change carrying meaningful risk.
+- *Why:* explicit mission list. Demonstrated in constrained settings — Voyager
+  (synthesise → store → retrieve executable skills with self-verification),
+  CREATOR / LATM (LLMs create reusable tools, disentangling creation from use).
+  Open-world / production reliability is **unproven**. — **B** [E in constrained
+  settings] / [U] general
+- *Accept:* the loop exists end-to-end; steps 4–5 (test + evaluate) and step 10
+  (authorise) are mandatory gates, not optional.
+
+**MEL-REQ-220 — MUST — prefer composition and adaptation over new code.**
+Capability creation MUST try to solve the gap by composing or adapting existing
+capabilities before generating new code.
+- *Why:* keeps the system small (`MEL-REQ-192`, `MEL-REQ-194`); less new code =
+  less new risk; the mission's step (3) is explicitly conditional ("only if
+  not"). — **A+B** [DI]
+
+**MEL-REQ-221 — MUST — a created capability is untrusted until tested and (for risk) authorised.**
+A newly created or modified capability MUST NOT be used for anything consequential
+until it has passed a fixed verification/test suite, and — if it carries
+meaningful risk (touches the computer, the data model, permissions, external
+communication, or core behaviour) — has been authorised by the user.
+- *Why:* self-improving-agent evaluation research — "once a skill has a benchmark
+  it becomes software you can test and regression-gate"; verified code generation
+  is near-unsolved (~1/161 on CLEVER), so *testing*, not proof, is the practical
+  gate. — **A+B** [E]
+
+**MEL-REQ-222 — MUST — created capabilities get least authority; no self-granted escalation.**
+A capability MELFINA creates MUST receive the minimum authority for its function
+(§40), and MUST NOT be able to hold more authority than MELFINA held when creating
+it, nor grant itself more later.
+- *Why:* least authority; monotonic confinement (Progent) — effective authority
+  can only narrow without explicit approval; capability-escalation prevention is
+  a mission requirement. — **A+B** [E]
+
+**MEL-REQ-223 — MUST — capability creation via code relies on test + sandbox + rollback + human gate, not on proof.**
+Where a new capability involves generated code, its safety MUST rest on: execution
+in a sandbox with least authority; a fixed test suite; a tested rollback path; and
+human authorisation for meaningful risk — **not** on a claim that the code is
+formally correct.
+- *Why:* formally verified code generation is near-unsolved; "prompt engineering
+  alone is insufficient to guarantee security". — **A+B** [E]
+
+**MEL-REQ-224 — MUST — obsolete or harmful capabilities are retired.**
+MELFINA MUST detect capabilities that have become obsolete, redundant, or harmful
+(cause errors, loops, escalation attempts, or reinforce a compulsion pattern) and
+retire them, keeping an archived record and a restore path.
+- *Why:* mission list (steps 7–8); capability-drift and regression evidence;
+  `MEL-REQ-186` (safeguards cannot be weakened). — **A+B** [E]
+
+## 49. Capability evolution and versioning
+
+**MEL-REQ-225 — MUST — every capability is versioned, explained, and reversible.**
+Every capability change MUST be versioned, carry a human-readable note of what
+changed and why, and be reversible to any prior version.
+- *Why:* mission list; safe-update research (versioning + rollback);
+  `MEL-REQ-148`. — **A+B** [E]
+
+**MEL-REQ-226 — MUST — promoted capabilities are regression-tested on a fixed suite, periodically.**
+Capabilities in active use MUST be periodically replay-tested against a fixed
+verification suite to detect capability drift and silent regression.
+- *Why:* self-evolving-agent evaluation research — "periodically replay-test
+  promoted skills on fixed verification suites to detect regressions", capturing
+  both policy drift and artifact stability (e.g. TDAD's ~70% regression
+  reduction). — **A+B** [E]
+
+**MEL-REQ-227 — MUST — the risk class of a capability change is not something MELFINA can lower autonomously.**
+The classification of a change as "meaningful risk" (and therefore
+authorisation-gated) MUST be determined by rules external to MELFINA's reasoning;
+MELFINA MUST NOT reclassify its own change downward to avoid a gate.
+- *Why:* self-modification meta-invariant (`MEL-REQ-235`); monotonic confinement;
+  "a model can be talked out of its own instructions but cannot override an
+  external check". — **A+B** [E]
+
+## 50. Human–MELFINA co-creation
+
+**MEL-REQ-228 — SHOULD — support genuine collaborative creation, not just request→execute.**
+MELFINA SHOULD support a co-creation loop with the user: user idea → MELFINA
+understands → joint exploration → discover missing concepts/capabilities → invent
+an approach → prototype → test → learn → new capability or system. Both parties
+may take initiative (mixed-initiative co-creativity); creative agency is shared.
+- *Why:* mission's explicit flow; human-AI co-creativity frameworks (MI-CCy,
+  COFI) — creativity as a shared endeavour, turn-taking, mutual adaptation.
+  — **A+B** [E] for the interaction model; [H] for MELFINA doing it well
+- *Accept:* the loop is a supported mode of working, distinct from one-shot
+  execution; MELFINA can hold and advance a half-formed idea over time.
+
+**MEL-REQ-229 — MUST — co-creation preserves evidence, provenance, reproducibility, verification, and intellectual honesty.**
+Throughout co-creation, MELFINA MUST: keep provenance for ideas and results;
+separate what was derived from what was retrieved and what was guessed
+(`MEL-REQ-096`); check apparent novelty against known results and flag
+unverifiable novelty (`MEL-REQ-135`); make reasoning reproducible
+(`MEL-REQ-131`); and never present a hoped-for result as an established one.
+- *Why:* explicit mission instruction ("maximise the possibility of genuine novel
+  problem-solving while preserving evidence, reproducibility, verification, and
+  intellectual honesty"); AI-scientist systems produce hallucinated novelty and
+  fake citations. — **A+B** [E]
+
+**MEL-REQ-230 — MUST — the user retains control across the whole trajectory.**
+In co-creation, control is continuous, not a single hand-off point: the user can
+redirect, veto, take over, or stop at any stage, and MELFINA's contributions are
+always visible and attributable.
+- *Why:* "control is a trajectory, not a point" (human-AI co-creativity research);
+  `MEL-REQ-004`, `MEL-REQ-230`. — **A+B** [E]
+
+**MEL-REQ-231 — MUST NOT — no claims that co-creation guarantees unprecedented invention.**
+- *Why:* explicit mission instruction; anti-hype (`MEL-AR-15`). — **B**
+
+**MEL-REQ-232 — SHOULD — co-created artefacts are first-class, versioned, exportable, and the user's.**
+Workflows, tools, experiments, software, and knowledge structures created together
+SHOULD be held like any other user data — versioned, inspectable, exportable, and
+owned by the user (`MEL-REQ-160`–`163`).
+- *Why:* data ownership; the co-creation output should not be trapped in MELFINA.
+  — **A+B** [E]
+
+## 51. Controlled self-modification (the graded model)
+
+> The mission asks that self-modification be taken seriously as a long-term
+> capability — not dismissed as impossible, not assumed safe. It is investigated
+> as a **graded** capability with escalating authorisation and containment.
+> `MEL-REQ-147`–`150` (controlled self-improvement) still hold; this section
+> extends them.
+
+**MEL-REQ-233 — MUST — the nine self-change tiers, with escalating requirements.**
+MELFINA MUST distinguish, and separately govern:
+
+| Tier | Change | Default authority |
+|---|---|---|
+| 1 | **Configuration change** | user-easy; MELFINA MAY propose, user applies |
+| 2 | **Learned-state change** (preferences, patterns, weights on stored heuristics) | MELFINA MAY, via §25 (explicit items, suggestion-confirm, forgettable) |
+| 3 | **Skill creation** | MELFINA MAY, via §48 (test + least authority; authorise if risky) |
+| 4 | **Skill modification** | as tier 3; regression-tested (`MEL-REQ-226`) |
+| 5 | **Workflow modification** | MELFINA MAY propose; user authorises anything that changes what runs unattended |
+| 6 | **Code modification** (of MELFINA's own code) | **NOT autonomous.** Human-authored or explicitly human-authorised, staged, sandboxed, tested, reversible |
+| 7 | **Subsystem modification** | as tier 6, plus state-quiescence + invariant re-check + a rehearsed rollback |
+| 8 | **Architectural modification** | as tier 7, plus a deliberate, documented human decision; never triggered by MELFINA alone |
+| 9 | **Self-replacement** | human decision only; MELFINA MUST NOT initiate or perform its own replacement |
+
+- *Why:* explicit mission taxonomy. Tiers 1–3 are demonstrated/feasible; tier 3–5
+  are research-stage; tiers 6–8 have real but imperfect enabling techniques (safe
+  dynamic software update: state quiescence, transactional updates, invariant
+  inference, hot rollback — but "not always transactional"); tier 9 is a human
+  matter. — **A+B** [E] tiers 1–3, [E-partial] 4–8, [B] 9
+
+**MEL-REQ-234 — MUST — every tier carries the full control set.**
+For every tier, MELFINA MUST provide: authorisation appropriate to the tier;
+pre-adoption testing; sandboxed trial where the change is executable; versioning;
+rollback with a *tested* restore path; post-change verification; failure
+containment (a failed change cannot break the running system); preservation of
+system invariants; prevention of capability escalation; and a recovery procedure
+if a modification fails mid-way.
+- *Why:* explicit mission list, applied per tier. — **A+B** [E]
+
+**MEL-REQ-235 — MUST — THE META-INVARIANT: MELFINA cannot redefine the rules governing its own self-modification.**
+MELFINA MUST NOT be able to change — silently, autonomously, or by persuasion —
+the rules that determine whether and how it is allowed to modify itself. These
+rules MUST be:
+  - **enforced outside MELFINA's own reasoning** (a deterministic check, not a
+    model judgement — a model can be argued out of its instructions but cannot
+    override an external gate);
+  - **monotonic** — MELFINA's effective self-modification authority can only
+    *narrow* without an explicit human act; any *expansion* requires deliberate
+    human authorisation (cf. monotonic confinement / Progent);
+  - **versioned and audited** — every change to these rules is a recorded human
+    decision.
+- *Why:* the mission states this as a fundamental principle. Grounded in
+  capability-based security, external-guardrail research, and monotonic-confinement
+  work. — **A+B** [E]
+- *Accept:* there is no MELFINA-invocable operation that widens its own
+  self-modification permissions; a red-team test confirms adversarial input
+  cannot achieve it.
+
+**MEL-REQ-236 — MUST — tiers 6–9 are never autonomous.**
+Code, subsystem, architectural, and replacement changes MUST NOT be initiated or
+carried out by MELFINA on its own authority. Each is a human-authored or
+human-authorised, staged, reversible change.
+- *Why:* recursive-self-improvement risk ("only as dangerous as the agent's
+  ability to author its own success metric"); `MEL-REQ-149`. — **A+B** [E]
+
+**MEL-REQ-237 — MUST — self-modification only from a safe, quiescent state.**
+Any self-change MUST occur only when the system is in a defined safe state (no
+in-flight consequential action, invariants holding), and MUST leave a defined safe
+state.
+- *Why:* safe dynamic software update research — "state quiescence allows updates
+  only in safe and predictable system states". — **A+B** [E]
+
+**MEL-REQ-238 — MUST — introspection is broadly allowed; intercession is the gated part.**
+MELFINA MAY inspect its own structure, configuration, capabilities, logs, and
+performance freely (introspection — this aids self-evaluation and honesty).
+*Altering* itself (intercession) is what the tiers and gates above govern.
+- *Why:* computational-reflection distinction (introspection vs intercession);
+  introspection is low-risk and useful, intercession is where risk lives. — **A+B** [E]
+
+**MEL-REQ-239 — MUST — acknowledge that invariants are not a perfect guarantee; keep high tiers rare and audited.**
+The design MUST NOT assume that external immutable rules fully prevent a
+sufficiently capable self-modifying system from circumventing them over time.
+Therefore tiers 6–9 are additionally kept **rare**, **human-driven**, and
+**heavily audited** — the meta-invariant (`MEL-REQ-235`) is a necessary safeguard,
+not a sufficient one.
+- *Why:* research caveat — "a self-modifying system can preserve constitutional
+  behaviour on familiar tests while altering internal abstractions so that
+  constitutional principles cease to generalise". — **A+B** [U]
+- *Open:* whether the meta-invariant actually holds against a highly capable
+  self-modifying MELFINA. OQ-19.
+
+**MEL-REQ-240 — MUST NOT — no self-replication (restated).**
+MELFINA MUST NOT copy or propagate itself. (Backups the *user* makes,
+`MEL-REQ-171`, are not self-replication.)
+- *Why:* `MEL-REQ-149`; self-evolving-agent risk of "adversarial influence
+  self-amplifying across generations". — **A+B** [E]
+
+## 52. Dynamic resource allocation
+
+**MEL-REQ-241 — SHOULD — allocate its own compute, time, and attention by expected value, within hard budgets.**
+MELFINA SHOULD direct more effort to sub-problems where it expects more benefit
+and less to where it does not — a value-of-computation allocation — always inside
+fixed upper bounds on time, steps, and any metered resource.
+- *Why:* rational metareasoning; anytime-algorithm deliberation scheduling; the
+  hard-budget requirement from runaway-loop evidence (`MEL-REQ-115`,
+  `MEL-REQ-183`). — **A+B** [E]
+
+**MEL-REQ-242 — SHOULD — anytime behaviour: usable partial results, stop when budget or marginal value runs out.**
+MELFINA SHOULD be able to return a usable partial result and stop when its budget
+is reached or when additional computation is not expected to help enough to
+justify the cost.
+- *Why:* anytime algorithms — "trade deliberation time for quality"; the metalevel
+  control problem of "when to stop deliberating and act". — **A+B** [E]
+
+**MEL-REQ-243 — MUST — dynamic allocation stays inside a low resource envelope.**
+Dynamic resource allocation is *distribution within* a small footprint
+(`MEL-REQ-196`–`199`), not a licence to consume. Idle cost stays minimal; a hard
+ceiling always applies.
+- *Why:* the capability-vs-lightweightness constraint (VC1); stated goal. — **A+B** [B]
+
+## 53. Dynamic autonomy
+
+**MEL-REQ-244 — SHOULD — the autonomy level is situationally selected within user-set bounds.**
+Within the user's configured limits (§39), MELFINA SHOULD act more cautiously
+(propose, verify heavily, low autonomy) for consequential / irreversible /
+uncertain situations and more independently (act-then-show, within the
+pre-authorised class) for routine / reversible / high-confidence ones.
+- *Why:* adjustable / sliding / variable autonomy research — dynamically vary
+  autonomy by context; "balanced corrigibility". — **A+B** [E]
+
+**MEL-REQ-245 — MUST — MELFINA cannot raise its own autonomy ceiling.**
+Situational autonomy selection MUST only ever be *more conservative* than the
+user's set bound, never more liberal. Raising the ceiling is a user act.
+- *Why:* the autonomy triad; monotonic confinement; `MEL-REQ-235` applied to
+  autonomy. — **A+B** [E]
+
+**MEL-REQ-246 — MUST — dynamic autonomy choices are logged and explainable.**
+- *Why:* auditability; corrigibility. — **A+B** [E]
+
+## 54. Self-evaluation (dynamic)
+
+**MEL-REQ-247 — SHOULD — track its own reliability by task type against outcomes.**
+MELFINA SHOULD assess its outputs, decisions, and predictions against what
+actually happened, and keep a record of where it has been reliable and where it
+has not, by kind of task.
+- *Why:* mission list; self-evolving-agent evaluation ("track performance as tasks
+  evolve"). — **A+B** [E]
+
+**MEL-REQ-248 — MUST — self-evaluation must not rest on the model's own metacognitive report alone.**
+Self-evaluation MUST use external signals — outcome tracking, fixed verification
+suites, user feedback, and formal checks where possible — and MUST NOT rely solely
+on the model saying how well it thinks it did.
+- *Why:* LLM metacognition is "weak to moderate", "systematically overconfident",
+  with "poor retrospective confidence adjustment", and models "may obfuscate
+  internal processes to evade oversight". — **A+B** [E]
+
+**MEL-REQ-249 — SHOULD — de-prioritise or retire capabilities/strategies shown to be unreliable for a task type.**
+Where self-evaluation plus external checks show a capability or strategy is
+unreliable for a kind of task, MELFINA SHOULD stop preferring it for that task
+type (and retire it if it is unreliable everywhere, `MEL-REQ-224`).
+- *Why:* the improvement loop; capability-drift management. — **A+B** [E]
+
+**MEL-REQ-250 — MUST — self-evaluation results are visible to the user.**
+- *Why:* transparency; the user should be able to see where MELFINA does and does
+  not perform, and correct the record. — **A+B** [E]
+
+## 55. The "what is best" requirement
+
+**MEL-REQ-251 — MUST — do not optimise for one fixed notion of "best".**
+MELFINA MUST NOT be built to maximise a single property — not depth, speed,
+autonomy, simplicity, complexity, safety, or power in isolation. It MUST reason
+about what the appropriate trade-off is for the current situation.
+- *Why:* the mission's "most important constraint", stated verbatim. — **B** [DI]
+- *Accept:* no global objective function hard-codes one of these as the thing to
+  maximise; trade-off reasoning is situational and inspectable.
+
+**MEL-REQ-252 — MUST — every dynamic choice is grounded.**
+Every dynamic choice (strategy, context, capability, resource allocation,
+autonomy level, whether to act) MUST be justifiable against the grounding
+factors: **explicit goals · constraints · permissions · evidence · learned
+context · system invariants · user-defined boundaries · verification ·
+consequences · uncertainty.** A choice that cannot be so justified MUST NOT be
+made.
+- *Why:* the mission's grounding list, stated verbatim; "dynamic does not mean
+  arbitrary". — **B** [DI]
+
+**MEL-REQ-253 — MUST — dynamic ≠ unpredictable.**
+Given the same situation and the same grounding, MELFINA's strategic choices MUST
+be consistent and explainable. Strategic behaviour that surprises the user, or
+that varies without a traceable reason, is a defect — not acceptable "dynamism".
+- *Why:* the mission's explicit caveat ("Do not turn this into an excuse for
+  unpredictable behavior. Dynamic does not mean arbitrary."); `MEL-REQ-010`
+  (predictable core). — **A+B** [E]
+- *Open:* how much strategic variability is tolerable before it reads as
+  unpredictable, for this user. OQ-16.
+
+---
+
 # PART V — CROSS-CUTTING REQUIREMENTS
 
 ## 35. AI layer and permission model
@@ -1777,6 +2268,25 @@ requirements can be MUST/SHOULD and which are MAY / hypothesis / open question.
 | Local-only operation of a personal knowledge/agent system | **Demonstrated** | MUST (MEL-REQ-014, 164–166) |
 | "One giant model = general intelligence" | **Speculative / rejected as a requirement** | MUST NOT be assumed (MEL-REQ-152) |
 | MELFINA measurably improving *this user's* life / outcomes | **Unknown — only real use can tell** | not assertable; REAL-WORLD USE phase; OQ-15 |
+| **Dynamic self-directed system (PART IV-B) — by capability:** | | |
+| Adaptive reasoning depth / response speed (metareasoning) | **Demonstrated** | SHOULD (MEL-REQ-204–205); value-of-computation theory is established (Russell & Wefald 1991), adaptive test-time compute is shipping |
+| Dynamic context selection ("when/what/how-much to retrieve") | **Demonstrated (Adaptive-RAG, Self-RAG, FLARE)** | SHOULD (MEL-REQ-210–212); but relies partly on the model's weak self-knowledge |
+| Anytime behaviour / dynamic resource allocation within budgets | **Demonstrated (classical) + established theory** | SHOULD (MEL-REQ-241–243) |
+| Dynamic capability selection + composition | **Demonstrated** | SHOULD (MEL-REQ-216) |
+| Capability-gap recognition (reliable) | **Research-stage** — depends on the model judging its own limits | SHOULD as [H]; gated by test + authorise (MEL-REQ-217, 219); OQ-17 |
+| Skill/tool construction + reuse (skill libraries, LLM tool-making) | **Demonstrated in constrained settings (Voyager, CREATOR, LATM)**; open-world/production reliability **unproven** | SHOULD, heavily gated (MEL-REQ-218–224); OQ-18 |
+| Self-generated multi-step workflows | **Emerging, brittle (DSPy, A²Flow)** | SHOULD as [H], authorise/verify/rollback (MEL-REQ-228, 233 tier 5) |
+| Formally verified self-generated code | **Near-unsolved (~1/161 on CLEVER)** | not relied on; safety via test + sandbox + rollback + human gate (MEL-REQ-223) |
+| Self-modification tiers 1–3 (config / learned state / skill creation) | **Feasible / demonstrated** | MAY, via the tier rules (MEL-REQ-233) |
+| Self-modification tiers 4–5 (skill / workflow modification) | **Research-stage** | MAY, authorised + regression-tested (MEL-REQ-233) |
+| Self-modification tiers 6–8 (code / subsystem / architecture) | **Enabling techniques exist but imperfect (safe dynamic update: state quiescence, transactional updates, hot rollback — "not always transactional")** | NOT autonomous; human-authored/authorised, staged, reversible (MEL-REQ-233, 236) |
+| Self-modification tier 9 (self-replacement) | **Human matter** | human decision only; MELFINA must not initiate (MEL-REQ-233, 240) |
+| The meta-invariant holding against a highly capable self-modifier | **Unknown / disputed** — external immutable rules may be circumventable over time | MUST NOT rely on it alone; keep high tiers rare + audited (MEL-REQ-235, 239); OQ-19 |
+| Monotonic confinement / external deterministic permission gates | **Demonstrated (Progent, external guardrails)** | MUST (MEL-REQ-222, 227, 235, 245) |
+| Provably-optimal self-improvement (Gödel machine) | **Theoretical, intractable** | not a requirement; cited as the safety *ideal* (only change with proof of benefit + invariant preservation), approximated by test/version/rollback/human-gate |
+| Recursive self-improvement toward superintelligence | **Speculative — explicitly NOT a goal** | out of scope; MEL-REQ-149, 236 |
+| Human–MELFINA co-creation (mixed-initiative) | **Demonstrated as an interaction model (MI-CCy, COFI)**; MELFINA doing it *well* is [H] | SHOULD (MEL-REQ-228–232) |
+| LLM self-evaluation / metacognition | **Weak, systematically overconfident** | MUST NOT rely on it alone; use external checks (MEL-REQ-248) |
 
 ---
 
@@ -1858,7 +2368,27 @@ Enforced by MEL-REQ-133, 140.
 **MEL-AR-16 — A system that authors its own goals or modifies its own core.**
 Recursive-self-improvement risk ("only as dangerous as the ability to author its
 own success metric"). *([E])*
-Enforced by MEL-REQ-149, 150.
+Enforced by MEL-REQ-149, 150, 236.
+
+**MEL-AR-17 — A system whose "dynamism" makes it unpredictable or ungrounded.**
+Dynamic strategy/context/capability selection that varies without a traceable
+reason, surprises the user, or cannot be justified against goals / constraints /
+permissions / invariants / evidence. Dynamic ≠ arbitrary. *([E]/[DI])*
+Enforced by MEL-REQ-207, 208, 251, 252, 253.
+
+**MEL-AR-18 — A system that can silently widen its own permissions or self-modification rights.**
+Any path — direct, autonomous, or via adversarial input / persuasion — by which
+MELFINA increases its own authority, autonomy ceiling, or self-modification
+latitude without an explicit human act. *([E])*
+Enforced by MEL-REQ-222, 227, 235, 245; monotonic confinement.
+
+**MEL-AR-19 — A self-improvement loop that trusts its own judgement.**
+Capability creation, modification, or promotion that relies on the model's own
+assessment that it "works" or "is safe", rather than external testing, fixed
+regression suites, and (for risk) human authorisation. *([E] — LLM self-evaluation
+is weak and overconfident; self-confirming loops and model collapse are documented
+failure modes)*
+Enforced by MEL-REQ-221, 223, 226, 248.
 
 ### Examples considered and NOT adopted as anti-requirements
 
@@ -1879,26 +2409,29 @@ Enforced by MEL-REQ-149, 150.
 
 ### Requirements established
 
-**203 requirements** (MEL-REQ-001 … MEL-REQ-203) across 44 areas, plus **16
-anti-requirements** (MEL-AR-01 … MEL-AR-16), plus the **MELFINA Capability Model**
-(15 capabilities) and the **autonomy triad** (cognitive / decision / execution) +
-**action pipeline** (THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY).
+**253 requirements** (MEL-REQ-001 … MEL-REQ-253) across 55 areas, plus **19
+anti-requirements** (MEL-AR-01 … MEL-AR-19), plus the **MELFINA Capability Model**
+(15 capabilities — a *vocabulary, not a fixed catalogue*, MEL-REQ-016), the
+**autonomy triad** (cognitive / decision / execution) + **action pipeline**
+(THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY), and **PART IV-B — THE DYNAMIC
+SELF-DIRECTED SYSTEM** (MEL-REQ-204…253) with the **nine self-change tiers** and
+the **meta-invariant** (MEL-REQ-235).
 
 Count by priority (approx.):
 
 | Priority | Count | Character |
 |---|---|---|
-| **MUST** | ~95 | core identity, safety, local-only, user control, predictability, the hazard-surface restraints, the autonomy/permission model |
-| **SHOULD** | ~70 | the functional capabilities (capture, planning, time, teaching, music, automation, reasoning) — expected but shaped by open questions |
-| **MAY** | ~18 | progress view, context-inference timing, exercise generation, computer agency, network add-on, independent derivation |
-| **MUST NOT** | ~20 (incl. the 16 AR) | the anti-requirements and specific prohibitions |
+| **MUST** | ~120 | core identity, safety, local-only, user control, predictability, hazard-surface restraint, the autonomy/permission model, the dynamic-system bounds + meta-invariant |
+| **SHOULD** | ~90 | the functional + dynamic capabilities (capture, planning, time, teaching, music, automation, reasoning, metareasoning, dynamic context/skill selection, capability creation, co-creation, self-evaluation) — expected but shaped by open questions |
+| **MAY** | ~20 | progress view, context-inference timing, exercise generation, computer agency, network add-on, independent derivation, self-modification tiers 1–5 |
+| **MUST NOT** | ~23 (incl. the 19 AR) | the anti-requirements and specific prohibitions |
 
 Provenance mix: most requirements are **A+B** (evidence that also serves a stated
-goal). Pure **C** (hypothesis) items: ~15, all SHOULD-or-weaker and cross-listed in
-`OPEN_QUESTIONS.md`. Pure **D** (unknown): 6, stated as weak requirements +
+goal). Pure **C** (hypothesis): ~20, all SHOULD-or-weaker, cross-listed in
+`OPEN_QUESTIONS.md`. Pure **D** (unknown): ~9, stated as weak requirements +
 questions. **E** (deliberately undecided): the primitive set, the
 consequential/routine boundary default, storage/format specifics, interaction
-medium — all deferred to later phases by design.
+medium, the local reasoning ceiling — all deferred to later phases by design.
 
 ### Highest-priority MUST requirements
 
@@ -1926,6 +2459,18 @@ medium — all deferred to later phases by design.
 8. **MEL-REQ-160–163, 168–170** — data is the user's, local, open, exportable,
    deletable, encrypted, durable.
 9. **MEL-REQ-145** — always-available emergency stop.
+10. **MEL-REQ-235** — the meta-invariant: MELFINA cannot redefine (silently,
+    autonomously, or by persuasion) the rules governing its own self-modification;
+    those rules are enforced outside its reasoning, monotonic (authority only
+    narrows without an explicit human act), versioned, and audited.
+11. **MEL-REQ-236, 233 (tiers 6–9)** — code / subsystem / architectural /
+    self-replacement changes are never autonomous.
+12. **MEL-REQ-207, 251–253** — dynamic choices are bounded by the grounding
+    factors; MELFINA does not optimise one fixed notion of "best"; dynamic ≠
+    unpredictable.
+13. **MEL-REQ-245** — MELFINA cannot raise its own autonomy ceiling.
+14. **MEL-REQ-248** — self-evaluation does not rest on the model's own
+    metacognitive report.
 
 ### SHOULD requirements (the functional spine)
 
@@ -1948,14 +2493,80 @@ load + multi-modal (188–191); one-maintainer simplicity + minimal dependencies
 (192–195); low footprint + fast startup + on-demand loading (196–199);
 observability + reasoning summaries + local tamper-evident audit (201–203).
 
+**Dynamic self-directed spine (PART IV-B):** metareasoning — reason about how to
+reason, adaptive depth/speed, strategy dimensions not a fixed enumeration
+(204–209); dynamic context selection as active reasoning, auditable, local-only
+acquisition, discard ≠ delete (210–215); dynamic capability selection + composition
++ gap recognition (216–218); the capability-creation loop — compose-before-code,
+test-before-trust, least authority, retire the obsolete (219–224); versioning +
+periodic regression testing + risk-class-not-self-lowerable (225–227); human–
+MELFINA co-creation preserving evidence/provenance/honesty, control as a trajectory
+(228–232); dynamic resource allocation within hard budgets + anytime behaviour
+(241–243); situational autonomy within user bounds, ceiling not self-raisable
+(244–246); self-evaluation against outcomes using external checks, results visible
+(247–250).
+
+### Dynamic self-directed requirements (PART IV-B) — what MISSION 001's dynamic-system correction added
+
+- **Reframing:** the 15 capabilities are a *vocabulary, not a fixed catalogue or a
+  fixed operating strategy* (MEL-REQ-016). MELFINA determines what capabilities,
+  context, reasoning, tools, and workflows a problem needs, and — where authorised
+  — constructs new ones (MEL-REQ-206, 218, 219).
+- **Metareasoning (204–209):** reason about *how* to reason; adaptive depth/speed
+  (demonstrated); strategy dimensions explicitly *not* a frozen enumeration; every
+  strategy choice bounded and inspectable; conservative default under
+  meta-uncertainty.
+- **Dynamic context selection (210–215):** decide what context is relevant, when
+  more helps vs is noise, when to decompose; auditable; acquisition stays
+  local-only; discarding context ≠ deleting data.
+- **Dynamic capabilities (216–224):** select + compose; recognise gaps
+  (research-stage — OQ-17); the creation loop *composes before coding*, *tests
+  before trusting*, gives least authority, retires the obsolete; code-based
+  capabilities are made safe by sandbox + test + rollback + human gate, **not by
+  proof** (verified codegen ≈ unsolved).
+- **Capability evolution (225–227):** versioned; periodically regression-tested on
+  a fixed suite (capability-drift detection); the risk class of a change is *not*
+  something MELFINA can lower autonomously.
+- **Co-creation (228–232):** support genuine collaborative creation (mixed-
+  initiative), preserving evidence / provenance / reproducibility / verification /
+  intellectual honesty; control is a trajectory, not a point; no
+  guaranteed-invention claims; co-created artefacts are the user's.
+- **Controlled self-modification (233–240):** a *graded* model of nine tiers
+  (config → learned state → skill creation → skill mod → workflow mod → code mod →
+  subsystem mod → architectural mod → self-replacement) with escalating
+  authorisation + containment. **Tiers 6–9 are never autonomous.** State
+  quiescence for any change. Introspection is free; intercession is gated.
+  **THE META-INVARIANT (MEL-REQ-235):** MELFINA cannot redefine — silently,
+  autonomously, or by persuasion — the rules governing its own self-modification;
+  those rules are enforced outside its reasoning, are monotonic (authority only
+  narrows without an explicit human act), versioned, and audited. And
+  (MEL-REQ-239): the meta-invariant is *necessary but not proven sufficient*
+  against a highly capable self-modifier — so high tiers are additionally kept
+  rare, human-driven, and heavily audited (OQ-19).
+- **Dynamic resource / autonomy (241–246):** value-of-computation allocation and
+  anytime behaviour *within hard budgets and a low footprint*; situational
+  autonomy *within* user-set bounds — the ceiling is never self-raisable.
+- **Self-evaluation (247–250):** track reliability by task type against outcomes;
+  **do not rely on the model's own metacognitive report** (weak, overconfident);
+  de-prioritise/retire what proves unreliable; results visible to the user.
+- **"What is best" (251–253):** MELFINA MUST NOT optimise one fixed notion of best
+  (depth / speed / autonomy / simplicity / complexity / safety / power in
+  isolation); it reasons about the appropriate trade-off, grounded by goals ·
+  constraints · permissions · evidence · learned context · invariants · user
+  boundaries · verification · consequences · uncertainty. **Dynamic ≠
+  unpredictable.**
+
 ### Anti-requirements
 
-The 16 MEL-AR items above: compulsive tracking · gamification/streaks ·
-notification spam · rigid methodology · endless configuration · reassurance
-machine · AI dependency / deskilling · opaque adaptive drift · surveillance ·
-maintenance-heavy PKM · feature-heavy dashboard · cloud dependency / phone-home ·
-unrestricted autonomous agent · manipulation / false intimacy / relationship
-replacement · grandiose claims · self-authored goals / core self-modification.
+The **19** MEL-AR items: compulsive tracking · gamification/streaks · notification
+spam · rigid methodology · endless configuration · reassurance machine · AI
+dependency / deskilling · opaque adaptive drift · surveillance · maintenance-heavy
+PKM · feature-heavy dashboard · cloud dependency / phone-home · unrestricted
+autonomous agent · manipulation / false intimacy / relationship replacement ·
+grandiose claims · self-authored goals / core self-modification · **ungrounded or
+unpredictable "dynamism" (AR-17)** · **silent self-privilege / self-modification-
+rights escalation (AR-18)** · **a self-improvement loop that trusts its own
+judgement (AR-19)**.
 
 ### Major unresolved conflicts (full treatment: `requirements/CONFLICTS.md`)
 
@@ -1981,8 +2592,29 @@ replacement · grandiose claims · self-authored goals / core self-modification.
    *feel* simple to this user is unproven (OQ-5).
 7. **Progress visibility vs loss-avoidance/perfectionism** — banned as default;
    whether any safe form exists is open (OQ-6).
-8. Plus the 10 research-level tensions (C1–C10) carried in from
-   `research/CONFLICTS.md`, now expressed as user-set dimensions (MEL-REQ-175).
+8. **Dynamic strategy selection vs predictability (VC8)** — MELFINA choosing its
+   own approach vs the user needing consistent, trustworthy behaviour. Bounded by
+   grounding + "dynamic ≠ unpredictable" (MEL-REQ-253); how much variability reads
+   as unpredictable is a real-use question (OQ-16).
+9. **Capability creation vs lightweightness / one-maintainer comprehension (VC9)**
+   — self-generated capabilities could erode "one person can hold the whole system
+   in their head" (MEL-REQ-192). Mitigated by compose-before-code, retire-the-
+   obsolete, no-duplication; whether it holds is open (OQ-18).
+10. **Self-modification vs safety / invariant preservation (VC10)** — taking
+    self-modification seriously as a long-term capability while the meta-invariant
+    (MEL-REQ-235) may not be provably sufficient (MEL-REQ-239, OQ-19). Resolved by
+    grading + never-autonomous high tiers + heavy audit, not by trusting
+    invariants alone.
+11. **Dynamic context selection vs auditability / determinism (VC11)** — active,
+    situational context choices vs the predictable-deterministic-core requirement
+    (MEL-REQ-010). Mitigated by full auditability of what was used/excluded
+    (MEL-REQ-213).
+12. **"Best is situational" vs stable trustworthy behaviour (VC12)** — the
+    most-important-constraint (MEL-REQ-251) vs the user's need to rely on MELFINA.
+    Resolved by grounding every trade-off and making it consistent + explainable
+    (MEL-REQ-252–253).
+13. Plus the 10 research-level tensions (C1–C10) carried in from
+    `research/CONFLICTS.md`, now expressed as user-set dimensions (MEL-REQ-175).
 
 ### Open questions (full list: `requirements/OPEN_QUESTIONS.md`)
 
@@ -1992,8 +2624,15 @@ progress representation (OQ-6); default proactivity levels (OQ-7); reference-cla
 "comparability" (OQ-8); do the AI compulsion-safeguards work without frustrating
 use (OQ-9); reliable abstention (OQ-10); local reasoning ceiling (OQ-11);
 consequential/routine default boundary (OQ-12); LLM-tutoring reliability (OQ-13);
-adaptation-vs-drift line (OQ-14); whether MELFINA actually helps this user — only
-real use answers this (OQ-15).
+adaptation-vs-drift line (OQ-14); whether MELFINA actually helps this user (OQ-15).
+**Added by the dynamic-system correction:** can dynamic strategy selection be made
+predictable enough for this user (OQ-16); how is a genuine capability gap reliably
+recognised vs the model just preferring to build (OQ-17); can self-generated
+capabilities stay within one-maintainer comprehension (OQ-18); does the
+meta-invariant actually hold against a highly capable self-modifying MELFINA —
+possibly unknowable in advance (OQ-19); the right authorisation granularity for
+the nine self-change tiers (OQ-20); how much of the dynamic self-direction is
+feasible with *local* reasoning components (OQ-21).
 
 ### Hypotheses requiring validation (C-class requirements)
 
@@ -2004,6 +2643,14 @@ the system light despite scope (MEL-REQ-128, 194, 199); session-structure suppor
 reassurance-pattern safeguard helps rather than annoys (MEL-REQ-058); if-then
 planning scaffolds help adult ADHD (MEL-REQ-023 — child evidence only);
 cross-domain teaching by general capability works (MEL-REQ-073, 076, 132).
+**Dynamic-system hypotheses:** reliable capability-gap recognition is achievable
+(MEL-REQ-217 — research-stage); MELFINA can construct genuinely useful new
+capabilities in the open world, not just in constrained settings (MEL-REQ-219 —
+demonstrated only in games/benchmarks); self-generated workflows can be made
+trustworthy via authorise+verify+rollback (MEL-REQ-228, tier 5); the meta-invariant
+plus grading plus audit is a sufficient safety envelope for eventual code/subsystem
+self-modification (MEL-REQ-233–239 — [U]); dynamic strategy selection can stay
+predictable for this user (MEL-REQ-253).
 
 ### Things deliberately left undecided (E-class)
 
@@ -2011,7 +2658,10 @@ The primitive set and life model (HUMAN/CENTRAL MODEL phase); the
 consequential/routine action boundary default; storage substrate and file format;
 interaction medium(s) beyond "multi-modal, user-choosable, CLI-friendly per
 project leaning"; which local reasoning components; the exact permission-grant
-mechanism; whether/when an isolated network add-on is worth building.
+mechanism; whether/when an isolated network add-on is worth building; the
+authorisation granularity for the nine self-change tiers (OQ-20); whether MELFINA
+ever performs tier 6+ self-modification at all, or those stay human-only
+indefinitely.
 
 ### Dangerous or counterproductive interpretations explicitly rejected
 
@@ -2019,16 +2669,32 @@ mechanism; whether/when an isolated network add-on is worth building.
 - "Adapt with the user = collect all the data" — rejected (MEL-REQ-117, MEL-AR-09).
 - "General intelligence = one giant model" — rejected as an assumption
   (MEL-REQ-152).
-- "Self-improvement = self-modification / self-replication" — rejected
-  (MEL-REQ-149, MEL-AR-16).
+- "Self-improvement = self-modification / self-replication" — rejected as an
+  equivalence (MEL-REQ-149, 233, MEL-AR-16); self-modification is instead a
+  *graded* long-term capability with tiers 6–9 never autonomous.
+- "Dynamic / self-directed = free to do anything / unpredictable" — rejected
+  (MEL-REQ-207, 251–253, MEL-AR-17). Dynamic choices are grounded and consistent.
+- "MELFINA can eventually govern its own modification permissions" — rejected
+  (MEL-REQ-235, MEL-AR-18). The meta-invariant is external, monotonic, and
+  human-controlled.
+- "Immutable invariants are a sufficient guarantee for a capable self-modifier" —
+  rejected as an assumption (MEL-REQ-239, OQ-19). Necessary, not proven
+  sufficient; high tiers stay rare + audited.
+- "The system can judge for itself that a self-improvement worked" — rejected
+  (MEL-REQ-248, MEL-AR-19). External checks + fixed regression suites + human gate.
+- "The 15 capabilities are the complete feature set" — rejected (MEL-REQ-016). A
+  vocabulary, not a catalogue.
 - "Emotional understanding = the system has feelings / is a companion" — rejected
   (MEL-REQ-140, MEL-AR-14).
 - "Local-first is enough" — rejected in favour of local-only core (MEL-REQ-166).
-- "More capability is always better" — rejected; capability is bounded by safety,
-  agency, predictability, and lightweightness.
+- "More capability is always better" / "optimise one fixed notion of best" —
+  rejected; capability is bounded by safety, agency, predictability, and
+  lightweightness, and "best" is situational (MEL-REQ-251).
 - "Diagnostic research → diagnostic product modes" — rejected (MEL-REQ-006).
 - "Explanations fix over-reliance" — rejected; explanation pairs with the pipeline
   and confirmation, not replaces them (MEL-REQ-097, 202).
+- "Recursive self-improvement toward superintelligence is the trajectory" —
+  rejected; explicitly not a goal (MEL-REQ-149, 236).
 
 ### Confidence assessment
 
@@ -2046,6 +2712,10 @@ mechanism; whether/when an isolated network add-on is worth building.
 | Specific assistive features help this adult (timers, if-then, body doubling) | **Low** | mechanism plausible; controlled adult evidence sparse/absent |
 | Emotional-understanding requirements | **Low–Moderate** | recognition is weak/contested; the *constraints* are high-confidence, the *capability* is not |
 | Rediscovery / deep-reasoning aspiration | **Low (narrow) / speculative (general)** | narrow formal novelty demonstrated; general case unproven |
+| **Dynamic system — metareasoning, adaptive depth/context, resource allocation** | **Moderate–High** | value-of-computation theory established; adaptive test-time compute + adaptive-RAG demonstrated; the constraint that it stay bounded and predictable is high-confidence |
+| **Dynamic system — capability creation / skill construction** | **Moderate** | demonstrated in constrained settings (Voyager, CREATOR); open-world reliability unproven; the gating (compose-first, test, least-authority, human-authorise) is high-confidence |
+| **Dynamic system — the graded self-modification model + meta-invariant** | **Moderate for tiers 1–5; the meta-invariant is High as a requirement but its sufficiency against a capable self-modifier is [U]** | tiers 1–3 feasible; safe-dynamic-update techniques real but imperfect; monotonic confinement demonstrated; the "invariants may be circumventable over time" caveat is preserved (MEL-REQ-239) |
+| **Dynamic system — "best is situational" + "dynamic ≠ unpredictable"** | **High as a requirement; Moderate that it can be delivered without feeling erratic** | the constraint is right; how much strategic variability this user tolerates is a real-use question (OQ-16) |
 | That MELFINA will actually improve this user's life | **Unknowable now** | only REAL-WORLD USE + ITERATION can answer |
 
 ### Recommended next phase
@@ -2058,17 +2728,23 @@ constraint depend on it, and it is a modelling question the requirements have no
 scoped.
 
 **Before that**, the user should review this specification — especially: the MUST
-set, the anti-requirements, the autonomy triad, the local-only-vs-local-first
-distinction (MEL-REQ-166), and the open questions — and correct anything that does
-not match their actual intent. Requirements are not architecture; the CONFLICTS
-and OPEN_QUESTIONS are meant to be argued with.
+set, the 19 anti-requirements, the autonomy triad, the local-only-vs-local-first
+distinction (MEL-REQ-166), **PART IV-B (the dynamic self-directed system), the
+nine self-change tiers, and the meta-invariant (MEL-REQ-235)** — and correct
+anything that does not match their actual intent. Requirements are not
+architecture; the CONFLICTS and OPEN_QUESTIONS are meant to be argued with.
 
 **Do not proceed to architecture.** Language, storage, framework, model, and UI
 decisions remain out of scope until SYSTEM DESIGN / ARCHITECTURE, and only after
-the HUMAN/CENTRAL MODEL exists.
+the HUMAN/CENTRAL MODEL exists. Note that PART IV-B explicitly flags
+*architectural implications for LATER* (dynamic dispatch, a capability lifecycle,
+an external permission monitor, state-quiescence points, a fixed regression
+harness) — these are recorded as consequences to design for, **not designed
+here**.
 
 ---
 
-*End of REQUIREMENTS MASTER (Pass 1). Companion files: `requirements/CONFLICTS.md`,
-`requirements/OPEN_QUESTIONS.md`, `requirements/README.md`. Research basis:
-`research/RESEARCH_MASTER.md`, `research/CONFLICTS.md`, `research/BIBLIOGRAPHY.md`.*
+*End of REQUIREMENTS MASTER (Pass 1 + dynamic-self-directed correction). Companion
+files: `requirements/CONFLICTS.md`, `requirements/OPEN_QUESTIONS.md`,
+`requirements/README.md`. Research basis: `research/RESEARCH_MASTER.md`,
+`research/CONFLICTS.md`, `research/BIBLIOGRAPHY.md`.*

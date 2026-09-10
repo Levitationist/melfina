@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-10 (PERSONAL REQUIREMENTS MISSION 001)
+Last updated: 2026-09-10 (PERSONAL REQUIREMENTS MISSION 001 + dynamic-self-directed correction)
 
 ---
 
@@ -40,22 +40,31 @@ local-only / network-isolation addendum + autonomous-personal-intelligence
 extension (assistant, autonomous automation, adaptation, skills, scientific
 thinking, teaching, world understanding, deep reasoning, emotional understanding,
 software engineering, computer agency, controlled self-improvement, general
-capability, extreme-capability-+-lightweightness, capability model).
+capability, extreme-capability-+-lightweightness, capability model) +
+**dynamic-self-directed correction** (do not model MELFINA as a static capability
+catalogue; it dynamically determines what capabilities / context / reasoning /
+tools a problem needs and, where authorised, constructs new ones).
 
 Output in `requirements/`:
-- `REQUIREMENTS_MASTER.md` — **203 requirements** (`MEL-REQ-001…203`) across 44
-  areas + **16 anti-requirements** (`MEL-AR-01…16`) + the **MELFINA Capability
-  Model** (15 capabilities) + the **autonomy triad** (cognitive / decision /
-  execution, never collapsed) + the **action pipeline**
-  (THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY) + a feasibility classification +
-  `REQUIREMENTS CHECKPOINT 001`.
-- `CONFLICTS.md` — 10 research-level tensions (RC1–RC10) + 7 vision-level tensions
-  (VC1–VC7) as configurable dimensions / constraints / safeguards / open
-  questions. Not resolved by fiat.
-- `OPEN_QUESTIONS.md` — OQ-1…OQ-15 + the deliberately-undecided list.
+- `REQUIREMENTS_MASTER.md` — **253 requirements** (`MEL-REQ-001…253`) across 55
+  areas + **19 anti-requirements** (`MEL-AR-01…19`) + the **MELFINA Capability
+  Model** (15 capabilities — a *vocabulary, not a fixed catalogue*) + the
+  **autonomy triad** (cognitive / decision / execution, never collapsed) + the
+  **action pipeline** (THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY) + **PART
+  IV-B — THE DYNAMIC SELF-DIRECTED SYSTEM** (metareasoning; dynamic context/skill
+  selection; capability-gap recognition + capability creation; human–MELFINA
+  co-creation; a graded **nine-tier self-modification model** with **THE
+  META-INVARIANT** — MELFINA cannot redefine the rules governing its own
+  self-modification; dynamic resource allocation + dynamic autonomy;
+  self-evaluation; "best is situational, dynamic ≠ unpredictable") + a feasibility
+  classification + `REQUIREMENTS CHECKPOINT 001`.
+- `CONFLICTS.md` — 10 research-level (RC1–RC10) + 7 vision-level (VC1–VC7) + 5
+  dynamic-system (VC8–VC12) tensions as configurable dimensions / constraints /
+  safeguards / open questions. Not resolved by fiat.
+- `OPEN_QUESTIONS.md` — OQ-1…OQ-21 + the deliberately-undecided list.
 - `README.md` — index.
 
-Priority mix: ~95 MUST · ~70 SHOULD · ~18 MAY · ~20 MUST NOT (incl. the 16 AR).
+Priority mix: ~120 MUST · ~90 SHOULD · ~20 MAY · ~23 MUST NOT (incl. the 19 AR).
 
 **Highest-priority MUSTs:** local-only core (stronger than "local-first" — the core
 has no notion of a remote; MEL-REQ-014, 164–166); user is the authority /
@@ -68,21 +77,37 @@ permission model not as owner, fully usable with AI disabled, no self-authored
 objectives / no core self-modification / no self-replication (149–150, 153–154);
 least-authority + capability-based permissions + audit + autonomous-action budgets
 + assume-prompt-injection + emergency stop (179–187); data is local/open/
-exportable/deletable/encrypted/durable (160–170).
+exportable/deletable/encrypted/durable (160–170); **THE META-INVARIANT — MELFINA
+cannot redefine (silently, autonomously, or by persuasion) the rules governing its
+own self-modification; those rules are external to its reasoning, monotonic
+(authority only narrows without an explicit human act), versioned, audited (235)**;
+self-modification tiers 6–9 never autonomous (236); dynamic choices bounded by the
+grounding factors, MELFINA does not optimise one fixed notion of "best", dynamic ≠
+unpredictable (207, 251–253); autonomy ceiling not self-raisable (245);
+self-evaluation not resting on the model's own metacognitive report (248).
 
-**Anti-requirements:** compulsive tracking · gamification/streaks · notification
-spam · rigid methodology · endless configuration · reassurance machine · AI
-dependency/deskilling · opaque adaptive drift · surveillance · maintenance-heavy
-PKM · feature-heavy dashboard · cloud dependency/phone-home · unrestricted
-autonomous agent · manipulation/false-intimacy/relationship-replacement ·
-grandiose claims · self-authored goals / core self-modification.
+**Anti-requirements (19):** compulsive tracking · gamification/streaks ·
+notification spam · rigid methodology · endless configuration · reassurance machine
+· AI dependency/deskilling · opaque adaptive drift · surveillance · maintenance-
+heavy PKM · feature-heavy dashboard · cloud dependency/phone-home · unrestricted
+autonomous agent · manipulation/false-intimacy/relationship-replacement · grandiose
+claims · self-authored goals / core self-modification · ungrounded/unpredictable
+"dynamism" · silent self-privilege / self-modification-rights escalation · a
+self-improvement loop that trusts its own judgement.
 
 **Rejected interpretations (recorded):** autonomy = unrestricted execution;
 adapt-with = collect-all-data; general intelligence = one giant model;
-self-improvement = self-modification/replication; emotional understanding = the
-system has feelings; "local-first is enough" (→ local-only core); more capability
-always better; diagnostic research → diagnostic product modes; explanations fix
-over-reliance.
+self-improvement = self-modification/replication (it is instead a *graded* capability,
+tiers 6–9 never autonomous); dynamic/self-directed = free to do anything /
+unpredictable; MELFINA can eventually govern its own modification permissions;
+immutable invariants are a *sufficient* guarantee for a capable self-modifier
+(necessary, not proven sufficient); the system can judge for itself that a
+self-improvement worked; the 15 capabilities are the complete feature set;
+emotional understanding = the system has feelings; "local-first is enough" (→
+local-only core); more capability always better / optimise one fixed notion of
+"best"; diagnostic research → diagnostic product modes; explanations fix
+over-reliance; recursive self-improvement toward superintelligence is the
+trajectory (explicitly not a goal).
 
 **Evidence discipline:** every requirement tagged `[E]/[G]/[DI]/[H]/[U]` and
 provenance-classed `A` (evidence) / `B` (user goal) / `C` (hypothesis) / `D`
@@ -98,13 +123,34 @@ defers to or degrades toward. Any future network capability is a separate,
 isolated, off-by-default add-on that can never form the "lethal trifecta" with
 core data and is never a core dependency (MEL-REQ-166, 167).
 
+**Dynamic self-directed system (PART IV-B):** the 15 capabilities are a vocabulary,
+not a ceiling; MELFINA reasons per-situation about how deep to reason, how fast,
+what context, which skills, whether existing skills suffice, whether to compose,
+whether to build a new capability, whether to experiment, whether to act at all.
+Grounded in: rational metareasoning / value-of-computation (Russell & Wefald 1991),
+adaptive test-time compute (demonstrated), anytime algorithms, adaptive/self-RAG
+(dynamic context), skill libraries (Voyager) + LLM tool-making (CREATOR/LATM)
+demonstrated in constrained settings, human-AI co-creativity frameworks, safe
+dynamic software update, monotonic confinement / external guardrails, the Gödel
+machine as the (intractable) safety ideal. Feasibility is mixed and stated per
+requirement: adaptive depth/context/resource allocation = demonstrated; capability
+creation = demonstrated only in games/benchmarks, open-world unproven; verified
+self-generated code ≈ unsolved (→ safety via test+sandbox+rollback+human-gate);
+tiers 6–9 self-modification never autonomous; recursive self-improvement toward
+superintelligence explicitly not a goal.
+
 **Confidence:** high for local-only / no-scorekeeping / predictability+autonomy /
 the autonomy triad + least-authority security / external-structure-is-worth-
-building. Low for the neutral-primitives life model (hypothesis), specific
-assistive-feature efficacy for this adult, the emotional-understanding *capability*
-(the constraints are high-confidence), and the deep-reasoning/rediscovery
-aspiration (narrow formal case only). Unknowable now: whether MELFINA actually
-improves this user's life — only REAL-WORLD USE answers that.
+building / the dynamic-system *bounds* (grounding factors, the meta-invariant,
+"dynamic ≠ unpredictable"). Moderate for metareasoning + dynamic context/resource
+allocation, capability creation with gating, and self-modification tiers 1–5. Low
+for the neutral-primitives life model (hypothesis), specific assistive-feature
+efficacy for this adult, the emotional-understanding *capability*, and the
+deep-reasoning/rediscovery aspiration (narrow formal case only). `[U]`: whether
+the meta-invariant is *sufficient* against a highly capable self-modifier
+(necessary, not proven sufficient — high tiers kept rare + human-driven + audited).
+Unknowable now: whether MELFINA actually improves this user's life — only
+REAL-WORLD USE answers that.
 
 ### RESEARCH MISSION 002 — summary of outcome (2026-09-10)
 
@@ -397,4 +443,26 @@ decided.
   agent memory, deskilling, XAI, prompt-injection/lethal-trifecta, BDI, abstention,
   self-improvement). **No architecture. No language (C/C++/Rust/…). No storage
   (SQLite/…). No framework, model, or UI toolkit. No dependencies. No code. `src/`
-  untouched.** Awaiting user review before HUMAN / CENTRAL MODEL.
+  untouched.**
+- **2026-09-10** — **PERSONAL REQUIREMENTS MISSION 001 — dynamic-self-directed
+  correction.** Reframed the capability model as a *vocabulary, not a fixed
+  catalogue* (`MEL-REQ-016`); added **PART IV-B — THE DYNAMIC SELF-DIRECTED
+  SYSTEM** (`MEL-REQ-204…253`): metareasoning / dynamic strategy selection;
+  dynamic context selection as active reasoning; dynamic skill selection +
+  capability-gap recognition + capability creation/evolution; human–MELFINA
+  co-creation; a graded **nine-tier self-modification model** with **THE
+  META-INVARIANT** (`MEL-REQ-235` — MELFINA cannot redefine the rules governing
+  its own self-modification; external, monotonic, versioned, audited); dynamic
+  resource allocation + dynamic autonomy; dynamic self-evaluation; "best is
+  situational, dynamic ≠ unpredictable". Added anti-requirements `MEL-AR-17…19`,
+  conflicts `VC8…VC12`, open questions `OQ-16…OQ-21`; extended the feasibility
+  classification and `REQUIREMENTS CHECKPOINT 001`. Total now **253 requirements +
+  19 anti-requirements**. Includes a dedicated research pass (~28 sources: rational
+  metareasoning, adaptive test-time compute, anytime algorithms, LLM metacognition,
+  skill-library learning, LLM tool-making, HTN planning, automatic curriculum,
+  program synthesis / verified codegen, Gödel machine / Darwin Gödel Machine, safe
+  dynamic software update, computational reflection, human-AI co-creativity,
+  self-generated workflow orchestration, adaptive/self-RAG, self-improving-agent
+  evaluation, monotonic confinement / external guardrails). **Still no
+  architecture, no language, no storage, no framework/model/UI, no dependencies,
+  no code. `src/` untouched.** Awaiting user review before HUMAN / CENTRAL MODEL.
