@@ -17,7 +17,8 @@ No implementation is designed here. Evidence tiers as in the master:
 The ten research-level tensions (**RC1–RC10**) are carried from
 `research/CONFLICTS.md` and mapped to requirements. The autonomous-personal-
 intelligence vision adds seven (**VC1–VC7**); the dynamic-self-directed correction
-adds five more (**VC8–VC12**, Part B-2).
+adds five more (**VC8–VC12**); **REQUIREMENTS EXPANSION MISSION 002** (cross-domain
+knowledge, first-principles reasoning, wisdom) adds six more (**VC13–VC18**).
 
 ---
 
@@ -305,6 +306,110 @@ rely on MELFINA behaving a certain way.*
 - **Framing:** "best is situational" applies to *how MELFINA works a problem*
   (depth, speed, breadth, autonomy-within-bounds), not to *whether it respects the
   user, stays local, or keeps the safeguards*.
+
+---
+
+## Added by REQUIREMENTS EXPANSION MISSION 002 (VC13 … VC18)
+
+### VC13 — General cross-domain capability vs. one-maintainer comprehension /
+lightweightness
+*Extends VC1/VC9: PART IV-C asks for foundational knowledge and reasoning
+across an explicit, large list of domains (mathematics, physics, computer
+science, chemistry, biology, technology, cognitive neuroscience, psychology,
+philosophy, economics, civics, ethics, law, physiology, art, music, martial
+arts, programming), which is a much larger surface than any prior part of the
+requirements.*
+- **Constraint:** domain knowledge is representable within the existing E²CI
+  ontology, without a primitive per domain. *(MEL-REQ-264)* [DI]
+- **Constraint:** foundational knowledge is acquired incrementally, as the
+  user's actual problems engage a domain — not pre-loaded as a fixed
+  encyclopedic scope. *(MEL-REQ-270)* [DI]
+- **Constraint:** retention follows the existing Chronicle contract (F5/F6); not
+  everything is kept permanently. *(MEL-REQ-268)* [DI]
+- **Open:** whether an explicitly cross-domain reasoning system can stay within
+  one person's comprehension any better than VC9 already worried it could —
+  `[H]` → OQ-22.
+
+### VC14 — Connection-making ("wisdom") vs. hallucination risk
+*The more MELFINA is asked to connect domains (§58–59), the more surface area
+exists for confident-sounding, structurally-invalid connections — directly in
+tension with `MEL-REQ-010` (predictable core) and the no-fabrication MUSTs.*
+- **Constraint:** every connection is classified into a closed relationship-type
+  vocabulary and states what's shared/differs/its evidence/its falsifiability.
+  *(MEL-REQ-272–273)* [E]
+- **Constraint:** a connection used in a consequential conclusion must be
+  independently checkable first. *(MEL-REQ-277)* [E]
+- **Acknowledged limit:** 2025–2026 evidence shows current reasoning systems
+  document their own tendency toward superficial, structurally-invalid
+  analogies, with no fully reliable self-detection mechanism yet. `[E]`
+- **Open:** how cross-domain hallucination (false-positive connections) is
+  detected in practice, given genuine insights also look surprising at first —
+  `[U]` → OQ-27.
+
+### VC15 — Adversarial-systems-thinking-by-default vs. this user's hazard
+surfaces
+*A generalised "assume things can fail or be abused" lens (§60) risks feeding
+exactly the checking/reassurance/hypervigilance pattern the OCD-safeguards
+(`MEL-REQ-058`, `013`) exist to prevent, for this specific user's profile.*
+- **Constraint:** the lens distinguishes ordinary uncertainty, accidental
+  failure, adversarial behaviour, and does not default to assuming malice.
+  *(MEL-REQ-286)* [B]
+- **Constraint:** applying the lens (including to MELFINA's own design) grants
+  no authority and produces no user-facing pressure by itself. *(MEL-REQ-287)*
+  [E]
+- **Tension, unresolved:** this section's very existence — reasoning that
+  actively looks for what can fail or be abused — is in some tension with
+  `MEL-REQ-013`'s "restraint at the hazard surfaces" if applied to the user's
+  own life and plans rather than to systems under analysis. No requirement here
+  restricts the lens to non-personal systems; this is flagged, not resolved.
+- **Open:** does an adversarial-lens default create the hypervigilance pattern
+  `MEL-REQ-058` exists to prevent, for this user specifically? `[U]` → OQ-28.
+
+### VC16 — First-principles / mathematical rigour vs. usability, latency, and
+"don't force math"
+*Deep decomposition (§61) and formalisation (§62) can consume real time and
+compute, in tension with `MEL-REQ-011` (quiet by default), `196–199`
+(lightweight), and the anti-requirement against forcing every problem into
+mathematics (`MEL-AR-21`).*
+- **Constraint:** decomposition and formalisation effort are bounded by the
+  existing value-of-computation allocation and hard budgets.
+  *(MEL-REQ-241–243, 292)* [E]
+- **Constraint:** "no sufficiently faithful reduction is known" is a valid,
+  cheap, first-class output — MELFINA is not required to keep trying until it
+  finds a formalisation. *(MEL-REQ-298)* [E]
+- **Open:** practical stopping criteria under a resource budget, beyond the
+  general principle — `[U]` → OQ-25.
+
+### VC17 — Ethics/law/civics reasoning depth vs. paternalism / scope creep
+*The mission explicitly wants ethics and law represented "from MELFINA's
+perspective of morality" while explicitly forbidding a "MELFINA morality
+score" — a narrow line to hold.*
+- **Constraint:** ethical analysis is never presented as settled, and never used
+  to pressure or shame the user. *(MEL-REQ-339)* [E]
+- **Constraint:** moral/ethical reasoning cannot override Ring-0 governance or
+  user authority — it is an input to a proposal, never an execution authority.
+  *(MEL-REQ-338)* [E]
+- **Constraint:** competing frameworks are represented for contested questions,
+  not collapsed to one "correct" answer. *(MEL-REQ-334)* [E]
+- **Open:** what authorisation granularity applies to a MELFINA-authored
+  ethical/legal analysis that informs a consequential decision — `[E]`-class
+  (a real decision, not yet made) → OQ-29.
+
+### VC18 — Greater reasoning capability vs. the meta-invariant's sufficiency
+*Intensifies VC10/OQ-19: a system explicitly built to reason from first
+principles about mathematics, formal systems, and its own governance is,
+definitionally, closer to "a highly capable self-modifier" than the system
+evaluated when VC10 was first raised.*
+- **Constraint:** understanding governance, deriving code mathematically,
+  identifying an architectural improvement, or proving a policy suboptimal are
+  each explicitly **not** treated as authorisation for the corresponding
+  self-modification tier. *(MEL-REQ-356, 361–364)* [E]
+- **Acknowledged limit:** this is a restatement of existing invariants against
+  new *routes*, not a new safety mechanism — it does not make the meta-invariant
+  more provably sufficient, only closes specific arguments for why it should not
+  apply.
+- **Open:** does PART IV-C change the answer to OQ-19, or only make the
+  question more urgent? `[U]` → OQ-32.
 
 ---
 

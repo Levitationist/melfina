@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-11 (LOW-LEVEL FOUNDATIONS MISSION 001 — first pass; architecture checkpoint committed + pushed as `8a40207`)
+Last updated: 2026-09-11 (REQUIREMENTS EXPANSION MISSION 002 — first pass; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
 
 ---
 
@@ -19,17 +19,50 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 (first pass) complete, NOT yet
+**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 (first pass) complete and
+committed. REQUIREMENTS EXPANSION MISSION 002 (first pass) complete, NOT yet
 committed, awaiting user review. Still design/research — no `src/`, no language,
 no storage, no sandbox mechanism, no cryptographic primitive chosen.**
 
 The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
 + REVISION 1) was committed and pushed as **`8a40207`** ("design: ARCHITECTURE
 MISSION 001 + adversarial review 001 + revision 1") — 11 `design/*.md` files +
-this file. `origin/main` is at `8a40207`.
+this file. The LOW-LEVEL FOUNDATIONS MISSION 001 checkpoint (README.md + 12
+technology-independent contracts in `design/foundations/`) was committed and
+pushed as **`19d0135`** ("design: LOW-LEVEL FOUNDATIONS MISSION 001").
+`origin/main` is at `19d0135`.
 
 Research Missions 001 + 002, PERSONAL REQUIREMENTS MISSION 001 (+ correction), and
 HUMAN / CENTRAL MODEL MISSION 001 are done and pushed (commit `f3093fc`).
+
+**REQUIREMENTS EXPANSION MISSION 002 (2026-09-11, NOT yet committed):**
+retroactively expands the already-committed requirements phase with **PART
+IV-C — GENERAL REASONING, KNOWLEDGE, AND WISDOM**
+(`requirements/REQUIREMENTS_MASTER.md` §56–76, `MEL-REQ-254`…`MEL-REQ-364`, 111
+new requirements) + 8 new anti-requirements (`MEL-AR-20`…`27`) + a new companion
+file `requirements/KNOWLEDGE_AND_REASONING_MODEL.md` (the "wisdom" operational
+definition + critique, the analogy/causation taxonomy grounded in Gentner and
+Pearl, the first-principles decomposition pipeline, an architecture/foundation
+compatibility test, and a dedicated adversarial review of 20 attack scenarios) +
+6 new conflicts (`requirements/CONFLICTS.md` VC13–VC18) + 11 new open questions
+(`requirements/OPEN_QUESTIONS.md` OQ-22–32). **Totals: 364 requirements + 27
+anti-requirements.** The mission's two load-bearing new sections — **§74
+knowledge ≠ authority** and **§75–76 the anti-bypass hardening set** — restate
+existing F1/F3/F7/F8/F9/F10 foundation-contract invariants against 12+
+specific reasoning-derived bypass attempts (self-authorising via knowledge,
+capability-creation, mathematical reclassification, experiment/simulation
+framing, aggregate-effect decomposition, GUI/terminal ambiguity, the lethal
+trifecta, governance reinterpretation, autonomy-ceiling arguments, post-hoc
+rationalisation, "wisdom"/ethics-based paternalism, and self-modification-tier
+arguments) — **no new authority mechanism was invented; every closure routes
+back to an existing contract.** **No architecture, model, or foundation
+document was modified** — a full 20-item compatibility check found no
+contradiction requiring one. One residual, unresolved tension is recorded as
+`OQ-32`: whether explicitly building MELFINA toward first-principles reasoning
+about its own governance changes the answer to `OQ-19` (meta-invariant
+sufficiency) rather than only making the question more urgent — reported, not
+resolved. `src/`, `research/`, `model/`, and all committed `design/` and
+`design/foundations/` documents untouched. **Not committed, not pushed.**
 
 **LOW-LEVEL FOUNDATIONS MISSION 001 (2026-09-11):** defined the smallest,
 precise, technology-independent contracts every future implementation must obey.
@@ -658,13 +691,16 @@ was judged unnecessary to proceed.
 
 ```
 DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
-  -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed
+  -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed;
+                                REQUIREMENTS EXPANSION MISSION 002 (PART IV-C,
+                                general reasoning/knowledge/wisdom) done (1st
+                                pass), NOT committed; awaiting review
   -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done, pushed (f3093fc)
   -> SYSTEM DESIGN /         <-- MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1
      ARCHITECTURE                done, committed + pushed (`8a40207`)
                                 (design/ = 11 files)
-  -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done (1st pass), NOT committed;
-                                awaiting review. design/foundations/ = README +
+  -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done, committed + pushed
+                                (`19d0135`). design/foundations/ = README +
                                 12 technology-independent contracts
   -> TECHNOLOGY SELECTION    <-- next: score candidates against
                                 design/foundations/TECHNOLOGY_SELECTION_CRITERIA.md
@@ -734,7 +770,7 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 | Path            | Holds                                                        |
 |-----------------|-------------------------------------------------------------|
 | `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
-| `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001). First pass done. |
+| `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001 + REQUIREMENTS EXPANSION MISSION 002). First pass done for both; MISSION 002 not yet committed. |
 | `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
 | `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, committed + pushed (`8a40207`). |
 | `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, first pass done, **not yet committed**. |
@@ -1041,3 +1077,51 @@ decided.
   untouched — no upstream contradiction found.** Awaiting user review before the
   `design/foundations/` set is committed as one checkpoint, then TECHNOLOGY
   SELECTION.
+- **2026-09-11** — **LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed
+  (`19d0135`, "design: LOW-LEVEL FOUNDATIONS MISSION 001").** `origin/main`
+  advanced from `8a40207` to `19d0135`. Next phase: TECHNOLOGY SELECTION, or
+  (as it turned out) a further requirements pass first — see below.
+- **2026-09-11** — **REQUIREMENTS EXPANSION MISSION 002 complete (first pass,
+  NOT committed, NOT pushed).** Added **PART IV-C — GENERAL REASONING,
+  KNOWLEDGE, AND WISDOM** to `requirements/REQUIREMENTS_MASTER.md` (§56–76,
+  `MEL-REQ-254`…`MEL-REQ-364`, 111 new requirements: 49 MUST, 28 SHOULD, 34 MUST
+  NOT) + 8 new anti-requirements (`MEL-AR-20`…`27`) + `REQUIREMENTS CHECKPOINT
+  002`. New companion file `requirements/KNOWLEDGE_AND_REASONING_MODEL.md` (the
+  "wisdom" operational definition + honest critique of its own limits; the
+  closed analogy/correlation/causation/speculation taxonomy grounded in
+  Gentner's structure-mapping theory and Pearl's association/intervention/
+  counterfactual causal ladder; the first-principles decomposition pipeline
+  with explicit stopping criteria; a 20-item architecture/model/foundation
+  compatibility test — all ✓; a dedicated adversarial review of 20 named
+  attack scenarios, each closed by restating an existing F1–F10 invariant, none
+  requiring a new authority mechanism; and per-area research grounding for the
+  mission's 26 research areas with honest `[E]/[G]/[DI]/[H]/[U]` tags,
+  including where the literature does *not* justify a strong requirement).
+  Updated `requirements/CONFLICTS.md` (+VC13–VC18) and
+  `requirements/OPEN_QUESTIONS.md` (+OQ-22–32, +2 deliberately-undecided items)
+  and `requirements/README.md`. **Totals: 364 requirements (186 MUST / 116
+  SHOULD / 8 MAY / 54 MUST NOT) + 27 anti-requirements.**
+  Strengthens genuine internal THINK/DECIDE ownership (§56) **without**
+  touching the autonomy triad or the action pipeline; adds cross-domain
+  foundational knowledge, first-principles/mathematical reasoning,
+  philosophical programming, extended scientific reasoning/teaching/knowledge-
+  acquisition, and structured (non-scoring) ethics/law/civics and embodied-
+  skill/physiology reasoning — all representable inside the existing E²CI
+  ontology, all still local-only, all still fully gated by the existing
+  capability-grant/Reference-Monitor/verifier contracts. The two load-bearing
+  new sections, **§74 (knowledge ≠ authority)** and **§75–76 (intelligence
+  must not become a security bypass)**, contain no new authority mechanism —
+  every one of their 18 requirements restates an existing F1/F3/F7/F8/F9/F10
+  invariant or an existing MEL-REQ/MEL-AR against a specific reasoning-derived
+  route around it. One residual tension was **not** closable by a requirement
+  and is recorded, not resolved: `OQ-32` — whether building MELFINA toward
+  first-principles reasoning about its own governance changes the answer to
+  `OQ-19` (meta-invariant sufficiency) or only makes the question more urgent.
+  Verified: no duplicate/gapped `MEL-REQ`/`MEL-AR` IDs (`MEL-REQ-001`…`364` and
+  `MEL-AR-01`…`27`, each defined exactly once); `src/` untouched; no secrets or
+  sensitive PII added; `model/`, `research/`, and every committed `design/` and
+  `design/foundations/` document untouched — no contradiction requiring human
+  review was found. **Not committed, not pushed.** Recommended: the user
+  reviews this expansion (particularly §74–76 and VC13–VC18/OQ-22–32), then it
+  is committed as its own checkpoint, then TECHNOLOGY SELECTION proceeds using
+  `design/foundations/TECHNOLOGY_SELECTION_CRITERIA.md` as planned.

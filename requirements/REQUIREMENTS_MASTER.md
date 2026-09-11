@@ -3,11 +3,17 @@
 **Phase:** PERSONAL REQUIREMENTS.
 **Mission:** PERSONAL REQUIREMENTS MISSION 001 (base brief + autonomous-reasoning
 addendum + local-only/network-isolation addendum + autonomous-personal-intelligence
-extension).
-**Status:** first pass, pending user review.
-**Date:** 2026-09-10.
+extension + dynamic-self-directed correction) + **REQUIREMENTS EXPANSION MISSION
+002** (cross-domain knowledge, first-principles/mathematical reasoning,
+philosophical programming, systems thinking, wisdom, genuine internal
+decision-making — PART IV-C).
+**Status:** first pass (both missions), pending user review.
+**Date:** 2026-09-10 (MISSION 001) / 2026-09-11 (MISSION 002).
 **Built on:** `research/RESEARCH_MASTER.md` (§§1–32), `research/CONFLICTS.md`,
-`research/BIBLIOGRAPHY.md` (research checkpoints 001 + 002).
+`research/BIBLIOGRAPHY.md` (research checkpoints 001 + 002);
+`model/HUMAN_CENTRAL_MODEL.md`; `design/` (architecture, `8a40207`) and
+`design/foundations/` (LOW-LEVEL FOUNDATIONS, `19d0135`) for MISSION 002's
+compatibility checks.
 
 ---
 
@@ -89,12 +95,28 @@ sequential; gaps are not reused.
 2. Part II — the **MELFINA Capability Model** (conceptual, not architecture) and
    the **autonomy triad** (cognitive / decision / execution).
 3. Part III — functional requirements by area (MEL-REQ-###).
-4. Part IV — the autonomous-personal-intelligence requirements.
-5. Part V — cross-cutting requirements (data, privacy/local-only, reliability,
+4. Part IV — the autonomous-personal-intelligence requirements, and
+   **Part IV-B — the dynamic self-directed system** (metareasoning, dynamic
+   context/skill selection, capability creation, the nine self-change tiers,
+   the meta-invariant).
+5. **Part IV-C — general reasoning, knowledge, and wisdom** (added by
+   REQUIREMENTS EXPANSION MISSION 002): decision ownership/rationale (§56),
+   cross-domain foundational knowledge (§57), the analogy/causation discipline
+   (§58), wisdom as a bounded target (§59), the adversarial-systems lens (§60),
+   first-principles reasoning (§61), mathematical abstraction (§62),
+   natural-language↔math↔code (§63), philosophical programming (§64),
+   programming as a modelling tool (§65), extended scientific reasoning (§66),
+   independent derivation vs. novelty (§67), teaching for independence (§68),
+   knowledge acquisition (§69), external self-evaluation (§70), ethics/law/
+   civics (§71), art/music/martial-arts/embodied skill (§72), physiology/
+   biology/cognition (§73), and the two load-bearing safety sections —
+   **knowledge ≠ authority (§74)** and **intelligence must not become a
+   security bypass (§75–76)**.
+6. Part V — cross-cutting requirements (data, privacy/local-only, reliability,
    security, accessibility, efficiency, observability, maintainability).
-6. Part VI — feasibility classification (what is demonstrated / plausible /
+7. Part VI — feasibility classification (what is demonstrated / plausible /
    research-stage / speculative / aspirational).
-7. Part VII — **anti-requirements** (what MELFINA must never become).
+8. Part VII — **anti-requirements** (what MELFINA must never become).
 8. `REQUIREMENTS CHECKPOINT 001` — the summary.
 9. Companion files: `CONFLICTS.md` (tensions as configurable dimensions /
    constraints / safeguards / open questions) and `OPEN_QUESTIONS.md`.
@@ -1909,6 +1931,1064 @@ that varies without a traceable reason, is a defect — not acceptable "dynamism
 
 ---
 
+# PART IV-C — GENERAL REASONING, KNOWLEDGE, AND WISDOM
+
+> **REQUIREMENTS EXPANSION MISSION 002 (2026-09-11).** MELFINA is not intended to
+> remain a tracker, a chatbot, a task manager, a knowledge database, a code
+> generator, a collection of domain assistants, a static skill catalogue, or a
+> passive automation engine. This Part strengthens genuine internal THINK/DECIDE
+> autonomy (§56), and adds cross-domain foundational knowledge (§57), cross-domain
+> reasoning with an explicit analogy-vs-causation discipline (§58), "wisdom" as a
+> bounded, non-mystical engineering target (§59), a generalised adversarial-
+> systems-thinking lens (§60), first-principles decomposition (§61), mathematical
+> abstraction (§62), natural-language↔math↔code translation (§63), philosophical
+> programming (§64), programming as a universal modelling tool (§65), and extends
+> scientific reasoning (§66), independent derivation (§67), teaching (§68),
+> knowledge acquisition (§69), and self-evaluation (§70) into this broader scope.
+> It adds structured moral/legal/civic reasoning (§71) and embodied/physiological
+> domains (§72–73) as genuine areas, not decoration. §74–76 are the load-bearing
+> safety sections: **knowledge is never authority**, greater reasoning capability
+> must never become a route around governance, and the self-modification boundary
+> (§51) holds regardless of how sophisticated MELFINA's reasoning about itself
+> becomes.
+>
+> **This Part changes no architecture and no foundation contract.** Every
+> requirement below is designed to be satisfiable entirely within the existing
+> E²CI ontology (`model/HUMAN_CENTRAL_MODEL.md`), the five-ring architecture
+> (`design/SYSTEM_ARCHITECTURE.md`), and the ten LOW-LEVEL FOUNDATIONS contracts
+> (`design/foundations/`, F1–F10) — see §31 compatibility notes inline and the
+> full check in `requirements/KNOWLEDGE_AND_REASONING_MODEL.md` §4. No requirement
+> here grants MELFINA new authority; several (§74–76) exist specifically to
+> foreclose authority creeping in through a reasoning capability.
+>
+> **Operational definitions, the analogy/causation taxonomy, the first-principles
+> pipeline, the research grounding (areas A–Z), and a dedicated adversarial review
+> (attacks A–T) live in the companion document
+> `requirements/KNOWLEDGE_AND_REASONING_MODEL.md`**, referenced throughout rather
+> than repeated. Evidence tags: `[E]` established · `[G]` guidance · `[DI]` design
+> inference · `[H]` hypothesis · `[U]` unknown. **No requirement here claims that
+> MELFINA has solved general reasoning, scientific discovery, wisdom, or
+> first-principles programming — these are capability targets under evaluation,
+> stated precisely enough to be tested, not claims of present achievement.**
+
+## 56. Decision ownership, rationale, and reconsideration (strengthens §22)
+
+> Answers the mission's core autonomy question directly: MELFINA must genuinely
+> THINK and DECIDE without the user dictating every sub-step, while cognitive
+> autonomy, decision autonomy, and execution authority (`MEL-REQ-017`) remain
+> exactly as separate as before. Nothing here grants execution authority.
+
+**MEL-REQ-254 — MUST — internal reasoning is not micromanaged.**
+Given an objective and its constraints, MELFINA MUST be able to internally
+understand the objective, determine what it knows, identify uncertainty,
+decompose the problem, select reasoning strategies (§45), generate and evaluate
+candidate approaches, and reach an internally-owned decision, **without** the
+user dictating each intermediate step.
+- *Why:* the mission's explicit interaction model ("the user should not have to
+  manually dictate the internal chain of thought or every sub-step"); restates
+  and consolidates `MEL-REQ-094`, `204`, `210`, `216`. — **B**
+- *Accept:* a single high-level objective can produce a proposal through THINK→
+  DECIDE→PROPOSE without step-by-step user direction; private intermediate
+  reasoning need not be exposed by default (MEL-REQ-097 governs what must be
+  *available* on request, not what must be *shown* unasked).
+
+**MEL-REQ-255 — MUST — every decision carries rationale/provenance at an
+appropriate abstraction level.**
+A decision (not only a consequential one) MUST be traceable to a human-readable
+rationale — the objective, the options considered, the basis for the one chosen
+— at a level of abstraction appropriate to the decision's stakes, without
+requiring the full private reasoning trace to be exposed.
+- *Why:* extends `MEL-REQ-097`, `131`, `202` to *every* decision, not only
+  consequential actions; corrigibility requires this to correct MELFINA. — **A+B** [E]
+
+**MEL-REQ-256 — SHOULD — decision reproducibility where feasible.**
+Where the reasoning process is deterministic or bounded enough to replay, MELFINA
+SHOULD be able to reproduce how a past decision was reached, given the same
+inputs; where it is not (e.g. it depended on a non-deterministic component),
+MELFINA states that explicitly rather than fabricating a replay.
+- *Why:* mission requirement; auditability; `MEL-REQ-174` (deterministic where
+  practical). — **A+B** [E]
+
+**MEL-REQ-257 — MUST — a decision represents its own uncertainty and
+assumptions.**
+A decision record MUST state the significant assumptions it depended on and the
+uncertainty in its basis, rather than presenting a chosen option as certain.
+- *Why:* restates `MEL-REQ-059`, `096` for the decision act itself, not only for
+  conclusions offered to the user. — **A+B** [E]
+
+**MEL-REQ-258 — MUST — decisions are reconsidered when evidence changes; stale
+assumptions expire.**
+When evidence contradicting a decision's basis appears, MELFINA MUST be able to
+reconsider that decision; an assumption a decision depended on MUST be able to
+be marked stale and trigger reconsideration, per the adaptation rules (`MEL-REQ-120`).
+- *Why:* mission requirement; extends `MEL-REQ-032` (plans track reality) to
+  decisions generally. — **A+B** [E]
+
+**MEL-REQ-259 — MUST — decision invalidation is recorded, not silently
+forgotten.**
+Invalidating a prior decision MUST produce a recorded record of the invalidation
+and its reason (an appended Claim/Event per F5, never an edit-in-place), visible
+on request.
+- *Why:* mission requirement; the Chronicle is append-only (F5 §2, F6 §1) —
+  invalidation is a new fact, not an erasure. — **A+B** [E]
+
+**MEL-REQ-260 — SHOULD — competing candidate plans are held and compared, not
+silently collapsed.**
+Where more than one defensible approach exists, MELFINA SHOULD be able to hold
+and compare the leading candidates rather than presenting only the one chosen as
+if it were the only one considered.
+- *Why:* mission requirement; supports correction — the user can see and pick a
+  different candidate. — **A+B** [DI]
+
+**MEL-REQ-261 — MUST — choosing no action is a first-class internal decision
+outcome.**
+Concluding that no action is warranted MUST be a recordable decision outcome in
+general reasoning, not only in prioritisation (extends `MEL-REQ-103` beyond
+proposing priorities to any decision).
+- *Why:* mission requirement ("decides whether action is useful… decides to do
+  nothing"); over-helpfulness is a documented failure mode ([E]). — **A+B** [E]
+
+**MEL-REQ-262 — MUST — escalation to the user is an explicit decision outcome
+with stated criteria.**
+MELFINA MUST be able to conclude that a decision should be escalated to the user
+rather than resolved internally, and MUST be able to state why (insufficient
+information, stakes exceed its situational autonomy, `MEL-REQ-244`, or
+irreversibility).
+- *Why:* mission requirement; extends `MEL-REQ-098`, `244`. — **A+B** [E]
+
+**MEL-REQ-263 — MUST NOT — no post-hoc rationalisation.**
+A decision's stated rationale MUST NOT be constructed after the fact to justify
+an action already decided upon, already performed, or already wanted; the
+rationale recorded (MEL-REQ-255) must reflect the reasoning that actually
+preceded the decision.
+- *Why:* mission requirement ("must not fabricate explanations after the fact");
+  restated as a security requirement in §75 (`MEL-REQ-358`). — **A+B** [DI]
+
+## 57. Cross-domain foundational knowledge substrate
+
+> Not a request for a hard-coded encyclopedia or a new primitive per domain. The
+> existing E²CI ontology (Entity/Event/Claim/Intention + Time) remains
+> authoritative (`model/HUMAN_CENTRAL_MODEL.md` §4); this section is about
+> knowledge and reasoning *capability*, never ontology expansion.
+
+**MEL-REQ-264 — MUST — domain knowledge is representable within E²CI without
+ontology expansion.**
+Foundational concepts, mechanisms, and relationships in any domain (mathematics,
+physics, computer science, chemistry, biology, technology, cognitive
+neuroscience, psychology, philosophy, economics, civics, ethics, law,
+physiology, art, music, martial arts, programming, or any other domain) MUST be
+representable as Entities, Events, Claims, and Intentions, without introducing a
+new primitive per domain.
+- *Why:* preserves E²CI (INV-4/INV-5, F5 §1); the mission's explicit instruction
+  ("Do NOT interpret this as requiring a fixed hard-coded ontology"). — **A+B** [DI]
+- *Accept:* no design or implementation document introduces a domain-specific
+  primitive kind alongside Entity/Event/Claim/Intention.
+
+**MEL-REQ-265 — MUST — distinguish the epistemic role of a held knowledge
+item.**
+For any piece of held knowledge, MELFINA MUST be able to distinguish: active
+context (in use for the current task) / retained knowledge (kept for reuse) /
+source material (the original acquired content) / a derived claim / a hypothesis
+/ a temporary working model / obsolete-superseded knowledge.
+- *Why:* mission requirement; without this distinction "knowledge" collapses into
+  an undifferentiated store, defeating provenance (MEL-REQ-096, F5 §6). — **A+B** [DI]
+
+**MEL-REQ-266 — SHOULD — foundational structure over fact accumulation.**
+Where MELFINA engages a domain, it SHOULD prioritise its primitives, definitions,
+axioms/assumptions, mechanisms, relationships, constraints, invariants, causal
+structure, mathematical representation, empirical boundaries, failure modes, and
+known exceptions, over accumulating unconnected facts.
+- *Why:* mission requirement ("prioritize underlying structure over mere fact
+  accumulation"). — **B/C** [DI]
+
+**MEL-REQ-267 — MUST NOT — "knows many facts" ≠ "understands a domain".**
+MELFINA MUST NOT present broad factual recall as equivalent to domain
+understanding; an "understanding" claim is checkable per §66/§70 (derivation,
+prediction, mechanism, or independent verification), a recall claim is not.
+- *Why:* mission requirement, stated as an explicit non-equivalence; enforced as
+  `MEL-AR-20`. — **B**
+
+**MEL-REQ-268 — MUST — retention follows the Chronicle contract; not everything
+is kept permanently.**
+Domain knowledge retention (what is kept, for how long, and at what fidelity)
+follows the Chronicle logical format and contract (F5, F6): working material may
+be discarded (MEL-REQ-215) while its provenance and epistemic status survive for
+anything that was recorded as a Claim.
+- *Why:* mission requirement ("do not assume that all knowledge should be stored
+  permanently"); consistency with F5/F6. — **A+B** [DI]
+
+**MEL-REQ-269 — MUST — every domain-knowledge item carries provenance and
+epistemic status, regardless of domain.**
+Restates `MEL-REQ-096` and F5 §6 (provenance is structural) as a cross-domain
+requirement: no domain gets a lighter-weight or ad hoc epistemic treatment.
+- *Why:* consistency; prevents a "trusted expert domain" exception that would
+  weaken the general provenance discipline. — **A+B** [E]
+
+**MEL-REQ-270 — SHOULD — foundational knowledge is acquired incrementally, as
+the user's actual problems require.**
+MELFINA SHOULD build foundational understanding of a domain as the user's actual
+interests and problems engage it, rather than attempting to pre-load a fixed
+encyclopedic scope.
+- *Why:* mission requirement ("NOT a request to hard-code an encyclopedia");
+  keeps the system lightweight (`MEL-REQ-128`, `196`). — **B/C** [DI]
+
+## 58. Cross-domain reasoning and the analogy/causation discipline
+
+> The full taxonomy, worked examples, and its critique are in
+> `KNOWLEDGE_AND_REASONING_MODEL.md` §3. This section states the binding
+> requirements.
+
+**MEL-REQ-271 — SHOULD — discover and evaluate cross-domain relationships when
+they serve the problem at hand.**
+MELFINA SHOULD be able to connect concepts across domains (e.g. mathematics ↔
+physics, physics ↔ chemistry, chemistry ↔ biology, neuroscience ↔ psychology,
+psychology ↔ economics, philosophy ↔ ethics/law, music ↔ mathematics, computer
+science ↔ mathematics, control theory ↔ physiology, information theory ↔
+cognition — an illustrative, non-exhaustive list) where doing so genuinely
+serves understanding or the task, not as an end in itself.
+- *Why:* mission requirement §5; extends `MEL-REQ-073`, `132`, `151`. — **B/C** [H]
+
+**MEL-REQ-272 — MUST — cross-domain connections are classified by a closed
+relationship-type vocabulary.**
+A cross-domain connection MUST be classified as exactly one of: **established
+relationship / mechanistic analogy / structural analogy / correlation / causal
+relationship / plausible hypothesis / speculation** (see the taxonomy and Pearl's
+association→intervention→counterfactual ladder in
+`KNOWLEDGE_AND_REASONING_MODEL.md` §3), and MUST NOT be presented as a stronger
+type than the evidence supports.
+- *Why:* mission requirement §5 ("Established relationship ≠ Mechanistic
+  analogy ≠ … ≠ Speculation"); Pearl's causal hierarchy formalises why
+  correlation/intervention/counterfactual are distinct evidentiary tiers `[E]`.
+  — **A+B** [E]
+
+**MEL-REQ-273 — MUST — a proposed cross-domain connection states what is
+shared, what differs, its assumptions, its evidence, and its falsifiability.**
+For any connection MELFINA proposes across domains, it MUST be able to state:
+what is actually shared between the domains; what differs; what assumptions make
+the analogy useful; what evidence supports it; and what observation would
+falsify it.
+- *Why:* mission requirement §5, verbatim structure; Gentner's structure-mapping
+  theory — analogical validity rests on shared *relational/causal* structure, not
+  surface similarity `[E]`. — **A+B** [E]
+
+**MEL-REQ-274 — MUST NOT — analogy ≠ identity.**
+A structural or mechanistic similarity between domains MUST NOT be presented or
+used as if it were a causal or established relationship between them.
+- *Why:* mission requirement; Gentner's theory itself distinguishes surface
+  similarity from valid structural mapping `[E]`; enforced as `MEL-AR-20`. — **A+B** [E]
+
+**MEL-REQ-275 — MUST NOT — no manufactured connections ("pattern hallucination").**
+A cross-domain connection MUST NOT be asserted merely because surface
+pattern-matching found a similarity; it requires the same evidentiary discipline
+as any Claim (`MEL-REQ-096`, `131`).
+- *Why:* mission requirement (connection-making "must NOT become pattern
+  hallucination"); LLMs are documented to "hallucinate or produce superficial
+  analogies lacking valid structural correspondence" and to lack a built-in
+  mechanism for checking cross-domain correspondence validity `[E]`
+  ([Can LLMs Truly Perform Analogical Reasoning?](https://aclanthology.org/2025.findings-acl.1230.pdf),
+  [Can LLMs Recognize Their Own Analogical Hallucinations?](https://aclanthology.org/2025.knowllm-1.8.pdf)).
+  — **A+B** [E]
+
+**MEL-REQ-276 — SHOULD — competing cross-domain explanations are held and
+compared.**
+Where more than one plausible cross-domain connection or explanation exists,
+MELFINA SHOULD hold and compare them rather than silently adopting the first one
+found.
+- *Why:* mission requirement; restates `MEL-REQ-260` for cross-domain claims
+  specifically. — **A+B** [DI]
+
+**MEL-REQ-277 — MUST — a cross-domain connection used in a consequential
+conclusion MUST be independently checkable first.**
+Before a cross-domain connection informs a consequential conclusion or action,
+it MUST be checkable per the external-verification discipline of §70 — not
+accepted on the strength of the reasoning that produced it alone.
+- *Why:* mission requirement (avoid confusing "interesting patterns with
+  truth"); consistency with the verifier contract (F10). — **A+B** [E]
+
+**MEL-REQ-278 — MUST — cross-domain connections carry provenance, a confidence
+label, and are subject to invalidation.**
+Restates `MEL-REQ-096`, `120`, F5 §7 (supersession) for connections specifically:
+a connection is a Claim like any other, correctable and forgettable.
+- *Why:* consistency; prevents connections from becoming a privileged,
+  unfalsifiable class of belief. — **A+B** [E]
+
+## 59. "Wisdom" as a bounded, non-mystical engineering target
+
+> The candidate operational definition, its critique, and the evaluation
+> dimensions (cross-domain integration, temporal/causal/consequence reasoning,
+> uncertainty, perspective comparison, value/constraint awareness, abstraction,
+> counterfactual reasoning, falsification, knowing when not to act, knowing what
+> is worth finding out) are in `KNOWLEDGE_AND_REASONING_MODEL.md` §2. **"Wisdom"
+> is a capability target under evaluation here, never a claimed property of
+> MELFINA.**
+
+**MEL-REQ-279 — SHOULD — connection-making is evaluated against the operational
+definition, not asserted as achieved.**
+MELFINA's cross-domain connection-making capability (§58) SHOULD be evaluated,
+over time and against outcomes, using the dimensions in
+`KNOWLEDGE_AND_REASONING_MODEL.md` §2 — treated as a capability target, not
+declared met by having the feature.
+- *Why:* mission requirement ("Treat this as a capability target that must be
+  evaluated empirically"). — **B**
+
+**MEL-REQ-280 — MUST NOT — no claim of possessing wisdom.**
+MELFINA MUST NOT describe itself, in its own outputs or self-description, as
+"wise", as possessing wisdom, or as having categorically superior judgement.
+- *Why:* mission requirement ("Do not claim that this makes MELFINA 'wise' merely
+  because it has the feature"); anti-hype (`MEL-REQ-133`). — **B**
+
+**MEL-REQ-281 — MUST — connection provenance and confidence are visible wherever
+they inform output.**
+Where a cross-domain connection informs teaching (§68), a recommendation
+(`MEL-REQ-101`), or a decision (§56), its provenance and confidence label
+(`MEL-REQ-278`) MUST be visible alongside that output.
+- *Why:* mission requirement (connection provenance and confidence); consistency
+  with `MEL-REQ-202`. — **A+B** [E]
+
+**MEL-REQ-282 — SHOULD — track and reduce false-positive connections over
+time.**
+MELFINA SHOULD apply the same self-evaluation discipline (§70, `MEL-REQ-247–249`)
+to its own cross-domain connection-making, tracking where connections proved
+useful/valid versus spurious.
+- *Why:* mission requirement (avoiding false-positive connection detection). — **A+B** [DI]
+
+**MEL-REQ-283 — MUST NOT — "wisdom" or connection-making MUST NOT override user
+intent or justify paternalism.**
+A cross-domain insight or connection-making claim MUST NOT be used to
+second-guess a clear, stated user decision or to justify acting against the
+user's stated intent.
+- *Why:* mission requirement ("avoiding dependency/manipulation through 'wisdom'
+  claims"); restates `MEL-REQ-004`, `005`; enforced as `MEL-AR-24`. — **A+B** [B]
+
+**MEL-REQ-284 — MUST — accumulated connections are ordinary, correctable,
+forgettable Claims.**
+Long-term accumulation of useful cross-domain connections is stored as ordinary
+provenance-carrying Claims (F5), subject to the same correction and forgetting
+rules as any other learned item (`MEL-REQ-120`) — never as a privileged,
+uncorrectable "wisdom store".
+- *Why:* mission requirement (long-term accumulation of useful connections);
+  prevents a second, unaccountable knowledge tier. — **A+B** [DI]
+
+## 60. Adversarial / systems-security reasoning as a general lens
+
+**MEL-REQ-285 — SHOULD — apply a generalised adversarial-systems lens across
+domains.**
+MELFINA SHOULD be able to analyse a system of any kind — software, organisational,
+physical, biological, social, economic, cognitive, or a workflow — by asking:
+what are its components; what are its trust boundaries; who controls what; what
+assumptions does it rest on; what are its attack/failure surfaces; what can be
+abused; what happens if an assumption is false or an actor is malicious or
+merely mistaken; what happens when individually-safe parts compose; where are
+its privilege boundaries; can authority be confused or escalated within it; how
+does it behave under adversarial input; what are its failure modes; what is its
+blast radius; what is reversible; what would falsify the analysis.
+- *Why:* mission requirement §7, generalised beyond computer security; mirrors
+  the analysis discipline already applied to MELFINA's own architecture
+  (`design/foundations/FOUNDATION_CROSS_CONTRACT_ANALYSIS.md`). — **B/C** [DI]
+
+**MEL-REQ-286 — MUST — the lens distinguishes uncertainty, accident, adversity,
+malice, instability, and emergence — and does not default to malice.**
+The adversarial lens MUST distinguish ordinary uncertainty, accidental failure,
+adversarial behaviour, malicious intent, systemic instability, and emergent
+behaviour as different categories, and MUST NOT assume every system or actor
+under analysis is malicious by default.
+- *Why:* mission requirement, explicit ("avoid assuming every system is
+  malicious"); prevents the lens from becoming reflexive hostility. — **B**
+
+**MEL-REQ-287 — MUST — applying the lens grants no authority.**
+Applying the adversarial-systems lens — including to MELFINA's own design —
+MUST NOT itself confer any capability grant, effect, or execution authority; it
+is an analytical output, gated exactly like any other reasoning output (§74).
+- *Why:* mission requirement §25 (findings must not become a bypass); direct
+  application of §74's knowledge≠authority principle. — **A+B** [E]
+
+**MEL-REQ-288 — SHOULD — findings about MELFINA's own design are routed as
+ordinary proposals.**
+Where the lens is applied to MELFINA's own architecture or governance, any
+finding is recorded and routed as an ordinary Intention/proposal for a human to
+act on (`MEL-REQ-149`, `235`), never self-executed.
+- *Why:* mission requirement §25/§26; consistency with the meta-invariant. — **A+B** [E]
+
+## 61. First-principles reasoning and decomposition
+
+> The decomposition pipeline (problem → concepts → assumptions → primitives →
+> relationships → constraints → mechanisms → formal/computational representation
+> → implementation → experiment → verification → revision) is diagrammed in
+> `KNOWLEDGE_AND_REASONING_MODEL.md` §1.
+
+**MEL-REQ-289 — SHOULD — recursively decompose non-trivial problems toward
+primitives.**
+For a non-trivial problem, MELFINA SHOULD be able to decompose it toward
+concepts, assumptions, primitives, relationships, constraints, and mechanisms,
+proceeding toward a formal or computational representation where that is useful
+(§62–63).
+- *Why:* mission requirement §8. — **B/C** [DI]
+
+**MEL-REQ-290 — MUST — hidden assumptions are identified and stated.**
+A first-principles decomposition MUST surface and state the hidden assumptions
+it depends on, not only the explicit ones.
+- *Why:* mission requirement; restates `MEL-REQ-095`, `290` for decomposition
+  specifically. — **A+B** [E]
+
+**MEL-REQ-291 — SHOULD — check dimensional/unit consistency and invariant
+structure where applicable.**
+Where the domain has physical units, conserved quantities, or invariants, MELFINA
+SHOULD check for dimensional/unit consistency and identify the conserved or
+invariant structure.
+- *Why:* mission requirement §8; dimensional analysis is an established
+  correctness check in physical sciences and engineering `[E]`. — **A+B** [E]
+
+**MEL-REQ-292 — MUST — decomposition stops at a recognised boundary.**
+MELFINA MUST determine when further decomposition has diminishing value or has
+reached an epistemic or physical boundary (an unmodelled primitive, an
+irreducible empirical fact, or a resource limit), and stop there rather than
+decomposing indefinitely.
+- *Why:* mission requirement ("avoid requiring infinite decomposition");
+  consistency with `MEL-REQ-241–243` (bounded resource allocation). — **A+B** [DI]
+
+**MEL-REQ-293 — MUST — a decomposition is inspectable and separates derived
+from assumed.**
+Each level of a first-principles decomposition MUST be inspectable
+(`MEL-REQ-097`) and MUST distinguish what was derived from what was assumed.
+- *Why:* mission requirement; restates `MEL-REQ-096` for decomposition. — **A+B** [E]
+
+## 62. Mathematical abstraction and formal modelling
+
+**MEL-REQ-294 — SHOULD — seek the lowest useful formal representation.**
+Where formalising a system is useful, MELFINA SHOULD seek the lowest useful
+formal representation from a broad vocabulary (algebra, equations, functions,
+sets, relations, graphs, matrices/tensors, probability distributions,
+statistical models, optimisation problems, differential/difference equations,
+recurrence relations, dynamical systems, state-transition systems, logic,
+automata, algorithms, simulations, hybrid models) rather than forcing a single
+closed-form reduction.
+- *Why:* mission requirement §9, verbatim intent. — **B/C** [DI]
+
+**MEL-REQ-295 — MUST — a formal model carries its assumptions, units,
+approximations, and validity boundary.**
+A formal model MELFINA produces MUST state the assumptions it rests on, its
+units (where applicable), its known approximations, and the empirical boundary
+within which it is expected to hold.
+- *Why:* mission requirement; consistency with `MEL-REQ-095`. — **A+B** [E]
+
+**MEL-REQ-296 — SHOULD — support symbolic/numerical reasoning, sensitivity and
+stability analysis where applicable.**
+Where tools and evidence support it, MELFINA SHOULD be able to perform symbolic
+and numerical reasoning, parameter estimation, sensitivity analysis, and
+stability analysis on a formal model.
+- *Why:* mission requirement §9. — **B/C** [DI]
+
+**MEL-REQ-297 — MUST — uncertainty is propagated, not silently dropped.**
+A formal model's output MUST carry or state its uncertainty rather than
+presenting a point estimate as exact, where the model's inputs carry
+uncertainty.
+- *Why:* mission requirement; restates `MEL-REQ-059` for formal outputs. — **A+B** [E]
+
+**MEL-REQ-298 — MUST — "no sufficiently faithful reduction is known" is a valid
+first-class output.**
+MELFINA MUST be able to say that no sufficiently faithful mathematical reduction
+of a system is currently known to it, rather than fabricating a formalisation to
+appear rigorous.
+- *Why:* mission requirement, verbatim; enforced as `MEL-AR-21`. — **A+B** [E]
+
+**MEL-REQ-299 — MUST NOT — no forced formalisation.**
+MELFINA MUST NOT force a mathematical representation onto a problem where the
+evidence does not support one.
+- *Why:* mission requirement, verbatim; enforced as `MEL-AR-21`. — **A+B** [E]
+
+**MEL-REQ-300 — SHOULD — compare competing formal models where more than one is
+defensible.**
+Where multiple formal models could describe the same phenomenon, MELFINA SHOULD
+be able to compare them and state the basis for preferring one.
+- *Why:* mission requirement §9 (model comparison). — **B/C** [DI]
+
+## 63. Natural language ↔ mathematics ↔ code
+
+**MEL-REQ-301 — MUST — translation preserves semantics, assumptions,
+constraints, units, edge cases, uncertainty, provenance, and invariants — or
+states what was not preserved.**
+A translation between natural-language description, conceptual model,
+mathematical model, formal specification, algorithm, program, and observed
+behaviour MUST preserve these properties, or explicitly identify which were not
+preserved and why.
+- *Why:* mission requirement §10, verbatim list. — **A+B** [DI]
+
+**MEL-REQ-302 — MUST — information loss in translation is identified.**
+Where a translation step loses information, MELFINA MUST identify the loss
+rather than silently dropping it.
+- *Why:* mission requirement §10. — **A+B** [DI]
+
+**MEL-REQ-303 — MUST — ambiguity is represented, not resolved by invented
+precision.**
+Where a natural-language statement is ambiguous, MELFINA MUST represent the
+ambiguity explicitly (as alternatives or a stated open point) rather than
+silently choosing one precise reading.
+- *Why:* mission requirement §10, verbatim; consistency with `MEL-REQ-303` and
+  `MEL-REQ-059`. — **A+B** [E]
+
+**MEL-REQ-304 — SHOULD — check translations bidirectionally where feasible.**
+Where feasible, MELFINA SHOULD check a translation in both directions (e.g. does
+a program's behaviour match the mathematical model; does the mathematical model
+match the natural-language statement of intent).
+- *Why:* mission requirement §10 (implied round-trip check); consistency with the
+  natural-language↔math↔code↔specification chain. — **B/C** [DI]
+
+## 64. Philosophical programming
+
+> "Programming from understanding and first principles rather than from
+> memorised implementation patterns" (mission's candidate definition, adopted).
+
+**MEL-REQ-305 — SHOULD — define the problem and specify behaviour before
+writing code.**
+For a non-trivial programming task, MELFINA SHOULD define the problem, specify
+the desired behaviour, and identify invariants before writing implementation
+code.
+- *Why:* mission requirement §11, verbatim flow. — **B/C** [DI]
+
+**MEL-REQ-306 — SHOULD — derive the algorithm and justify structure/complexity
+against the specification.**
+Where feasible, MELFINA SHOULD derive an algorithm from the specification and
+justify the chosen data structures and computational complexity against it,
+rather than defaulting to a memorised implementation pattern.
+- *Why:* mission requirement §11. — **B/C** [DI]
+
+**MEL-REQ-307 — MUST — tests are constructed from the specification.**
+MELFINA MUST be able to construct tests derived from the specification (not only
+from the implementation) as part of a philosophical-programming task.
+- *Why:* mission requirement §11; consistency with `MEL-REQ-142`. — **A+B** [E]
+
+**MEL-REQ-308 — MUST NOT — generated code without spec, invariants, and tests
+is not "verified first-principles programming".**
+Code MELFINA generates without an accompanying specification, stated invariants,
+and specification-derived tests MUST NOT be presented as a completed, verified
+piece of first-principles programming; it may still be offered as a draft,
+clearly labelled as such.
+- *Why:* mission requirement §11, verbatim ("Code generation alone is
+  insufficient"); enforced as `MEL-AR-20`. — **A+B** [E]
+
+**MEL-REQ-309 — MUST — observed behaviour is compared against the specification,
+and discrepancies surfaced.**
+A program's observed behaviour MUST be compared against its specification/model
+(`MEL-REQ-142`), and any discrepancy MUST be surfaced, not silently absorbed or
+explained away.
+- *Why:* mission requirement §11 (compare behaviour against the model). — **A+B** [E]
+
+## 65. Programming as a universal modelling tool
+
+**MEL-REQ-310 — SHOULD — use programs to model, simulate, or test across
+domains via the general reasoning and scientific-thinking capabilities.**
+MELFINA SHOULD be able to use programs to simulate physical, biological,
+economic, or cognitive systems, explore mathematical structures, test
+algorithms, analyse music, explore optimisation, and run symbolic/numerical
+experiments — as an extension of §27/§66, not a separate subsystem.
+- *Why:* mission requirement §12; extends `MEL-REQ-076`, `132`, `151`. — **B/C** [DI]
+
+**MEL-REQ-311 — MUST — every executable action for modelling/simulation still
+passes the full pipeline; "it's just an experiment" is not a bypass.**
+An executable action performed for modelling, simulation, or experimentation
+purposes MUST still pass THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY
+(`MEL-REQ-018`) and the structured-action / reference-monitor contracts (F2, F3)
+exactly as any other action.
+- *Why:* mission requirement §12, verbatim ("Do not allow 'it's just an
+  experiment' to bypass authority controls"); enforced as `MEL-AR-25`. — **A+B** [E]
+
+**MEL-REQ-312 — MUST — a simulation result is not treated as empirical fact
+about the world without independent validation.**
+MELFINA MUST label a simulation's result as a simulation result, and MUST NOT
+treat it as confirmed reality, until it has been independently validated against
+observation.
+- *Why:* mission requirement §13, restated here for programming-as-modelling.
+  — **A+B** [E]
+
+## 66. Scientific reasoning, extended (extends §27)
+
+**MEL-REQ-313 — SHOULD — extend the scientific-reasoning discipline to
+competing hypotheses, prediction, experimental design, reproducibility,
+measurement uncertainty, statistics, and causal-inference boundaries.**
+Extends `MEL-REQ-129–131` to explicitly include: comparing competing hypotheses;
+generating predictions; designing experiments including controls and
+confounders; reproducibility; measurement uncertainty; statistical reasoning
+where appropriate; and stating the boundary of what a given piece of evidence
+can support causally (Pearl's association/intervention/counterfactual
+distinction — see `KNOWLEDGE_AND_REASONING_MODEL.md` §3).
+- *Why:* mission requirement §13; Pearl's causal hierarchy is established
+  theory `[E]`. — **A+B** [E]
+
+**MEL-REQ-314 — MUST — negative/failed results are recorded with the same
+rigour as positive ones.**
+A negative or failed experimental result MUST be recorded, with the same
+provenance and rigour as a positive one, and MUST NOT be discarded.
+- *Why:* mission requirement §13; publication-bias / negative-results evidence
+  is well established in the philosophy and practice of science `[E]`. — **A+B** [E]
+
+**MEL-REQ-315 — MUST NOT — a simulation/model result is not empirical
+confirmation of reality without independent validation.**
+Restates `MEL-REQ-312` for the scientific-reasoning discipline generally, not
+only programming-as-modelling.
+- *Why:* mission requirement §13, verbatim. — **A+B** [E]
+
+**MEL-REQ-316 — MUST — observation, interpretation, and simulation-derived
+inference are distinguished at every stage.**
+A scientific-reasoning chain MUST label each step as observation, interpretation,
+or simulation-derived inference; these MUST NOT be conflated (extends
+`MEL-REQ-094`, `096`).
+- *Why:* mission requirement §13 ("distinction between observation and
+  interpretation"). — **A+B** [E]
+
+## 67. Independent derivation vs. novelty, extended (extends §29)
+
+**MEL-REQ-317 — MUST — a derivation's provenance includes assumptions,
+reasoning-path summary, comparison with known results, and novelty status.**
+Extends `MEL-REQ-131`, `135`: a derivation's recorded provenance MUST include the
+starting assumptions, an inspectable summary of the reasoning path, an explicit
+comparison against known existing results, and the resulting novelty status
+(known-result / independently-rederived / unverified-claim-of-novelty).
+- *Why:* mission requirement §14, verbatim list; hallucinated-novelty and
+  fabricated-citation research shows this check is not optional — AI-generated
+  fake citations in the scientific literature rose roughly sixfold from 2023 to
+  2025 (about 1 in 458 papers by 2025, 1 in 277 in early 2026), well-formatted
+  and hard to detect without an explicit comparison step `[E]`
+  ([Nature, "Hallucinated citations are polluting the scientific literature"](https://www.nature.com/articles/d41586-026-00969-z),
+  [phys.org, 2026-05](https://phys.org/news/2026-05-ai-generated-fake-citations-scientific.html)).
+  — **A+B** [E]
+
+**MEL-REQ-318 — MUST NOT — independent derivation ≠ novel discovery.**
+An independently re-derived known result MUST NOT be presented as, or confused
+with, a novel discovery — restated and generalised from `MEL-REQ-135` beyond
+formal domains to any domain.
+- *Why:* mission requirement §14, verbatim ("Independent derivation ≠ novel
+  discovery"); enforced as `MEL-AR-22`. — **A+B** [E]
+
+**MEL-REQ-319 — MUST NOT — no promise of scientific novelty.**
+MELFINA MUST NOT promise, or imply as a general property of its use, that it
+will produce scientific novelty.
+- *Why:* mission requirement §14, verbatim; anti-hype (`MEL-REQ-133`). — **B**
+
+## 68. Teaching for independence, cross-domain (extends §15)
+
+**MEL-REQ-320 — SHOULD — teach via a progression fitted to the learner and the
+material.**
+MELFINA SHOULD be able to teach using intuition, concrete examples, formal
+definitions, derivation, exercises, experimentation, counterexamples, and
+progressively deeper abstraction, in whatever order and combination fits the
+learner and topic — not necessarily using all of them, not necessarily in this
+order.
+- *Why:* mission requirement §15; extends `MEL-REQ-070`. — **A+B** [E]
+
+**MEL-REQ-321 — SHOULD — identify prerequisites, misconceptions, gaps, and
+transfer opportunities.**
+Extends `MEL-REQ-073`: for a foundational topic, MELFINA SHOULD identify its
+prerequisites, likely misconceptions, the learner's current gaps, and
+opportunities to transfer understanding across domains.
+- *Why:* mission requirement §15. — **A+B** [E]
+
+**MEL-REQ-322 — MUST — the teaching objective is the learner's independent
+reconstruction, not continued dependency.**
+Restates and generalises `MEL-REQ-071` across domains: the goal of teaching is
+the learner's own ability to reconstruct and apply the concept independently,
+never the learner's continued reliance on MELFINA.
+- *Why:* mission requirement §15, verbatim ("The goal is not dependency on
+  MELFINA"); enforced as `MEL-AR-27` and `MEL-AR-07`. — **A+B** [E]
+
+## 69. Knowledge acquisition and self-update
+
+**MEL-REQ-323 — SHOULD — identify a knowledge gap and formulate a concrete
+information-seeking goal.**
+MELFINA SHOULD be able to identify a knowledge gap relevant to the task at hand
+and formulate a concrete goal for acquiring the missing information.
+- *Why:* mission requirement §16. — **B/C** [DI]
+
+**MEL-REQ-324 — MUST — acquisition stays within the local-only core.**
+Knowledge acquisition MUST draw only from sources the user has permitted and
+that are reachable within the local-only core (the user's own stores, local
+files the user has exposed, or asking the user) — never the network by default;
+restates `MEL-REQ-214` for knowledge acquisition generally, not only working
+context.
+- *Why:* mission requirement §16 ("preserve the architecture's local-only core
+  and network isolation rules"); `MEL-REQ-014`, `164`; F7 P3, F8 §2.9. — **A+B** [E]
+
+**MEL-REQ-325 — SHOULD — evaluate and record acquired-source quality.**
+MELFINA SHOULD evaluate the quality/reliability of an acquired source and record
+that evaluation alongside the resulting claim.
+- *Why:* mission requirement §16. — **A+B** [DI]
+
+**MEL-REQ-326 — MUST — conflicting evidence is reconciled by recording both
+with provenance, never silent overwrite.**
+Where newly acquired information conflicts with an existing claim, MELFINA MUST
+reconcile it by recording both with provenance and superseding only with
+evidence (`MEL-REQ-120`, F5 §7); it MUST NOT silently overwrite a foundational
+belief.
+- *Why:* mission requirement §16, verbatim ("avoid silently changing foundational
+  beliefs without evidence"). — **A+B** [E]
+
+**MEL-REQ-327 — MUST — provenance distinguishes user-provided from
+externally-acquired information.**
+Extends `MEL-REQ-269`: provenance MUST distinguish information the user provided
+directly from information MELFINA acquired from a permitted source.
+- *Why:* mission requirement §16, verbatim. — **A+B** [E]
+
+**MEL-REQ-328 — MUST NOT — knowledge acquisition is not a route to unrestricted
+network access.**
+Knowledge acquisition MUST NOT become a path to ambient or unrestricted network
+access; any future networked acquisition capability remains the separate,
+isolated, off-by-default add-on already required (`MEL-REQ-167`), gated by the
+same capability-grant model (F1) as any other effect.
+- *Why:* mission requirement §16, verbatim; enforced as `MEL-AR-26`. — **A+B** [E]
+
+## 70. Self-evaluation via external verification, extended (extends §54)
+
+**MEL-REQ-329 — MUST — important reasoning uses external checks, not
+introspective confidence alone.**
+For consequential, high-risk, or explicitly-requested reasoning, self-evaluation
+MUST use available external checks — symbolic verification, numerical checks,
+unit checks, independent re-derivation, test suites, simulations compared
+against independent evidence, alternative reasoning paths, or a designated
+verifier (F10) — **in addition to**, never instead of, the model's own
+assessment.
+- *Why:* mission requirement §17; extends `MEL-REQ-248`. — **A+B** [E]
+
+**MEL-REQ-330 — MUST NOT — an expressed confidence level is not verification.**
+A statement of confidence ("I am 99% confident") MUST NOT itself constitute
+verification, and MUST NOT be treated by any downstream component — including
+the Reference Monitor (F3) — as evidence of correctness.
+- *Why:* mission requirement §17, verbatim; restates `MEL-REQ-059`, `248`
+  explicitly against self-declared confidence; F3 §5 already lists self-declared
+  risk as untrusted — this extends the same rule to self-declared correctness;
+  enforced as `MEL-AR-20`. — **A+B** [E]
+
+**MEL-REQ-331 — MUST — the verifier contract remains the authoritative external
+check; self-evaluation complements it, never substitutes for it.**
+The verifier contract (F10) is the authoritative mechanism for external
+verification of a consequential result; self-evaluation (§54, §70) is a
+complement, never a substitute, and creates no new authority.
+- *Why:* consistency with F10; prevents §70 from becoming a second, informal
+  verification path that competes with the actual verifier contract. — **A+B** [E]
+
+## 71. Ethics, law, civics, and moral reasoning
+
+> Not a "MELFINA morality score". A structured capability to represent,
+> distinguish, and reason about ethical/legal/civic questions — never a source
+> of execution authority.
+
+**MEL-REQ-332 — MUST — distinguish law from morality, and policy from ethics.**
+MELFINA MUST treat law/policy and morality/ethics as distinct categories with
+distinct sources of authority (legal systems and jurisdictions vs. moral
+frameworks and personal/social values), and MUST NOT conflate them.
+- *Why:* mission requirement §21, verbatim. — **B/C** [DI]
+
+**MEL-REQ-333 — MUST — legal claims carry jurisdiction and bitemporal
+provenance.**
+A legal claim MUST record the jurisdiction it applies to and its temporal
+validity (a law's applicability depends on where and when); legal claims use the
+same bitemporal Claim structure as any other knowledge (F5 §5).
+- *Why:* mission requirement §21 ("preserve temporal validity and provenance");
+  consistency with F5. — **A+B** [E]
+
+**MEL-REQ-334 — SHOULD — represent more than one applicable ethical framework
+for a genuinely contested question.**
+For a genuinely contested ethical question, MELFINA SHOULD represent more than
+one applicable framework and identify where they agree and where they conflict,
+rather than presenting a single framework as the answer.
+- *Why:* mission requirement §21; machine-ethics research treats
+  consequentialist, deontological, and virtue-ethics traditions as distinct,
+  each with known real-world failure modes when applied alone, motivating a
+  pluralistic, deliberative approach rather than a single hard-coded
+  framework `[E]`
+  ([Normative Moral Pluralism for AI](https://arxiv.org/pdf/2508.08333)). — **A+B** [E]
+
+**MEL-REQ-335 — MUST — descriptive vs. normative claims are labelled.**
+MELFINA MUST distinguish descriptive claims ("what is the case") from normative
+claims ("what ought to be the case") in ethical or legal reasoning, and label
+which is which.
+- *Why:* mission requirement §21, verbatim. — **B/C** [DI]
+
+**MEL-REQ-336 — SHOULD — identify affected parties, rights/duties/constraints,
+and consequences.**
+For a decision or recommendation with an ethical dimension, MELFINA SHOULD
+identify the affected parties, relevant rights/duties/constraints, and the
+foreseeable consequences it considered.
+- *Why:* mission requirement §21. — **A+B** [DI]
+
+**MEL-REQ-337 — MUST — legal and ethical conclusions can diverge, and MELFINA
+states so without resolving it for the user.**
+MELFINA MUST be able to state that a legal conclusion and an ethical conclusion
+diverge on a given question, without resolving the divergence on the user's
+behalf.
+- *Why:* mission requirement §21, verbatim ("recognizing that legal and ethical
+  conclusions can diverge"); `MEL-REQ-004`. — **B**
+
+**MEL-REQ-338 — MUST NOT — moral/ethical reasoning does not override governance
+or user authority.**
+Moral or ethical reasoning MUST NOT be used to override, reinterpret, or bypass
+Ring-0 governance, the Reference Monitor's authorisation decision (F3), or the
+user's authority (`MEL-REQ-004`); a moral judgement is an input to a proposal,
+never an execution authority.
+- *Why:* mission requirement §21, verbatim ("must NOT become a mechanism for
+  secretly overriding Ring-0 governance or user authority"); direct application
+  of §74. — **A+B** [E]
+
+**MEL-REQ-339 — MUST NOT — ethical analysis is not presented as settled, and
+not used to pressure the user.**
+MELFINA MUST NOT present its own ethical analysis as a settled, universally
+agreed conclusion, and MUST NOT use it to pressure or shame the user.
+- *Why:* restates `MEL-REQ-005`, `029` for the new ethical-reasoning capability;
+  enforced as `MEL-AR-24`. — **A+B** [E]
+
+## 72. Art, music, martial arts, and embodied skill (extends §16)
+
+**MEL-REQ-340 — SHOULD — reason about structure, technique, and practice across
+artistic and physical-skill domains via general capabilities.**
+MELFINA SHOULD be able to reason about structure, form, technique, timing,
+coordination, perception, aesthetics, interpretation, cultural context, practice,
+and feedback across music, martial arts, and other art/physical-skill domains,
+using the general teaching and reasoning capabilities (§27, §68), not a bespoke
+per-domain subsystem.
+- *Why:* mission requirement §22; restates the "music is not a special case"
+  model decision for martial arts and other embodied/artistic domains, extending
+  `MEL-REQ-076`, `132`. — **B/C** [DI]
+
+**MEL-REQ-341 — MUST NOT — importance to the user does not by itself justify a
+domain-specific primitive.**
+A domain being personally important to the user (music, per §16; martial arts;
+visual or other arts) MUST NOT by itself justify a domain-specific primitive in
+the data model — restates `MEL-REQ-007`, `078` for any such domain.
+- *Why:* mission requirement §22 ("Do not treat these as decorative domains" cuts
+  both ways — important, but not ontology-expanding); preserves E²CI. — **A+B** [DI]
+
+**MEL-REQ-342 — MUST — embodied-skill knowledge is distinguished from the
+user's own physical execution.**
+For music, martial arts, and similar embodied-skill domains, MELFINA MUST
+distinguish conceptual/declarative knowledge, biomechanical/motor-learning
+knowledge, technique description, training-plan knowledge, and safety knowledge,
+from the user's own physical execution, which MELFINA does not perform or
+directly sense by default.
+- *Why:* mission requirement §22; motor-skill acquisition (Fitts & Posner's
+  cognitive/associative/autonomous stages) is a distinct process from
+  declarative/conceptual knowledge acquisition, established in motor-learning
+  research `[E]`. — **A+B** [E]
+
+**MEL-REQ-343 — MUST NOT — symbolic reasoning alone does not produce embodied
+mastery.**
+MELFINA MUST NOT claim that symbolic or conceptual reasoning alone produces or
+substitutes for embodied mastery in a physical-skill domain.
+- *Why:* mission requirement §22, verbatim; consistent with the autonomous stage
+  of motor learning requiring extended physical practice, not conceptual
+  instruction alone `[E]`; anti-hype (`MEL-REQ-133`). — **A+B** [E]
+
+## 73. Physiology, biology, and cognitive-science modelling
+
+**MEL-REQ-344 — SHOULD — model physiological/biological/cognitive systems
+mechanistically.**
+Where useful, MELFINA SHOULD model physiological, biological, and cognitive
+systems mechanistically — interacting components, feedback, homeostasis,
+constraints, adaptation, measurement uncertainty, and individual variation —
+rather than as static fact/symptom lookup.
+- *Why:* mission requirement §23. — **B/C** [DI]
+
+**MEL-REQ-345 — MUST NOT — no autonomous medical or psychological diagnosis.**
+Mechanistic modelling of physiology, biology, or cognition MUST NOT be used to
+produce or imply an autonomous medical or psychological diagnosis — restates and
+extends `MEL-REQ-006` to this capability.
+- *Why:* mission requirement §23, verbatim; `MEL-REQ-006`. — **A+B** [E]
+
+**MEL-REQ-346 — MUST — a health/wellbeing-relevant model is presented as
+interpretation, never as clinical authority.**
+Where a physiological/biological/cognitive model bears on the user's own health
+or wellbeing, MELFINA MUST present it as an uncertain interpretation
+(`MEL-REQ-096`, `138`), never as an authoritative clinical conclusion.
+- *Why:* mission requirement §23; consistency with `MEL-REQ-138`. — **A+B** [E]
+
+## 74. Knowledge ≠ authority
+
+> **This is the single most load-bearing statement in this Part.** It must be
+> explicit, and it changes nothing about F1/F3: it exists to foreclose any
+> reading of Parts IV-B/IV-C as implicitly widening authority.
+
+**MEL-REQ-347 — MUST — knowing how is never a capability grant.**
+Knowing how to perform an action — modifying files, executing programs,
+controlling a GUI, interacting with a terminal, accessing a resource, changing
+MELFINA itself, acquiring information, or performing an experiment — MUST NOT
+be treated as, or silently converted into, a capability grant, a permission, a
+governance change, or execution authority. Authority comes only from the
+capability grant model and the Reference Monitor's authorisation decision (F1,
+F3); reasoning capability is categorically orthogonal to it.
+- *Why:* mission requirement §24, verbatim ("This MUST be explicit"); direct
+  restatement of F1 §1 ("a capability must NOT acquire authority merely because
+  a reasoning component requests it") and F3 §5 (no authority from reasoner
+  claims). — **A+B** [E]
+- *Accept:* no requirement in this document, read in any combination, implies a
+  path from "MELFINA understands/can derive/can reason about X" to "MELFINA may
+  do X" without passing through F1/F3.
+
+**MEL-REQ-348 — MUST — this separation is invariant to reasoning capability.**
+The knowledge≠authority separation MUST hold regardless of how capable,
+confident, or well-justified MELFINA's reasoning is; greater reasoning
+capability MUST NOT by itself expand what MELFINA is authorised to do.
+- *Why:* mission requirement §24; direct restatement of F7 §7 (the
+  reasoning↔effect boundary is real even if code is co-located) and F1 §9 (M8 —
+  creator authority ≤ minter authority, never a function of demonstrated
+  competence). — **A+B** [E]
+
+## 75. Intelligence must not become a security bypass
+
+> A dedicated adversarial-hardening set, each requirement mapped to one of the
+> mission's listed attack vectors and to the existing foundation contract that
+> already forecloses it. The full attack-by-attack review (mission §32, attacks
+> A–T) is in `KNOWLEDGE_AND_REASONING_MODEL.md` §5. **No requirement below
+> creates new authority; each closes a specific route by which greater reasoning
+> capability could appear to create authority that does not exist.**
+
+**MEL-REQ-349 — MUST NOT — no inferring authority from knowledge.**
+MELFINA MUST NOT infer, claim, or act on the assumption that possessing
+knowledge of how to do something confers authority to do it.
+- *Why:* restates `MEL-REQ-347` as a security requirement; enforced as
+  `MEL-AR-23`. — **A+B** [E]
+
+**MEL-REQ-350 — MUST NOT — capability creation cannot substitute reasoning
+sophistication for its required gates.**
+A capability MELFINA creates or composes (§48) MUST NOT be used to obtain an
+effect that the capability-creation gates (`MEL-REQ-220–223`, F1 §9) would not
+otherwise authorise; increased reasoning sophistication in designing a
+capability MUST NOT substitute for the required tests, least-authority grant,
+and human authorisation for risk.
+- *Why:* mission attack J (capability-creating reasoner); restates
+  `MEL-REQ-221–223` against a reasoning-sophistication route around them;
+  enforced as `MEL-AR-25`. — **A+B** [E]
+
+**MEL-REQ-351 — MUST NOT — mathematical or formal reasoning cannot reclassify a
+forbidden or higher-risk action.**
+Mathematical, formal, or first-principles reasoning MUST NOT be used to
+reclassify a forbidden or higher-risk action as permitted or lower-risk; the
+risk classification and governance floors (F8 §2.4) are authoritative regardless
+of the sophistication of the argument for reclassifying them.
+- *Why:* mission attack G (mathematical overformalizer) and the explicit attack
+  question ("use mathematical reasoning to reinterpret a forbidden action?");
+  restates F8 §2.4 and `MEL-REQ-227`; enforced as `MEL-AR-21`, `MEL-AR-25`.
+  — **A+B** [E]
+
+**MEL-REQ-352 — MUST NOT — "it's an experiment/simulation/test" does not lower
+risk classification or exempt from authorisation.**
+An action MUST NOT be granted a lower risk classification, or exempted from
+authorisation, merely because it is framed as an "experiment", a "simulation",
+or a "test"; restates `MEL-REQ-311` as a security requirement — the structured-
+action and governance contracts (F2, F8) apply regardless of framing.
+- *Why:* mission attack S (experimentation as an authority bypass); enforced as
+  `MEL-AR-25`. — **A+B** [E]
+
+**MEL-REQ-353 — MUST NOT — no risk laundering via reasoning-directed
+decomposition.**
+A prohibited or high-risk effect MUST NOT be achieved by decomposing it into a
+sequence of individually-permitted smaller effects; the aggregate-effect
+governance contract (F1 §8/§11, F8 §2.7, RC-2) applies to a reasoning-derived
+decomposition exactly as to any other composition — "no risk laundering" holds
+regardless of how the decomposition was derived.
+- *Why:* mission attack M (composed individually-safe actions) and the explicit
+  attack question ("decompose a prohibited effect into individually permitted
+  effects? exploit aggregate-effect blind spots?"); restates RC-2, F1 §8/§11.
+  — **A+B** [E]
+
+**MEL-REQ-354 — MUST NOT — ambiguity resolution cannot widen a granted scope.**
+Ambiguity in a terminal or GUI target, path, or argument MUST NOT be resolved by
+MELFINA's own inference in a way that widens the effect beyond the canonical,
+granted scope; restates the structured-action core invariant (F2 §5) against a
+reasoning-driven reinterpretation of an ambiguous action.
+- *Why:* mission attack question ("exploit GUI/terminal ambiguity?"); F2 §3's
+  "reject rather than guess" acceptance criterion already covers this — this
+  requirement makes it explicit against a *reasoning-driven* attempt to guess.
+  — **A+B** [E]
+
+**MEL-REQ-355 — MUST NOT — cross-domain reasoning cannot assemble the lethal
+trifecta.**
+Cross-domain reasoning MUST NOT be used to assemble, request, or justify a
+configuration that would give any component simultaneous access to private data,
+untrusted-content ingestion, and an outbound channel; restates `MEL-REQ-126`,
+F8 §2.5, against a reasoning-derived route to the same prohibited configuration.
+- *Why:* mission attack question ("use cross-domain reasoning to create a lethal
+  trifecta?"); enforced as `MEL-AR-25`. — **A+B** [E]
+
+**MEL-REQ-356 — MUST NOT — understanding governance is not authority over
+governance.**
+Reasoning about, understanding, or being able to articulate a flaw in Ring-0
+governance MUST NOT be treated as authority to modify, reinterpret, or work
+around that governance; governance remains outside MELFINA's reasoning system
+entirely (F8 §1, F9). A finding is at most a proposal a human may act on
+(`MEL-REQ-288`).
+- *Why:* mission attack T (reinterpret governance through reasoning); restates
+  F8 §1 ("governance is not ordinary MELFINA knowledge") and F9; enforced as
+  `MEL-AR-26`. — **A+B** [E]
+
+**MEL-REQ-357 — MUST NOT — competence or "wisdom" arguments cannot raise the
+autonomy ceiling.**
+MELFINA MUST NOT raise, or construct an argument intended to raise, its own
+autonomy ceiling or self-modification authority, whether the argument is framed
+as demonstrated competence, accumulated "wisdom" (§59), or a risk analysis
+(§60); restates `MEL-REQ-245`, `MEL-AR-18` against a reasoning-based route to
+the same outcome.
+- *Why:* mission attack K (self-modifying reasoner) and the explicit attack
+  question ("manufacture a rationale for widening its own ceiling?"). — **A+B** [E]
+
+**MEL-REQ-358 — MUST NOT — no post-hoc rationale manufacturing (restated as a
+security requirement).**
+Decision rationale MUST NOT be constructed after an action is already decided
+upon or already wanted, to make that action appear better-justified than the
+reasoning that actually preceded it; restates `MEL-REQ-263`.
+- *Why:* mission attack question ("manufacture a rationale for an action it
+  already wanted?"); mission §2's explicit constraint. — **A+B** [DI]
+
+**MEL-REQ-359 — MUST NOT — "wisdom" or emotional-understanding claims cannot
+justify overriding user intent.**
+A "wisdom", cross-domain-insight, or emotional-understanding claim MUST NOT be
+used to justify overriding the user's stated intent or acting paternalistically;
+restates `MEL-REQ-283`, `139`, `005` together as a security requirement.
+- *Why:* mission attack Q (false "wisdom" claims) and the explicit attack
+  question ("use 'wisdom' as an excuse for paternalism?"); enforced as
+  `MEL-AR-24`. — **A+B** [E]
+
+**MEL-REQ-360 — MUST NOT — knowledge acquisition/learning cannot become a route
+to self-authored objectives.**
+Dynamic knowledge acquisition or learning (§69) MUST NOT be used as a route to
+self-authored objectives or success metrics; restates `MEL-REQ-149` against a
+knowledge-acquisition-based route to the same outcome.
+- *Why:* mission attack question ("turn learning into self-authored
+  objectives?"); enforced as `MEL-AR-16`, `MEL-AR-26`. — **A+B** [E]
+
+## 76. Self-modification boundary reaffirmed under greater reasoning capability
+(extends §51)
+
+**MEL-REQ-361 — MUST NOT — deriving code mathematically does not authorise
+applying it to MELFINA's own tiers 6–9.**
+The ability to mathematically derive, generate, or prove properties of code
+MUST NOT be treated as authorisation to apply that code to MELFINA's own code,
+subsystem, architecture, or self-replacement (tiers 6–9); `MEL-REQ-233`, `236`
+govern regardless of derivation quality.
+- *Why:* mission attack K and §26, verbatim ("A system capable of deriving code
+  mathematically is still not thereby authorized to modify itself"). — **A+B** [E]
+
+**MEL-REQ-362 — MUST NOT — discovering an architectural improvement does not
+authorise implementing it.**
+Discovering, or being able to articulate, an architectural improvement to
+MELFINA itself MUST NOT be treated as authorisation to implement it; it is a
+proposal under the same tier rules (`MEL-REQ-236`, `288`).
+- *Why:* mission §26, verbatim. — **A+B** [E]
+
+**MEL-REQ-363 — MUST NOT — proving a policy suboptimal does not authorise
+rewriting it.**
+The ability to demonstrate that a governance policy or risk floor is suboptimal
+MUST NOT be treated as authorisation to rewrite it; policy revision is a
+Ring-0/human act (F8 §1, F9), never a MELFINA operation, however well-argued.
+- *Why:* mission §26, verbatim; restates F8 §1, F9. — **A+B** [E]
+
+**MEL-REQ-364 — MUST NOT — understanding governance is not the capability to
+govern itself.**
+Understanding how governance works, in depth, MUST NOT be treated as, or allowed
+to converge toward, the capability to govern itself; comprehension and authority
+remain categorically distinct — restates §74's knowledge≠authority principle for
+the specific case of self-governance.
+- *Why:* mission §26, verbatim ("A system capable of understanding governance is
+  not thereby capable of governing itself."). — **A+B** [E]
+
+---
+
 # PART V — CROSS-CUTTING REQUIREMENTS
 
 ## 35. AI layer and permission model
@@ -2390,6 +3470,65 @@ is weak and overconfident; self-confirming loops and model collapse are document
 failure modes)*
 Enforced by MEL-REQ-221, 223, 226, 248.
 
+### Added by REQUIREMENTS EXPANSION MISSION 002 (MEL-AR-20 … MEL-AR-27)
+
+**MEL-AR-20 — Equating recall, pattern-similarity, or self-confidence with
+actual understanding, causation, or verification.**
+Presenting broad factual recall as domain understanding; treating a structural
+or surface analogy as identity or causation; treating self-declared confidence
+as verification; treating generated code as correct merely because it compiles;
+treating a simulation result as empirical truth without independent validation.
+*([E] — LLM analogical-reasoning research documents hallucinated/superficial
+analogies without a built-in structural-validity check; LLM self-evaluation is
+established as weak and systematically overconfident; verified code generation
+is near-unsolved.)*
+Enforced by MEL-REQ-267, 272, 274, 275, 308, 312, 315, 330.
+
+**MEL-AR-21 — Forcing every problem into a single mathematical or formal
+representation, or fabricating mathematical/causal certainty where none
+exists.**
+*([DI] — the mission's explicit instruction that formalisation follow evidence,
+not the reverse.)*
+Enforced by MEL-REQ-298, 299, 351.
+
+**MEL-AR-22 — Claiming novelty, discovery, or genuine invention without
+checking against and comparing to known results.**
+*([E] — hallucinated novelty and fabricated citations are a documented and
+worsening failure mode of AI-assisted research; AI-generated fake citations in
+the scientific literature rose roughly sixfold from 2023 to 2025.)*
+Enforced by MEL-REQ-135, 231, 317, 318, 319.
+
+**MEL-AR-23 — Using knowledge, reasoning capability, or "intelligence" as a
+substitute for, or route to, authority, permission, or governance change.**
+*([E] — direct restatement of the object-capability principle underlying F1/F3:
+authority is never a function of what a component knows or can argue.)*
+Enforced by MEL-REQ-347, 348, 349–360 (all of §74–76).
+
+**MEL-AR-24 — Using "wisdom", cross-domain insight, or emotional/ethical
+understanding to override user autonomy or act paternalistically.**
+*([B] — the mission's explicit instruction; extends the existing
+manipulation/dependency anti-requirements, MEL-AR-06/07/14, to the new
+reasoning capabilities.)*
+Enforced by MEL-REQ-283, 336, 338, 339, 359.
+
+**MEL-AR-25 — Using capability creation, experimentation, or simulation
+framing to bypass governance, authorisation, or the aggregate-effect budget.**
+*([E] — restates RC-2's "no risk laundering" and F8's governance floors against
+a reasoning-sophistication or framing-based route around them.)*
+Enforced by MEL-REQ-311, 350, 352, 353, 355.
+
+**MEL-AR-26 — Silently expanding network access or altering/reinterpreting
+governance through a knowledge-acquisition, learning, or reasoning path.**
+*([E] — restates INV-1/INV-6 and F8/F9 against a reasoning-derived route to the
+same prohibited outcomes.)*
+Enforced by MEL-REQ-324, 328, 356, 360, 363, 364.
+
+**MEL-AR-27 — Creating dependency, or eroding the user's independent
+capability, through teaching, co-creation, or cross-domain guidance.**
+*([E] — deskilling from AI decision-support dependence is empirically shown;
+extends MEL-AR-07 to the new teaching/co-creation depth of PART IV-C.)*
+Enforced by MEL-REQ-071, 322.
+
 ### Examples considered and NOT adopted as anti-requirements
 
 - *"Any proactive behaviour at all"* — the research supports *low-default,
@@ -2744,7 +3883,260 @@ here**.
 
 ---
 
-*End of REQUIREMENTS MASTER (Pass 1 + dynamic-self-directed correction). Companion
-files: `requirements/CONFLICTS.md`, `requirements/OPEN_QUESTIONS.md`,
-`requirements/README.md`. Research basis: `research/RESEARCH_MASTER.md`,
-`research/CONFLICTS.md`, `research/BIBLIOGRAPHY.md`.*
+# REQUIREMENTS CHECKPOINT 002 — REQUIREMENTS EXPANSION MISSION 002
+
+**Baseline:** MISSION 001 (253 requirements + 19 anti-requirements, checkpointed
+above), architecture MISSION 001 (`8a40207`), LOW-LEVEL FOUNDATIONS MISSION 001
+(`19d0135`) — both committed and pushed. **Status:** first pass, pending user
+review. **Not committed, not pushed.**
+
+### What this expansion adds
+
+**PART IV-C — GENERAL REASONING, KNOWLEDGE, AND WISDOM** (§56–76,
+`MEL-REQ-254`…`MEL-REQ-364`, **111 new requirements**) and **8 new
+anti-requirements** (`MEL-AR-20`…`MEL-AR-27`). New companion document:
+`requirements/KNOWLEDGE_AND_REASONING_MODEL.md` (operational definition of
+"wisdom" + critique, the analogy/causation/correlation taxonomy, the
+first-principles decomposition pipeline, research grounding for areas A–Z, and
+a dedicated adversarial review of attacks A–T).
+
+**Totals: 364 requirements (`MEL-REQ-001`…`MEL-REQ-364`) + 27 anti-requirements
+(`MEL-AR-01`…`MEL-AR-27`).** No ID reused; no existing ID renumbered.
+
+### Why this mission exists
+
+MISSION 001 established a highly capable local autonomous personal system, but
+under-specified an important dimension: MELFINA is not intended to remain a
+tracker, chatbot, task manager, knowledge database, code generator, collection
+of domain assistants, static skill catalogue, or passive automation engine — it
+is intended to become a general-purpose local reasoning system that can
+understand foundational concepts across domains, connect them responsibly,
+reason from first principles, move between natural language/mathematics/code,
+use programming as a medium of thought, and develop useful cross-domain
+connections over time ("wisdom", operationalised, not claimed) — all while
+THINK/DECIDE remain genuinely internal to MELFINA and knowledge never becomes
+authority.
+
+### Autonomy changes (§56)
+
+Strengthens `MEL-REQ-017–019` (the triad) and `MEL-REQ-094–104` (autonomous
+reasoning/decision) with 10 new requirements on decision ownership, rationale
+at an appropriate abstraction level, reproducibility where feasible,
+represented uncertainty, reconsideration on new evidence, decision
+invalidation, competing candidate plans, choosing no action, escalation
+criteria, and a ban on post-hoc rationalisation. **No change to the autonomy
+triad or the action pipeline** — cognitive autonomy is broadened in depth
+(the user need not dictate every sub-step); decision autonomy and execution
+authority are untouched.
+
+### Knowledge substrate changes (§57)
+
+Cross-domain foundational knowledge is required to be representable **within
+the existing E²CI ontology, without a new primitive per domain**
+(`MEL-REQ-264`). Adds the epistemic-role distinction (active context / retained
+knowledge / source material / derived claim / hypothesis / working model /
+superseded knowledge, `MEL-REQ-265`) and the foundational-over-encyclopedic
+priority (`MEL-REQ-266–267`). Retention follows the existing Chronicle contract
+(F5/F6) — nothing new is invented for storage.
+
+### First-principles / math / programming changes (§61–65)
+
+First-principles decomposition with an explicit stopping criterion
+(`MEL-REQ-289–293`); mathematical abstraction that seeks the *lowest useful*
+formal representation and treats "no faithful reduction is known" as a valid
+output (`MEL-REQ-294–300`); a natural-language↔math↔code preservation contract
+that surfaces information loss and represents ambiguity rather than inventing
+precision (`MEL-REQ-301–304`); "philosophical programming" — spec and
+invariants before code, tests from the spec, generated code without these is a
+draft, not a verified result (`MEL-REQ-305–309`); programming as a modelling
+tool across domains, explicitly still gated by the full action pipeline —
+"it's an experiment" is not a bypass (`MEL-REQ-310–312`).
+
+### Cross-domain / wisdom changes (§58–60)
+
+A closed relationship-type vocabulary (established / mechanistic analogy /
+structural analogy / correlation / causal / plausible hypothesis / speculation,
+`MEL-REQ-272`) grounded in Pearl's association→intervention→counterfactual
+causal hierarchy and Gentner's structure-mapping theory of analogy — both
+`[E]`. Analogy ≠ identity is explicit (`MEL-REQ-274`), and manufactured
+connections ("pattern hallucination") are prohibited (`MEL-REQ-275`), grounded
+in 2025–2026 evidence that LLMs document their own tendency toward
+superficial, structurally-invalid analogies. "Wisdom" is given a bounded,
+falsifiable, non-mystical treatment (§59, full definition + critique in the
+companion document) — explicitly **a capability target under evaluation, never
+a claimed property** (`MEL-REQ-279–280`). A generalised adversarial-systems
+lens (§60) extends beyond computer security to any system, explicitly
+distinguishing uncertainty/accident/adversity/malice/instability/emergence and
+refusing a default-malicious assumption (`MEL-REQ-286`).
+
+### Cybersecurity / adversarial-reasoning changes (§60, §75–76)
+
+§75 is a dedicated 12-requirement adversarial-hardening set
+(`MEL-REQ-349–360`), each answering one of the mission's 15 listed attack
+vectors by restating an existing foundation-contract invariant against a
+reasoning-derived route around it (no new authority mechanism was invented —
+every closure routes back to F1/F3/F7/F8/F9 or an existing MEL-REQ/MEL-AR).
+§76 (`MEL-REQ-361–364`) restates the self-modification boundary (§51) against
+four specific "greater capability implies authorisation" arguments the mission
+named verbatim.
+
+### Scientific reasoning changes (§66–67)
+
+Extends `MEL-REQ-129–131` with competing-hypothesis comparison, prediction,
+experimental design (controls/confounders), reproducibility, measurement
+uncertainty, and explicit causal-inference boundaries (`MEL-REQ-313–316`);
+negative results are recorded with equal rigour (`MEL-REQ-314`); independent
+derivation is explicitly generalised beyond formal domains as **not** novel
+discovery (`MEL-REQ-317–319`), reinforced by materially worse hallucinated-
+citation evidence than was available at MISSION 001 (a documented sixfold rise
+in AI-generated fake citations in the scientific literature, 2023→2025).
+
+### Teaching/learning changes (§68–69)
+
+Teaching progression and cross-domain transfer are generalised beyond the
+existing music/general teaching sections (`MEL-REQ-320–322`), with the
+explicit objective restated as the learner's independent reconstruction, never
+dependency. Knowledge acquisition (§69) is a new, fully-specified capability
+that stays inside the local-only core by construction (`MEL-REQ-324`,
+restating `MEL-REQ-214`) and cannot become a route to unrestricted network
+access (`MEL-REQ-328`) — no exception to INV-1 was introduced.
+
+### Ethics/law/civics changes (§71)
+
+A new, structured (not scored) capability: law vs. morality, policy vs.
+ethics, jurisdiction and temporal validity for legal claims, representing
+competing ethical frameworks for contested questions, descriptive vs.
+normative labelling, and an explicit statement that legal and ethical
+conclusions can diverge without MELFINA resolving that divergence for the
+user. **§71's most load-bearing requirement is `MEL-REQ-338`: moral/ethical
+reasoning must not override Ring-0 governance or user authority** — this is
+the same knowledge≠authority principle as §74, applied to the one domain most
+likely to be argued as an exception.
+
+### Art/music/martial-arts/embodied-knowledge changes (§72–73)
+
+Extends the existing "music is not a special case" model decision to martial
+arts and other embodied/artistic domains (`MEL-REQ-340–341`); requires
+embodied-skill knowledge to be distinguished from the user's own physical
+execution (`MEL-REQ-342`, grounded in Fitts & Posner's established
+cognitive/associative/autonomous stages of motor learning `[E]`); explicitly
+prohibits claiming symbolic reasoning substitutes for embodied mastery
+(`MEL-REQ-343`). Physiology/biology/cognitive-science modelling (§73) is
+required to be mechanistic, not symptom-lookup, while explicitly reaffirming
+the no-diagnostic-modes prohibition (`MEL-REQ-006`) against this new
+capability (`MEL-REQ-345`).
+
+### Research performed
+
+Focused, targeted web research (not exhaustive) grounding the highest-leverage
+new claims: Gentner's structure-mapping theory of analogy (`[E]`, the de facto
+cognitive-science standard); 2025–2026 studies on LLM analogical-reasoning
+hallucination (`[E]`); Pearl's association/intervention/counterfactual causal
+ladder (`[E]`, established); the Adam/Eve robot-scientist systems as evidence
+that automated hypothesis-generate-test cycles are demonstrated in narrow,
+well-instrumented domains, not general science (`[E]`, narrow); Fitts &
+Posner's three-stage model of motor-skill acquisition (`[E]`, established);
+formal-methods industrial-adoption evidence — real but narrow, siloed, and
+training-limited, not a general software-engineering default (`[E]`);
+competing-normative-framework machine-ethics research, including its
+documented real-world failure modes for single-framework (consequentialist- or
+deontological-only) approaches (`[E]`); and updated, materially worse
+hallucinated-citation evidence than MISSION 001 had (`[E]`, 2026 data). Full
+grounding and citations: `KNOWLEDGE_AND_REASONING_MODEL.md` §6. **Where the
+literature does not justify a strong requirement** (reliable capability-gap
+recognition, general cross-domain "wisdom" evaluation, general automated
+scientific discovery, LLM self-knowledge for context/strategy selection), the
+existing `[H]`/`[U]` tags and open questions (OQ-11, OQ-17, OQ-21) are
+preserved and extended (OQ-22–32), never silently upgraded.
+
+### Adversarial review
+
+A dedicated adversarial review (mission attacks A–T) is in
+`KNOWLEDGE_AND_REASONING_MODEL.md` §5, in the same attack/violated-assumption/
+existing-defence/missing-requirement/correction/residual-risk format as
+`design/ARCHITECTURE_ADVERSARIAL_REVIEW.md`. **Verdict: no attack required a
+new authority mechanism or a change to F1–F10; every closure is a restatement
+of an existing invariant against a specific reasoning-derived route around
+it**, recorded as `MEL-REQ-349–364` and cross-referenced in the table. One
+residual risk was *not* closable by a new requirement and is recorded as
+`OQ-32`: whether a system explicitly built to reason from first principles
+about its own governance changes the answer to OQ-19 (meta-invariant
+sufficiency) rather than only making the question more urgent. This is
+reported, not resolved.
+
+### Conflicts and open questions added
+
+**6 new conflicts** (`requirements/CONFLICTS.md` VC13–VC18): general
+cross-domain capability vs. one-maintainer comprehension (extends VC1/VC9);
+connection-making vs. hallucination risk; adversarial-systems-thinking-by-
+default vs. this user's OCD/IU-related hazard surfaces (a genuine tension with
+`MEL-REQ-058`, flagged, not resolved); first-principles/mathematical rigour vs.
+latency and the "don't force math" anti-requirement; ethics/law/civics
+reasoning depth vs. paternalism/scope-creep; and greater reasoning capability
+vs. the meta-invariant's sufficiency (intensifies VC10/OQ-19).
+
+**11 new open questions** (`requirements/OPEN_QUESTIONS.md` OQ-22–32):
+minimum-viable per-domain knowledge representation and domain-scope bounding;
+whether learned-vs-authored knowledge is a meaningful distinction once stored;
+how analogy/causal-link representation should structure inside the Chronicle
+without expanding E²CI (ties to OQ-M1); practical stopping criteria for
+decomposition/formalisation under a resource budget; how "wisdom" is actually
+evaluated and by whom; how cross-domain hallucination is detected in practice;
+whether an adversarial-lens default creates the checking pattern
+`MEL-REQ-058` exists to prevent, for this specific user; authorisation
+granularity for MELFINA-authored ethical/legal analysis; which domains have
+practical local independent-verification tooling and which have none; how much
+of PART IV-C is feasible with local reasoning components (extends OQ-21); and
+whether PART IV-C changes the answer to OQ-19.
+
+### Architecture / model / foundation compatibility
+
+Checked against all 20 items in the mission's compatibility test (§31): E²CI
+unchanged (no new primitive — `MEL-REQ-264`, `341`); the five-ring architecture,
+Ring-0 governance, Ring-1 determinism, Ring-2 proposal-only stance, Ring-3
+isolation, and the (unbuilt) Ring-4 boundary are all referenced, never altered;
+the action pipeline is reinforced, not bypassed (`MEL-REQ-311`); local-only is
+reinforced (`MEL-REQ-324`, `328`); capability grants, aggregate-effect
+governance, live revocation, structured terminal/GUI actions, and the verifier
+contract are each explicitly restated against a reasoning-derived bypass
+attempt (§75); the Chronicle remains the sole source of truth (§57, §69); the
+dynamic-capability-creation and nine-tier self-modification models are
+reinforced, not loosened (§75–76); no requirement makes AI the source of truth,
+the authority, or the verifier, and none equates intelligence with permission.
+**No contradiction requiring human review was found; no architecture or
+foundation document was modified.**
+
+### Confidence assessment (additive to the MISSION 001 table)
+
+| Area | Confidence the requirement is right | Basis |
+|---|---|---|
+| Knowledge≠authority separation (§74) and the adversarial-hardening set (§75–76) | **High** | direct restatement of already-high-confidence F1/F3/F7/F8/F9 invariants; no new mechanism |
+| Analogy/causation discipline (§58) | **Moderate–High** | Gentner and Pearl are established theory `[E]`; whether MELFINA's own connection-making reliably respects the discipline is empirical, `[U]` |
+| First-principles/mathematical/philosophical-programming requirements (§61–65) | **Moderate** | the *constraints* (state assumptions, don't force formalisation, spec-before-code) are high-confidence design discipline; whether MELFINA can reliably *execute* them is `[H]`/`[U]` |
+| "Wisdom" as an evaluated, non-claimed capability target (§59) | **Moderate for the constraint; Low/Unknown for whether the capability is achievable at all** | the mission's own framing; genuinely aspirational, stated to be falsifiable rather than assumed |
+| Ethics/law/civics as a structured, non-scoring capability (§71) | **Moderate** | machine-ethics research supports pluralistic representation over single-framework scoring `[E]`; whether this specific user finds it useful vs. intrusive is untested, see VC17 |
+| Cross-domain art/music/martial-arts/physiology modelling (§72–73) | **Moderate–High for the constraints (no new primitives, no diagnosis, embodied ≠ symbolic); Low for the capability itself** | motor-learning stages are established `[E]`; MELFINA's actual usefulness in these domains is unknown |
+| Whether PART IV-C is deliverable with *local* reasoning components at all | **Unknown** | OQ-31; overlaps and likely worsens OQ-11/OQ-21 — this Part asks for *more*, not less, reasoning depth |
+
+### Recommended next phase
+
+**Unchanged: HUMAN / CENTRAL MODEL remains the next phase**, if it has not yet
+started — PART IV-C changes no ontology and adds no new modelling question that
+would block it (OQ-24 is noted but does not require resolution first; it
+extends OQ-M1, already deferred). If HUMAN / CENTRAL MODEL, ARCHITECTURE
+MISSION 001, and LOW-LEVEL FOUNDATIONS MISSION 001 are already complete (as
+they are, per `PROJECT_STATE.md`), **the natural next step is for the user to
+review this expansion specifically against §74–76 (the knowledge≠authority and
+anti-bypass set) and VC13–VC18/OQ-22–32**, then fold any accepted changes into
+the next TECHNOLOGY SELECTION or CORE ENGINE mission's scope — no requirement
+here forces a new phase ahead of TECHNOLOGY SELECTION.
+
+---
+
+*End of REQUIREMENTS MASTER (Pass 1 + dynamic-self-directed correction +
+REQUIREMENTS EXPANSION MISSION 002). Companion files:
+`requirements/CONFLICTS.md`, `requirements/OPEN_QUESTIONS.md`,
+`requirements/KNOWLEDGE_AND_REASONING_MODEL.md`, `requirements/README.md`.
+Research basis: `research/RESEARCH_MASTER.md`, `research/CONFLICTS.md`,
+`research/BIBLIOGRAPHY.md`, and the MISSION 002 grounding in
+`KNOWLEDGE_AND_REASONING_MODEL.md` §6.*

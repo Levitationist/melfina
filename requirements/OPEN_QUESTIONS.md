@@ -11,7 +11,9 @@ it, and where it should be resolved.
 **E** deliberately undecided (a real decision, just not now).
 
 **OQ-1 … OQ-15** are from the base + earlier addenda; **OQ-16 … OQ-21** were added
-by the dynamic-self-directed correction.
+by the dynamic-self-directed correction; **OQ-22 … OQ-32** were added by
+**REQUIREMENTS EXPANSION MISSION 002** (cross-domain knowledge, first-principles
+reasoning, wisdom).
 
 ---
 
@@ -233,6 +235,137 @@ by the dynamic-self-directed correction.
 
 ---
 
+---
+
+## Added by REQUIREMENTS EXPANSION MISSION 002 (OQ-22 … OQ-32)
+
+## OQ-22 — What is the minimum viable foundational-knowledge representation per
+domain, and how is domain scope bounded?
+- **Question:** `MEL-REQ-264–270` require foundational knowledge to be
+  representable within E²CI and acquired incrementally, but do not fix how
+  large a domain's "foundational structure" needs to be before it is useful, or
+  how domain scope avoids becoming an unbounded, ever-expanding commitment.
+- **Class:** C / E.
+- **Depends:** VC13; `MEL-REQ-264–270`.
+- **Resolve in:** CORE ENGINE / real use — likely per-domain, driven by what the
+  user actually engages.
+
+## OQ-23 — Is a learned-vs-authored foundational-knowledge distinction
+meaningful once stored?
+- **Question:** `MEL-REQ-265`/`327` distinguish user-provided from
+  externally-acquired knowledge in provenance, but once a piece of knowledge is
+  stored as a Claim with provenance, does the *learned vs. authored* framing add
+  anything beyond what provenance already captures, or does it collapse into it?
+- **Class:** C.
+- **Depends:** `MEL-REQ-265`, `269`, `327`; F5 §6 (provenance).
+- **Resolve in:** CORE ENGINE (data-model design pass).
+
+## OQ-24 — How should analogy/causal-link representation structure inside the
+Chronicle, without expanding E²CI?
+- **Question:** `MEL-REQ-278` requires connections to be ordinary, provenance-
+  carrying Claims — but the exact shape (a relational Claim per F5 §4.4's
+  "structural relations recorded as Claims" pattern, or something else) is not
+  fixed. This directly extends `OQ-M1` (is Relation a primitive?) into the
+  cross-domain-connection case specifically.
+- **Class:** C.
+- **Depends:** `OQ-M1`; `MEL-REQ-272–278`; F5 §4.4, §9.
+- **Resolve in:** CORE ENGINE, only after `OQ-M1` itself is resolved or
+  deliberately deferred further.
+
+## OQ-25 — What are the practical stopping criteria for decomposition and
+formalisation under a resource budget?
+- **Question:** `MEL-REQ-292` requires stopping decomposition at diminishing
+  value or an epistemic/physical boundary, and `MEL-REQ-241–243` bound resource
+  use generally — but no concrete rule for *when* a specific decomposition or
+  formalisation attempt should stop is given.
+- **Class:** D.
+- **Depends:** VC16; `MEL-REQ-241–243`, `289–300`.
+- **Resolve in:** CORE ENGINE + REAL-WORLD USE (calibration).
+
+## OQ-26 — How is "wisdom" actually evaluated empirically, and by whom?
+- **Question:** `MEL-REQ-279`/`282` require MELFINA's connection-making to be
+  evaluated against the operational definition (`KNOWLEDGE_AND_REASONING_MODEL.md`
+  §2) over time, but no evaluation method, cadence, or evaluator (the user, a
+  fixed test suite, both) is specified. What would falsify a claim that
+  MELFINA's connection-making is improving?
+- **Class:** D.
+- **Depends:** VC14; `MEL-REQ-279–284`.
+- **Resolve in:** REAL-WORLD USE + ITERATION — likely cannot be resolved by
+  design alone.
+
+## OQ-27 — How is cross-domain hallucination (false-positive connections)
+detected in practice?
+- **Question:** genuine cross-domain insights and false-positive "pattern
+  hallucinations" (`MEL-REQ-275`) can look similarly surprising at first
+  encounter. What observable signal distinguishes them before a connection is
+  relied upon?
+- **Class:** D.
+- **Depends:** VC14; `MEL-REQ-275`, `277`, `282`.
+- **Resolve in:** CORE ENGINE (verification tooling) + REAL-WORLD USE.
+
+## OQ-28 — Does an adversarial-lens default create the hypervigilance pattern
+`MEL-REQ-058` exists to prevent, for this specific user?
+- **Question:** §60's generalised adversarial-systems lens is meant for
+  analysing systems, not the user's own life — but no requirement restricts it
+  from being applied there, and this user's profile includes documented
+  checking/reassurance/hypervigilance risk (`MEL-REQ-013`, `058`).
+- **Class:** D.
+- **Depends:** VC15; `MEL-REQ-285–288`.
+- **Resolve in:** REAL-WORLD USE — this is an individual, lived-experience
+  question, not a design one.
+
+## OQ-29 — What authorisation granularity applies to a MELFINA-authored
+ethical/legal analysis informing a consequential decision?
+- **Question:** `MEL-REQ-332–339` establish a structured ethics/law/civics
+  capability, but do not specify whether such an analysis, when it feeds a
+  consequential decision, needs review beyond the ordinary pipeline
+  (`MEL-REQ-018`), or is treated exactly like any other proposal input.
+- **Class:** E (a real decision) + D (needs use).
+- **Depends:** VC17; `MEL-REQ-332–339`.
+- **Resolve in:** SYSTEM DESIGN / next architecture pass.
+
+## OQ-30 — Which domains have practical local independent-verification tooling,
+and what happens where none exists?
+- **Question:** `MEL-REQ-329–331` require external checks for important
+  reasoning (symbolic/numerical/unit checkers, alternative derivations,
+  designated verifiers). Some domains have mature, automatable local checkers
+  (algebra, unit consistency, some statistical tests); others (much of ethics,
+  history, qualitative social science) do not. What is the fallback where no
+  local automatable check exists?
+- **Class:** D.
+- **Depends:** F10 (verifier contract); `MEL-REQ-329–331`.
+- **Resolve in:** CORE ENGINE + TECHNOLOGY SELECTION (which checkers to build
+  or integrate).
+
+## OQ-31 — How much of PART IV-C is feasible with local reasoning components at
+all?
+- **Question:** extends `OQ-21` to the whole of PART IV-C: metareasoning,
+  cross-domain connection-making, first-principles decomposition, mathematical
+  abstraction, and ethical-framework comparison are demonstrated mostly with
+  large, often non-local models. Which of `MEL-REQ-254–364` degrade acceptably
+  on local components, and which should MELFINA simply decline, per
+  `MEL-REQ-155`?
+- **Class:** D.
+- **Depends:** OQ-11, OQ-21; `MEL-REQ-155`, `254–364`.
+- **Resolve in:** ARCHITECTURE + AI LAYER + ITERATION.
+
+## OQ-32 — Does PART IV-C change the answer to OQ-19 (meta-invariant
+sufficiency)?
+- **Question:** `OQ-19` asks whether the meta-invariant (`MEL-REQ-235`) holds
+  against a highly capable self-modifier. PART IV-C explicitly builds MELFINA
+  toward first-principles reasoning about mathematics, formal systems, and (in
+  §71/§75–76) its own governance. Does this materially change the answer to
+  `OQ-19` — or only make the question more urgent without changing it?
+- **Class:** D / U.
+- **Depends:** VC18, OQ-19; `MEL-REQ-356`, `361–364`.
+- **Resolve in:** cannot be fully resolved by design, per `OQ-19`'s own
+  resolution note. Mitigation: unchanged from `OQ-19` — keep tiers 6–9
+  non-autonomous, rare, human-driven, heavily audited; treat this question as a
+  standing item for every future review of MELFINA's reasoning capability, not
+  a one-time check.
+
+---
+
 ## Deliberately-undecided list (E-class, consolidated)
 
 Recorded so no later document treats these as already-decided:
@@ -264,3 +397,8 @@ Recorded so no later document treats these as already-decided:
     (`MEL-REQ-236` keeps them non-autonomous regardless).
 16. The fixed regression / verification harness for capabilities
     (`MEL-REQ-221`, `226`).
+17. The exact domain scope and depth of cross-domain foundational knowledge
+    (OQ-22) — bounded only by "incremental, as the user's problems engage it"
+    (`MEL-REQ-270`), not by a fixed list.
+18. The local-checker/verification tooling per domain (OQ-30) — which domains
+    get an automatable local check and which do not.
