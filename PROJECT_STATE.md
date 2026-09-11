@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-11 (SYSTEM DESIGN / ARCHITECTURE MISSION 001 + Adversarial Review 001 + Revision 1 — resume-completed + cross-document validation)
+Last updated: 2026-09-11 (LOW-LEVEL FOUNDATIONS MISSION 001 — first pass; architecture checkpoint committed + pushed as `8a40207`)
 
 ---
 
@@ -19,14 +19,137 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: SYSTEM DESIGN / ARCHITECTURE — MISSION 001 + ADVERSARIAL REVIEW 001 +
-REVISION 1 all complete (first pass), NOT yet committed, awaiting user review.
-Next phase is LOW-LEVEL FOUNDATIONS, and it does not start until the architecture
-is reviewed and explicitly accepted (and no `src/` until LOW-LEVEL FOUNDATIONS
-itself is accepted).**
+**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 (first pass) complete, NOT yet
+committed, awaiting user review. Still design/research — no `src/`, no language,
+no storage, no sandbox mechanism, no cryptographic primitive chosen.**
+
+The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
++ REVISION 1) was committed and pushed as **`8a40207`** ("design: ARCHITECTURE
+MISSION 001 + adversarial review 001 + revision 1") — 11 `design/*.md` files +
+this file. `origin/main` is at `8a40207`.
 
 Research Missions 001 + 002, PERSONAL REQUIREMENTS MISSION 001 (+ correction), and
 HUMAN / CENTRAL MODEL MISSION 001 are done and pushed (commit `f3093fc`).
+
+**LOW-LEVEL FOUNDATIONS MISSION 001 (2026-09-11):** defined the smallest,
+precise, technology-independent contracts every future implementation must obey.
+Output: `design/foundations/` — `README.md` + 12 numbered contracts:
+1. `CAPABILITY_GRANT_MODEL.md` — what a grant *is* (unforgeable, scoped,
+   time-bounded, revocable, Monitor-issued, evaluable to exactly one of {this
+   effect may / may not occur}); envelope fields; attenuation (narrow-only);
+   delegation (downward, through the Monitor); composition (one grant per
+   authorised Intention, union risk class); creator-authority ≤ check (M8);
+   aggregate-effect budget (RC-2); declared-scope-overlap conflict ⇒ serialise
+   (M9); the 9-conjunct minimum to answer "may this exact effect occur?".
+2. `STRUCTURED_ACTION_MODEL.md` — CONTAINMENT-CRITICAL (RC-4). Terminal actions
+   are structured (`process-exec`: resolved abs path + argv vector + env
+   allow-list; **never a shell string**); `shell-exec` a distinct high-risk
+   type; `gui-op` structured targeting, coordinate fallback explicit + higher
+   risk; canonicalisation (resolve symlinks, collapse `.`/`..`, bind to a fixed
+   root, re-canonicalise at every check, deny on any difference — TOCTOU); the
+   core invariant: a grant for `program X + argv A` does **not** authorise
+   `X + argv B`, `shell → X`, or added composition unless explicitly authorised.
+3. `REFERENCE_MONITOR_CONTRACT.md` — complete mediation, non-bypassable,
+   tamper-proof, fail-safe defaults; the REQUEST→VALIDATE→CLASSIFY→CHECK
+   GOVERNANCE→AUTHORISE/DENY→ISSUE LIVE GRANT→EXECUTE→VERIFY sequence; a closed
+   deny-reason vocabulary; `AUTHORIZED(e,g,s,t)` as a formal conjunction; the
+   distrust table (reasoner claims, capability self-description, Intention
+   status, AI-generated user text, self-declared risk, projections for
+   consequential conjuncts, its own past allow, raw strings as scope, requests
+   to widen / edit Ring 0 / raise the ceiling, the network).
+4. `REVOCATION_MODEL.md` — grants are live revocable handles (RC-5); lifecycle
+   ISSUED→ACTIVE→SUSPENDED→REVOKED/EXPIRED→TERMINAL; the outcome vocabulary
+   (completed / partially completed / rolled back / failed / interrupted —
+   closed, honest, identical everywhere); revocation before / during (between
+   effects / mid single effect) / after; per-effect compensation (declared
+   tested inverse ⇒ rollback + VERIFY, else PARTIAL and **no rollback claimed**);
+   how a partial effect becomes a recorded Event; per effect-kind meaning of
+   "stop"/"rollback" (long process, file write/create, file delete/truncate/
+   rename, GUI, workflow, automation, capability composition, chronicle-append).
+5. `CHRONICLE_LOGICAL_FORMAT.md` — exactly 3 unit kinds (Event / Claim /
+   Intention) + a thin Entity Registry; Context / State / Relation / Task / Goal
+   / Routine / Project / Memory / Skill / Workflow / Calendar / Dashboard /
+   Streak are **not** units; common fields; bitemporal time; structural
+   relations recorded as Claims (not promoted — OQ-M1 stays open); supersession
+   / AGM belief change = all appends; redaction = a tombstone Event; **OQ-M1,
+   OQ-M2, OQ-M3, OQ-M4, OQ-M5, OQ-M11 preserved with both alternatives**.
+6. `CHRONICLE_CONTRACT.md` — APPEND / READ / QUERY / REPLAY / VERIFY / PROJECT;
+   durable-before-return, monotonic transaction-time, atomic unit append, no
+   silent duplicate suppression; the authoritative read (computed from the
+   sequence, used by the Monitor + consequential DECIDE — M2) vs the view read
+   (current-state cache, may lag, never for consequential decisions); bitemporal
+   query forms; deterministic REPLAY; corruption detection with no silent
+   repair; one materialised cache (O1), all other views on-demand; the Chronicle
+   is the serialisation point (single-writer, no distributed consensus).
+7. `ISOLATION_CONTRACT.md` — 14 required Ring-3 properties (no ambient authority;
+   explicit-grant-only; **zero network capability by default — the socket
+   primitive is withheld, not unconfigured**, L4; filesystem / process
+   confinement per grant; Ring-0 region never granted, RC-1; hard resource
+   cut-offs; terminable; failure-contained; no Ring-0 path; cannot forge a grant
+   or impersonate the Monitor; no persistent inter-action state; lightweight);
+   the seL4 confidentiality / integrity / availability framing (timing channels
+   **not** covered — documented residual); what happens if isolation fails; the
+   reasoning↔effect boundary is real even if Ring-2 and Ring-3 code are
+   co-located (O2 rejected); which properties are structural vs empirically
+   tested.
+8. `GOVERNANCE_FORMAT.md` — the logical structure of the Ring-0 governance
+   object: the meta-invariant, the nine-tier policy (tiers 6–9 **cannot be
+   expressed as autonomous** — a format property), the **closed effect-class
+   vocabulary** (owned here; F1 references it) + permanently-absent classes
+   (widen-authority, edit-governance, network-*), risk floors, the
+   lethal-trifecta prohibition (L5), authority ceilings (no self-raising),
+   aggregate governance constraints (RC-2), emergency-stop behaviour, other
+   constitutional invariants; the version metadata (parent link, creation
+   metadata, human authorisation, integrity metadata, activation, retirement);
+   governance is **not** ordinary MELFINA knowledge and MELFINA cannot author,
+   sign, or activate a version; the class→governance maps the Monitor consults.
+9. `GOVERNANCE_INTEGRITY.md` — RC-1's abstract integrity contract: a human-held
+   signing authority MELFINA does **not** possess in any usable form; a linear,
+   append-only, hash-linked version chain; each transition human-signed over
+   `hash(content) ‖ parent-id`; rollback-as-forward-only; a separately-protected
+   current-head marker (TUF rollback-protection lesson); startup verification
+   (walk chain, recompute hashes, verify signatures, check forbidden shapes,
+   check head marker) — **any failure ⇒ MELFINA refuses to run**, never runs
+   degraded, never auto-repairs; runtime file-change ⇒ emergency stop; version
+   pinning; tamper-evident (not tamper-proof) + fully auditable; integrity
+   independent of the Chronicle; the required security properties (not Ed25519 /
+   RSA / TPM / enclave — an offline key satisfies the contract, hardware is a
+   `[OPEN]` upgrade).
+10. `VERIFIER_CONTRACT.md` — RC-3: a verifier is a bounded, low-authority,
+    preferably-deterministic checker that returns {confirmed / contradicted /
+    inconclusive}, **cannot cause effects**, is **not an agent** (no goal state,
+    no Intention ownership, no retry-and-act); 11 trust properties;
+    "architecturally independent" defined as differing in ≥ 2 of {evidence
+    source, checking mechanism, implementation lineage, determinism class}
+    **without** claiming statistical / mathematical independence (Knight &
+    Leveson 1986 + the 2026 AI-agent replication — common-mode failure is a
+    documented residual); the 4-condition single-verifier fallback; high-risk /
+    irreversible + no strong verification ⇒ human-gated, not autonomous;
+    disagreement ⇒ take the more adverse verdict; verification failure never
+    upgrades an outcome.
+11. `FOUNDATION_CROSS_CONTRACT_ANALYSIS.md` — nine end-to-end path traces
+    (A simple read · B terminal command · C file modification · D long-running
+    action revoked midway · E malicious reasoner · F malicious capability ·
+    G governance tampering · H local-only violation attempt · I high-risk
+    action); per path: authoritative component, trust boundary, authority
+    boundary, failure point, recovery, audit record; a contract-vs-contract
+    consistency matrix (every shared concept has exactly one owning contract;
+    **no contradictions found**); the open seams carried forward.
+12. `TECHNOLOGY_SELECTION_CRITERIA.md` — MUST-HAVE / SHOULD-HAVE / MUST-NOT-HAVE
+    criteria, each traced to a foundation contract, for: cross-cutting, language,
+    Chronicle storage substrate + format, Ring-3 isolation mechanism,
+    cryptographic integrity, process / concurrency model, IPC, GUI control,
+    terminal control — for the *next* phase (TECHNOLOGY SELECTION) to score
+    candidates against. **Chooses nothing.**
+
+Enforceability of every MUST-level invariant is tagged **[SEN]** structurally
+enforceable now / **[ID]** implementation-dependent / **[ETL]** empirically
+testable later / **[OPEN]**. No model open question resolved (OQ-M1 / OQ-M2 /
+OQ-M3 / OQ-M5 / OQ-M9 / OQ-M11 preserved with both alternatives). No requirement
+weakened. No technology chosen. No `src/`. `research/`, `requirements/`,
+`model/`, and the committed `design/*.md` architecture set untouched (no
+contradiction requiring an upstream change was found). **Not committed, not
+pushed.**
 
 **Revision 1 (2026-09-10):** a targeted edit pass — NOT a redesign — applying the
 adversarial review's corrections into the architecture documents:
@@ -538,11 +661,16 @@ DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
   -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed
   -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done, pushed (f3093fc)
   -> SYSTEM DESIGN /         <-- MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1
-     ARCHITECTURE                done (1st pass), NOT committed; awaiting review
+     ARCHITECTURE                done, committed + pushed (`8a40207`)
                                 (design/ = 11 files)
-  -> LOW-LEVEL FOUNDATIONS   <-- next, only after the architecture is accepted;
-                                first deliverable = the RC-4 parsed-action grant
-                                model + Reference Monitor contract
+  -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done (1st pass), NOT committed;
+                                awaiting review. design/foundations/ = README +
+                                12 technology-independent contracts
+  -> TECHNOLOGY SELECTION    <-- next: score candidates against
+                                design/foundations/TECHNOLOGY_SELECTION_CRITERIA.md
+                                (language, storage, isolation, crypto, process,
+                                IPC, GUI, terminal) — human-reviewed, not
+                                autonomous
   -> CORE ENGINE
   -> STORAGE
   -> INTERFACE
@@ -608,7 +736,8 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 | `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
 | `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001). First pass done. |
 | `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
-| `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, first pass done, **not yet committed**. |
+| `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, committed + pushed (`8a40207`). |
+| `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, first pass done, **not yet committed**. |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -877,3 +1006,38 @@ decided.
   user review before the whole `design/` set is committed as one checkpoint,
   then LOW-LEVEL FOUNDATIONS (first deliverable = the RC-4 parsed-action grant
   model).**
+- **2026-09-11** — **ARCHITECTURE CHECKPOINT committed + pushed (`8a40207`).**
+  `git status` / `git diff` inspected; all 11 `design/*.md` + `PROJECT_STATE.md`
+  reviewed; `src/`, `research/`, `requirements/`, `model/`, `decisions/`,
+  `experiments/` verified untouched; no secrets / API keys / passwords / tokens /
+  PATs / sensitive PII. Staged only the intended files. Commit message exactly
+  `design: ARCHITECTURE MISSION 001 + adversarial review 001 + revision 1`.
+  Pushed `git push origin main`; local `HEAD` == `origin/main` == `8a40207`;
+  clean tree. Next phase: LOW-LEVEL FOUNDATIONS.
+- **2026-09-11** — **LOW-LEVEL FOUNDATIONS MISSION 001 complete (first pass, NOT
+  committed, NOT pushed).** Still design/research. Created `design/foundations/`:
+  `README.md` + 12 technology-independent contracts (see §2 for the per-contract
+  summary): `CAPABILITY_GRANT_MODEL.md`, `STRUCTURED_ACTION_MODEL.md`
+  (CONTAINMENT-CRITICAL — structured actions, never raw shell strings),
+  `REFERENCE_MONITOR_CONTRACT.md`, `REVOCATION_MODEL.md`,
+  `CHRONICLE_LOGICAL_FORMAT.md`, `CHRONICLE_CONTRACT.md`, `ISOLATION_CONTRACT.md`,
+  `GOVERNANCE_FORMAT.md`, `GOVERNANCE_INTEGRITY.md`, `VERIFIER_CONTRACT.md`,
+  `FOUNDATION_CROSS_CONTRACT_ANALYSIS.md` (9 path traces A–I + a consistency
+  matrix — no contradictions found), `TECHNOLOGY_SELECTION_CRITERIA.md` (chooses
+  nothing). Each contract answers the 10 questions (guarantees / requires /
+  trusts / distrusts / enters / leaves / malformed input / failure / authoritative
+  / independently verifiable) and tags every MUST-level invariant **[SEN]** /
+  **[ID]** / **[ETL]** / **[OPEN]**. Focused research pass (capability security,
+  reference monitors, object-capability, secure command invocation, revocable
+  capabilities, event sourcing / append-only durability, bitemporal data, crash
+  consistency, sandbox isolation / seL4 / WASI, N-version-programming independence
+  failure, governance / integrity transparency chains — CT / TUF / Sigstore) —
+  principles + failure modes extracted, not cargo-culted. **No language, storage,
+  sandbox mechanism, cryptographic primitive, IPC model, GUI toolkit, or local
+  model chosen. No API / schema / wire format / grant syntax designed. No parser
+  or executable artefact written. OQ-M1 / OQ-M2 / OQ-M3 / OQ-M5 / OQ-M9 / OQ-M11
+  preserved with both alternatives. No requirement weakened. `src/`, `research/`,
+  `requirements/`, `model/`, and the committed `design/*.md` architecture set
+  untouched — no upstream contradiction found.** Awaiting user review before the
+  `design/foundations/` set is committed as one checkpoint, then TECHNOLOGY
+  SELECTION.
