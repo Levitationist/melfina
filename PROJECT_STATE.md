@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-10 (HUMAN / CENTRAL MODEL MISSION 001)
+Last updated: 2026-09-11 (SYSTEM DESIGN / ARCHITECTURE MISSION 001 + Adversarial Review 001 + Revision 1 — resume-completed + cross-document validation)
 
 ---
 
@@ -19,12 +19,182 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: HUMAN / CENTRAL MODEL — MISSION 001 complete (first pass), awaiting user
-review. Next phase is SYSTEM DESIGN / ARCHITECTURE, and it does not start until the
-human/central model is reviewed and explicitly accepted.**
+**Phase: SYSTEM DESIGN / ARCHITECTURE — MISSION 001 + ADVERSARIAL REVIEW 001 +
+REVISION 1 all complete (first pass), NOT yet committed, awaiting user review.
+Next phase is LOW-LEVEL FOUNDATIONS, and it does not start until the architecture
+is reviewed and explicitly accepted (and no `src/` until LOW-LEVEL FOUNDATIONS
+itself is accepted).**
 
-Research Missions 001 + 002 and PERSONAL REQUIREMENTS MISSION 001 (+ its
-dynamic-self-directed correction) are done and pushed (commit `120567a`).
+Research Missions 001 + 002, PERSONAL REQUIREMENTS MISSION 001 (+ correction), and
+HUMAN / CENTRAL MODEL MISSION 001 are done and pushed (commit `f3093fc`).
+
+**Revision 1 (2026-09-10):** a targeted edit pass — NOT a redesign — applying the
+adversarial review's corrections into the architecture documents:
+- **RC-1** Ring 0 at-rest integrity: cryptographic signature chain rooted in a
+  human-held key MELFINA never possesses, verified every startup, invalid ⇒
+  refuse to run; Ring 0 path hard-excluded from every File Access grant.
+- **RC-2** aggregate-effect governance: per-activity-chain aggregate budget over a
+  window; the crossing action re-gates as consequential; a composed workflow is
+  risk-classified by the UNION of component authority + scope + aggregate effect;
+  composition never launders a high-risk action into low-risk steps.
+- **RC-3** verifier trust model (`AUTHORITY_AND_SECURITY_MODEL.md` §4.1, new):
+  deterministic where practical, minimal / no ambient authority, read-only unless
+  narrowly justified, cannot cause effects, independently testable against
+  fixtures, not a second agent; ≥2 architecturally-independent verification
+  mechanisms for high-risk actions, with an explicit enumerated single-verifier
+  fallback where a second is impractical.
+- **RC-4** AU-2 re-tagged **CONTAINMENT-CRITICAL** and made the first LOW-LEVEL
+  FOUNDATIONS deliverable: terminal authority = structured actions, not raw shell
+  strings; command grants matched against parsed argv / a structured invocation;
+  shell interposition is a distinct higher-risk capability.
+- **RC-5** capability grants are live, revocable handles the Reference Monitor can
+  invalidate mid-execution; after revocation no new effect, running execution
+  stopped where possible, reversible effects rolled back, irreversible/partial
+  recorded as partial failure; user-visible outcome vocabulary = completed /
+  partially completed / rolled back / failed / interrupted.
+- **RC-6** reasoner locality is structural: Ring 1 and Ring 2 hold no network
+  capability; the Reasoner Interface cannot open a socket; a remote endpoint is
+  unreachable through the core capability model — "cannot", not "does not".
+- **RC-7** the ~25 named subsystems are **responsibilities**, not necessarily
+  separate processes/services/binaries/IPC boundaries; an implementation may
+  group them into a few cohesive components; only Ring 0 ↔ all, Ring 1 ↔ the
+  sandbox, and reasoning ↔ effect must be real enforced boundaries.
+- Small corrections: M1 (context on demand), M2 (Chronicle-contract reads for
+  consequential correctness), M3 (Reasoning Contributor trust/lifecycle), M5/O6
+  (cache-divergence audit = future concern), M6 (cyclic automation triggers of
+  any length), M8 (explicit Reference Monitor ≤-creator-authority check), M9
+  (declared-scope-overlap conflict), M10 (structural proposal validation), L4
+  (Ring 3 zero network by default), L5 (lethal-trifecta prohibition = a Ring 0
+  invariant).
+- Optional: **O1 adopted** (one Chronicle + one current-state cache + on-demand
+  views), **O2 rejected** (do not collapse Ring 2 / Ring 3 — the reasoning↔effect
+  boundary is must-be-real), **O3 adopted** (blackboard = one candidate impl),
+  **O4 adopted** (supervisor topology not specified now), **O5 preserved** as an
+  explicit design question, **O6 retained** as a future implementation concern.
+- **No technology chosen** — the crypto scheme, the action parser, the redundancy
+  mechanism, the isolation primitive, storage, and language remain LOW-LEVEL
+  FOUNDATIONS choices. No model open question resolved (OQ-M1/OQ-M2/OQ-M5
+  untouched). The adversarial review's findings §2–§19 were **not deleted or
+  rewritten** — a "Revision 1 — resolution status" section was added before §1.
+  `src/`, `research/`, `requirements/`, `model/` untouched. Not committed, not
+  pushed.
+- Files changed: all 9 `design/*.md` architecture docs +
+  `design/ARCHITECTURE_ADVERSARIAL_REVIEW.md` (status section only) +
+  `design/README.md` + this file.
+- Full finding→correction mapping: `design/ARCHITECTURE_ADVERSARIAL_REVIEW.md`
+  "Revision 1 — resolution status"; full traceability:
+  `design/TRACEABILITY.md` §2.1.
+
+**Revision 1 — resume-completed (2026-09-11).** The edit pass was interrupted by
+a host restart with the bulk of the integration already written. On resume: a
+full cross-document consistency check confirmed RC-1…RC-7 + M1/M2/M3/M5/M6/M8/M9/
+M10 + L4/L5 are integrated throughout, no model open question (OQ-M1/OQ-M2/OQ-M5)
+was resolved, no deferred technology was chosen, and `src/` is untouched. Three
+residual propagation gaps were closed — `SYSTEM_ARCHITECTURE.md` §5 startup now
+names the RC-1 signature check; §6.1's Event-flow box no longer implies a
+maintained "context cache" (M1); a duplicated phrase in §6.2 was fixed — plus one
+RC-7 wording variance in `ARCHITECTURAL_ALTERNATIVES.md` AA-1 was harmonised, and
+`design/TRACEABILITY.md` §2.1's RC-1 row + the review's resolution-status section
+got a resume note. **Verdict: Revision 1 complete; the architecture set is
+internally consistent and ready for user review. Still NOT committed, NOT
+pushed.**
+
+### SYSTEM DESIGN / ARCHITECTURE MISSION 001 — summary of outcome (2026-09-10)
+
+Designed the architecture that realises the research + requirements + E²CI model.
+Architecture defines **boundaries, flows, and invariants** — **no** language,
+storage engine, framework, model, or UI is chosen or implied (deferred to the
+named later phases). `src/`, `research/`, `requirements/`, `model/` untouched — no
+inconsistency requiring an upstream change was found.
+
+Output in `design/` (11 files after Revision 1):
+`ARCHITECTURAL_PRINCIPLES.md` (invariants INV-1…14 + principles AP-1…14 + the
+mechanism/policy/data/capability/governance/derived-view vocabulary + what is
+deferred) · `SYSTEM_ARCHITECTURE.md` (the ring model, subsystem map, all flows,
+Diagrams 1–3 & 6, the key decisions AD-1…15, risks) · `ARCHITECTURAL_ALTERNATIVES.md`
+(9 choices AA-1…9, candidates/tradeoffs/recommendations/confidence) ·
+`RUNTIME_MODEL.md` · `DATA_AND_STATE_MODEL.md` · `AUTHORITY_AND_SECURITY_MODEL.md`
+(incl. §4.1 verifier trust model and §9 documented residual limits) ·
+`CAPABILITY_MODEL.md` · `FAILURE_AND_RECOVERY.md` (Diagram 7) · `TRACEABILITY.md`
+(incl. §2.1 Revision 1 corrections → sources) · `ARCHITECTURE_ADVERSARIAL_REVIEW.md`
+(the review + the "Revision 1 — resolution status" section) · `README.md`.
+
+**The architecture in one line:** *a small governed core over an append-only
+claim/event substrate, with reasoning and capabilities as optional, isolated,
+permissioned outer rings, coordinated by a metareasoning controller that is a
+control loop, not an agent loop.*
+
+**Five concentric rings, dependencies strictly inward, nothing outer modifies
+anything inner:**
+- **Ring 0 — Governance:** the reference monitor / permission gate, the
+  self-modification tier policy, the autonomous-action budgets, the emergency
+  stop, the meta-invariant. Read-only to every outer ring; changed **only by a
+  human editing versioned files** — not a MELFINA operation.
+- **Ring 1 — Core Mechanism** (deterministic, local-only, no AI): the **Chronicle**
+  (append-only bitemporal Events + Claims + Intentions — the single source of
+  truth), Projection Engine, Query, Entity Registry, Pipeline State Machine,
+  Audit, Capability Registry (metadata), Policy Store, Notification Gateway,
+  Supervisor. **Complete and usable alone** (INV-9 / MEL-REQ-154).
+- **Ring 2 — Reasoning** (optional, bounded, may use AI): the Metareasoning
+  Controller (blackboard-style control, **not an agent loop**), Context
+  Constructor, Reasoning Contributors, Self-Evaluation, the narrow Reasoner
+  Interface. **Emits only proposals + claims — never effects.**
+- **Ring 3 — Capabilities** (isolated, permissioned, dynamic, replaceable):
+  skills, tools, workflows, terminal control, GUI control, file access,
+  verifiers. **No ambient authority**; per-action typed grants from the Reference
+  Monitor; sandboxed.
+- **Ring 4 — (future) Network:** never in the core; off by default; separately
+  installed; structurally cannot form the lethal trifecta with core data.
+
+**E²CI maps directly:** `Event` / `Claim` / `Intention` = append-only Chronicle
+units; `Entity` = a registry; `Time` = bitemporal coordinates on every unit;
+"state" = the one rebuildable current-state cache; `Context` = constructed on
+demand, never stored (O1, M1).
+
+**Key decisions:** five inward-only rings (AD-1) · Ring 0 read-only, no write
+path, signed at rest with a human-held key (AD-2, AD-14) · Chronicle = single
+append-only source of truth, everything else a rebuildable view — one
+current-state cache + on-demand views (AD-3) · hybrid persistence (AD-4) ·
+reasoning = a metareasoning control loop, not an agent loop (AD-5) · Ring 2 emits
+only proposals (AD-6) · capabilities sandboxed, no ambient authority, per-action
+grants that are live revocable handles (AD-7, AD-14) · deterministic risk class
+from the union of authority + scope + aggregate effect, not lowerable by
+reasoning, not launderable by composition (AD-8, AD-15) · self-modification tiers
+6–9 are a human path, not a MELFINA operation (AD-9) · one memory, the Chronicle
+(AD-10) · a single Notification Gateway (AD-11) · supervision-based failure
+isolation, topology deferred (AD-12) · all technology deferred (AD-13).
+
+**THINK→DECIDE→PROPOSE→AUTHORISE→EXECUTE→VERIFY** is a state machine, never
+collapsed; the autonomy triad (cognitive / decision / execution) is structurally
+separated (reaching a proposed Intention never itself produces an "authorised"
+grant).
+
+**The meta-invariant is structural** (Ring 0 has no write path; "widen my
+authority" / "edit Ring 0" are absent from the capability namespace; tiers 6–9 are
+human-only) — **and documented as necessary, not sufficient**: social-engineering
+of the user, unintended Ring-1 bugs, and test-passing-but-badly-generalising
+capabilities remain as recorded residual limits (`AUTHORITY_AND_SECURITY_MODEL.md`
+§9).
+
+**Grounding pass (~10 sources):** reference monitor / policy-mechanism separation
+(Hydra), capability-based OS (seL4, Fuchsia/Zircon, WASI component model), event
+sourcing + CQRS, blackboard architecture, microkernel vs modular monolith,
+Erlang/OTP supervision + "let it crash".
+
+**Biggest risks (documented, not solved):** the meta-invariant's insufficiency;
+projection consistency window; metareasoning-controller predictability;
+lightweightness vs ring overhead; local reasoner ceiling; capability sprawl vs
+one-maintainer comprehension.
+
+**Not committed or pushed** (per the mission). **Recommended next phase:**
+LOW-LEVEL FOUNDATIONS — (1) **the capability grant representation + Reference
+Monitor contract, including the structured (parsed-argv) terminal/GUI action
+model — CONTAINMENT-CRITICAL (RC-4), revocable mid-execution (RC-5)**;
+(2) Chronicle logical format + append/query contract; (3) the Ring 3 isolation
+primitive (zero network by default — L4); (4) Ring 0 governance file format +
+version-chain verification + the at-rest signing scheme (RC-1); (5) the verifier
+trust contract (RC-3); (6) only then a language + project skeleton. **No `src/`
+until LOW-LEVEL FOUNDATIONS is accepted.**
 
 We are NOT coding the application. No architecture chosen. No language (C vs C++)
 chosen. No storage substrate chosen — and the model explicitly must survive any
@@ -365,11 +535,14 @@ was judged unnecessary to proceed.
 
 ```
 DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
-  -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed (120567a)
-  -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done (1st pass); awaiting review
-  -> SYSTEM DESIGN           <-- next, only after the model is explicitly accepted
-  -> ARCHITECTURE
-  -> LOW-LEVEL FOUNDATIONS
+  -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed
+  -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done, pushed (f3093fc)
+  -> SYSTEM DESIGN /         <-- MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1
+     ARCHITECTURE                done (1st pass), NOT committed; awaiting review
+                                (design/ = 11 files)
+  -> LOW-LEVEL FOUNDATIONS   <-- next, only after the architecture is accepted;
+                                first deliverable = the RC-4 parsed-action grant
+                                model + Reference Monitor contract
   -> CORE ENGINE
   -> STORAGE
   -> INTERFACE
@@ -434,8 +607,8 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 |-----------------|-------------------------------------------------------------|
 | `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
 | `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001). First pass done. |
-| `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done. |
-| `design/`       | System design and architecture work. **Next phase**, on model acceptance. |
+| `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
+| `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, first pass done, **not yet committed**. |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -568,5 +741,139 @@ decided.
   fifth primitive (OQ-M2); is `Relation` (OQ-M1); is four genuinely
   minimum-sufficient (OQ-M8); how are worries/affect represented (OQ-M5).
   `requirements/` and `research/` **not edited**. **No architecture, no
-  technology, no schema, no format, no code. `src/` untouched.** Awaiting user
-  review and explicit acceptance before SYSTEM DESIGN / ARCHITECTURE.
+  technology, no schema, no format, no code. `src/` untouched.**
+- **2026-09-10** — Research + Requirements + Human/Central Model accepted as a
+  checkpoint by the user and pushed (`f3093fc` on `origin/main`).
+- **2026-09-10** — **SYSTEM DESIGN / ARCHITECTURE MISSION 001 complete (first
+  pass, NOT yet committed).** Created `design/` (10 files):
+  `ARCHITECTURAL_PRINCIPLES.md` (INV-1…14 → AP-1…14 + the mechanism/policy/data/
+  capability/governance/derived-view vocabulary + deferred-technology list),
+  `SYSTEM_ARCHITECTURE.md` (the five-ring model + subsystem map + all flows +
+  Diagrams 1–3 & 6 + key decisions AD-1…15 + risks + "what must NOT be
+  implemented yet"), `ARCHITECTURAL_ALTERNATIVES.md` (AA-1…9), `RUNTIME_MODEL.md`,
+  `DATA_AND_STATE_MODEL.md`, `AUTHORITY_AND_SECURITY_MODEL.md` (incl. §9 documented
+  residual limits), `CAPABILITY_MODEL.md`, `FAILURE_AND_RECOVERY.md` (Diagram 7),
+  `TRACEABILITY.md`, `README.md`; updated this file.
+  **Architecture:** *a small governed core over an append-only claim/event
+  substrate, with reasoning and capabilities as optional isolated permissioned
+  outer rings, coordinated by a metareasoning controller that is a control loop,
+  not an agent loop.* Five inward-only rings (Governance · Core Mechanism ·
+  Reasoning · Capabilities · future Network); E²CI maps directly onto the
+  Chronicle (append-only Events/Claims/Intentions = the single source of truth;
+  Context + state = rebuildable projections); THINK→DECIDE→PROPOSE→AUTHORISE→
+  EXECUTE→VERIFY is a state machine, the autonomy triad structurally separated;
+  the self-modification meta-invariant is structural (Ring 0 has no write path;
+  tiers 6–9 are a human path, not a MELFINA operation) **and documented as
+  necessary-not-sufficient**. Grounding pass (~10 sources): reference monitor /
+  Hydra, capability-based OS (seL4/Fuchsia/WASI), event sourcing + CQRS,
+  blackboard architecture, microkernel vs modular monolith, Erlang/OTP
+  supervision. **No language, storage engine, framework, model, or UI chosen or
+  implied — all deferred to the named later phases.** `src/`, `research/`,
+  `requirements/`, `model/` **untouched** (no upstream inconsistency found).
+  Not committed or pushed (per the mission). Awaiting user review and explicit
+  acceptance before LOW-LEVEL FOUNDATIONS.
+- **2026-09-10** — **ARCHITECTURE ADVERSARIAL REVIEW 001 complete (first pass).**
+  Created `design/ARCHITECTURE_ADVERSARIAL_REVIEW.md` (19 sections). Attacked the
+  architecture across all 10 focus areas. **Verdict: the architecture survives —
+  0 CRITICAL, 6 HIGH, 11 MEDIUM, 6 LOW; no redesign required.** The 6 HIGH
+  findings each get a **minimum correction that strengthens an existing boundary**
+  (RC-1…RC-6), plus a required framing fix (RC-7, "subsystems are responsibilities
+  not components"):
+  - **H1/RC-1:** Ring 0 governance files need cryptographic signing + a hard File
+    Access path exclusion (runtime write path is closed; at-rest integrity was
+    only version-chain-checked, and the chain could be forged).
+  - **H2/RC-2:** aggregate-effect blindness — the routine/reversible class and
+    capability composition are governed per-action, not by aggregate effect; a
+    sequence of routine actions, or a composition of trivial capabilities, can be
+    consequential in aggregate.
+  - **H3/RC-3:** VERIFY is a single point of trust — a buggy/compromised Verifier
+    undermines the pipeline; needs a Verifier trust spec + ≥2 independent
+    Verifiers for high-risk actions.
+  - **H4/RC-4:** terminal/GUI grant granularity + action-parsing is
+    containment-critical (shell composition defeats "exactly these commands"); AU-2
+    must be re-tagged as such; grants checked against parsed argv, not raw strings.
+  - **H5/RC-5:** mid-execution permission revocation is unspecified.
+  - **H6/RC-6:** the Reasoner Interface's locality is stated as a preference, not a
+    structure (contradicts INV-1) — Ring 1/2 have no network capability, so it
+    *cannot* bind a remote endpoint; say "cannot", not "does not".
+  Optional simplifications (O1 fewer projections · O2 collapse Ring 2/3 into one
+  sandboxed region · O3 soften "blackboard" · O4 flat supervisor · O5 move the
+  routine/consequential boundary to Ring 0 · O6 projection consistency audit) —
+  recommended, not required. **E²CI faithfully preserved; the architecture is
+  genuinely dynamic (substance deferred to CORE ENGINE); local-only holds; the
+  meta-invariant holds structurally after RC-1, with its residual limits intact
+  and honest.** No model open question resolved; no requirement weakened. `src/`,
+  `research/`, `requirements/`, `model/` untouched. **Not committed, not pushed.**
+  Recommended: a short `ARCHITECTURE MISSION 001 — REVISION 1` applying RC-1…RC-7
+  (a targeted edit pass, not a rewrite), then commit the whole `design/` set as
+  one checkpoint, then LOW-LEVEL FOUNDATIONS.
+- **2026-09-10** — **ARCHITECTURE MISSION 001 — REVISION 1 complete (first pass,
+  NOT yet committed).** Targeted edit pass — not a redesign, no `src/` — applying
+  the adversarial review's corrections into the architecture documents:
+  **RC-1** Ring 0 at-rest cryptographic signing (human-held key, verified every
+  startup, invalid ⇒ refuse to run; Ring 0 path excluded from every File Access
+  grant); **RC-2** aggregate-effect governance (per-activity-chain aggregate
+  budget; composition classified by the union of component authority + scope +
+  aggregate; no laundering a high-risk action into low-risk steps); **RC-3**
+  verifier trust model (new `AUTHORITY_AND_SECURITY_MODEL.md` §4.1 — deterministic
+  where practical, minimal / no ambient authority, read-only, cannot cause
+  effects, independently testable, not a second agent; ≥2 architecturally-
+  independent verifiers for high-risk, explicit single-verifier fallback
+  otherwise); **RC-4** AU-2 re-tagged CONTAINMENT-CRITICAL and made the first
+  LOW-LEVEL FOUNDATIONS deliverable (terminal authority = structured actions, not
+  raw shell strings; grants matched against parsed argv; shell interposition a
+  distinct higher-risk capability); **RC-5** grants are live revocable handles
+  the Reference Monitor can invalidate mid-execution, with the outcome vocabulary
+  completed / partially completed / rolled back / failed / interrupted; **RC-6**
+  reasoner locality made structural (Ring 1/2 hold no network capability — the
+  Reasoner Interface *cannot* bind a remote endpoint); **RC-7** the ~25 named
+  subsystems stated as responsibilities, not necessarily processes/IPC
+  boundaries — only Ring 0 ↔ all, Ring 1 ↔ sandbox, reasoning ↔ effect must be
+  real enforced boundaries. Small corrections M1/M2/M3/M5/M6/M8/M9/M10/L4/L5
+  integrated. Optional: O1 adopted (one Chronicle + one current-state cache +
+  on-demand views), **O2 rejected** (do not collapse Ring 2 / Ring 3), O3 adopted
+  (blackboard = one candidate impl), O4 adopted (supervisor topology not
+  specified now), O5 preserved as an explicit design question, O6 retained as a
+  future implementation concern. `TRACEABILITY.md` gained §2.1 (Revision 1
+  corrections → sources) + AD-14/AD-15 + updated §3–§6 rows. The adversarial
+  review's findings §2–§19 were **not deleted or rewritten** — a "Revision 1 —
+  resolution status" section was added before §1. **No technology chosen** (no
+  crypto scheme, no parser, no isolation mechanism, no storage, no language); **no
+  model open question resolved** (OQ-M1/OQ-M2/OQ-M5 untouched). `src/`,
+  `research/`, `requirements/`, `model/` untouched. **Not committed, not pushed.**
+  Recommended next: commit the whole `design/` set (architecture + adversarial
+  review + revision) as one checkpoint, push, then LOW-LEVEL FOUNDATIONS.
+- **2026-09-11** — **ARCHITECTURE MISSION 001 — REVISION 1 resume-completed +
+  validated (still NOT committed, NOT pushed).** The 2026-09-10 edit pass was
+  interrupted by a host restart with almost all of the integration written. This
+  session did **no redesign and no code** — it verified the present state and
+  finished Revision 1:
+  · **Cross-document validation.** Read all 11 `design/` docs end to end.
+  Confirmed RC-1…RC-7 and M1/M2/M3/M5/M6/M8/M9/M10 + L4/L5 are integrated in every
+  document the resolution table names; the RC-5 outcome vocabulary
+  (completed / partially completed / rolled back / failed / interrupted) is
+  identical everywhere; the "three must-be-real boundaries" statement is
+  consistent; E²CI is preserved (Event/Claim/Intention = Chronicle units, Entity
+  = registry, Time = bitemporal, Context = on-demand, State = current-state
+  cache); the local-only invariant is structural (RC-6 + L4 + Ring 4 outside the
+  core); no deferred technology is chosen; OQ-M1/OQ-M2/OQ-M5 and the other §18
+  "keep unresolved" items are still open; `src/` and the upstream dirs are
+  untouched.
+  · **Three residual propagation gaps closed** in `SYSTEM_ARCHITECTURE.md`: §5
+  startup now names the RC-1 at-rest signature check (it previously listed only
+  the version chain, unlike `RUNTIME_MODEL.md` §2 / `AUTHORITY_AND_SECURITY_MODEL.md`
+  §6); §6.1's Event-flow box no longer lists a maintained "context cache" (M1 —
+  context is a Ring-2 on-demand build); a duplicated phrase in §6.2 was fixed.
+  · **One RC-7 wording variance harmonised** in `ARCHITECTURAL_ALTERNATIVES.md`
+  AA-1 (the middle must-be-real boundary now reads "Ring 2 + Ring 3", matching
+  `ARCHITECTURAL_PRINCIPLES.md` AP-12 and `SYSTEM_ARCHITECTURE.md` §2/§20).
+  · `design/TRACEABILITY.md` §2.1 RC-1 row gained "§5 (startup)"; the review's
+  "Revision 1 — resolution status" section gained a dated resume note (no finding
+  touched).
+  Files changed this session: `design/SYSTEM_ARCHITECTURE.md`,
+  `design/ARCHITECTURAL_ALTERNATIVES.md`, `design/TRACEABILITY.md`,
+  `design/ARCHITECTURE_ADVERSARIAL_REVIEW.md` (resolution-status note only), and
+  this file. **Verdict: Revision 1 complete and internally consistent; awaiting
+  user review before the whole `design/` set is committed as one checkpoint,
+  then LOW-LEVEL FOUNDATIONS (first deliverable = the RC-4 parsed-action grant
+  model).**
