@@ -22,8 +22,10 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 **Phase: LOW-LEVEL FOUNDATIONS — MISSION 001, REQUIREMENTS EXPANSION
 MISSION 002, and TECHNOLOGY SELECTION — MISSION 001 are all complete and
 committed. The technology stack is *recommended*, not yet human-approved —
-12 decisions in `design/technology/TECHNOLOGY_SELECTION.md` §14 remain open
-for explicit sign-off. Still design/research — no `src/`, no implementation,
+6 decision areas in `design/technology/TECHNOLOGY_SELECTION.md` §14 remain
+open for explicit sign-off (a decision-ready checklist:
+`design/technology/HUMAN_DECISION_PACKAGE.md`). Still design/research —
+no `src/`, no implementation,
 no dependency installed.**
 
 The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
@@ -78,9 +80,10 @@ invocation with `openat2` TOCTOU defence; AT-SPI2 for structured GUI
 targeting with a disclosed Wayland coordinate-fallback gap; Ed25519 +
 SHA-256 for governance integrity, an offline signing key, and a TPM 2.0
 monotonic counter for rollback protection where available; `llama.cpp`/GGUF
-for local inference (model selection explicitly deferred). **Twelve
-decisions are flagged as requiring explicit human sign-off before CORE
-ENGINE proceeds** (language, Chronicle substrate, isolation, the Monitor's
+for local inference (model selection explicitly deferred). **Six decision
+areas (spanning ~16 individual technology choices in the decision log) are
+flagged as requiring explicit human sign-off before CORE ENGINE proceeds**
+(language, Chronicle substrate, isolation, the Monitor's
 process boundary, governance integrity, and the AI runtime boundary — the
 exact set the mission's own instructions named); everything else is offered
 as a reviewable, non-blocking recommendation.
@@ -779,9 +782,11 @@ DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
                                 synthesis + 10 category evaluations +
                                 adversarial review + experiment plan +
                                 decision log. Recommends, does not mandate;
-                                12 decisions await explicit human sign-off
-                                (see TECHNOLOGY_SELECTION.md §14) before
-                                CORE ENGINE may build against them
+                                6 decision areas await explicit human
+                                sign-off (see TECHNOLOGY_SELECTION.md §14,
+                                or the one-sitting checklist in
+                                HUMAN_DECISION_PACKAGE.md) before CORE
+                                ENGINE may build against them
   -> CORE ENGINE
   -> STORAGE
   -> INTERFACE
@@ -1281,7 +1286,7 @@ decided.
   here because authority is gated by grant-possession and effect-class
   membership, neither a function of compute power); no hard MUST/MUST-NOT
   gate was rescued by a SHOULD-tier advantage anywhere. **No implementation
-  performed, no dependency installed, `src/` untouched.** 12 decisions
+  performed, no dependency installed, `src/` untouched.** Six decision areas
   flagged for explicit human sign-off (language, Chronicle substrate,
   isolation, the Monitor's process boundary, governance integrity, the AI
   runtime boundary); everything else offered as a reviewable, non-blocking

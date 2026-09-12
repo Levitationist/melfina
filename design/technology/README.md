@@ -12,16 +12,22 @@ scoring, the recommendation, the alternative, the rejected options and why,
 the residual risk, and whether it requires explicit human sign-off before
 CORE ENGINE proceeds.
 
-**Start with `TECHNOLOGY_SELECTION.md`** — the cross-cutting synthesis:
-overall stack, hard-gate results, F1–F10 compatibility, offline-core/AI-
-boundary/self-modification-boundary tests, TCB analysis, and the explicit
-human-decision boundary. Read it before the category documents below.
+**If you're here to decide, not to research: read `HUMAN_DECISION_PACKAGE.md`
+first** — six decision areas, one-sitting checklist, nothing else to read
+unless you want the reasoning behind a specific one.
+
+**If you're here for the reasoning: start with `TECHNOLOGY_SELECTION.md`** —
+the cross-cutting synthesis: overall stack, hard-gate results, F1–F10
+compatibility, offline-core/AI-boundary/self-modification-boundary tests,
+TCB analysis, and the explicit human-decision boundary. Read it before the
+category documents below.
 
 ## Documents
 
 | File | Covers |
 |---|---|
-| **`TECHNOLOGY_SELECTION.md`** | The synthesis — read this first |
+| **`HUMAN_DECISION_PACKAGE.md`** | The thing to actually read and mark — six decision areas, recommendation + alternative + your-call checkboxes for each |
+| **`TECHNOLOGY_SELECTION.md`** | The synthesis — read this for the full reasoning |
 | `LANGUAGE_EVALUATION.md` | Primary language, supporting languages, multi-language architecture |
 | `CHRONICLE_EVALUATION.md` | Chronicle authoritative substrate, physical record format, current-state cache |
 | `ISOLATION_EVALUATION.md` | Ring-3 isolation mechanism (default + escalated tiers) |
