@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-13 (TECHNOLOGY SELECTION MISSION 001 committed + pushed as `b40b3b7`; REQUIREMENTS EXPANSION MISSION 002 committed + pushed as `4f5e97c`; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
+Last updated: 2026-09-13 (all six TECHNOLOGY SELECTION decision areas human-approved — Chronicle conditionally, pending a not-yet-run crash experiment; TPM 2.0 confirmed present on the target machine; TECHNOLOGY SELECTION MISSION 001 committed as `b40b3b7`; REQUIREMENTS EXPANSION MISSION 002 committed as `4f5e97c`; LOW-LEVEL FOUNDATIONS MISSION 001 committed as `19d0135`; architecture checkpoint committed as `8a40207`)
 
 ---
 
@@ -21,12 +21,18 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 **Phase: LOW-LEVEL FOUNDATIONS — MISSION 001, REQUIREMENTS EXPANSION
 MISSION 002, and TECHNOLOGY SELECTION — MISSION 001 are all complete and
-committed. The technology stack is *recommended*, not yet human-approved —
-6 decision areas in `design/technology/TECHNOLOGY_SELECTION.md` §14 remain
-open for explicit sign-off (a decision-ready checklist:
-`design/technology/HUMAN_DECISION_PACKAGE.md`). Still design/research —
-no `src/`, no implementation,
-no dependency installed.**
+committed. All six flagged technology decision areas have been reviewed and
+approved by the human (2026-09-13) — see
+`design/technology/HUMAN_DECISION_PACKAGE.md` for the full record. One
+decision (the Chronicle storage substrate) is approved *conditionally*: real
+data must not be trusted to it until a not-yet-run crash/power-loss
+experiment passes (protocol prepared:
+`design/technology/CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`). A TPM 2.0
+device was independently confirmed present on the target machine, resolving
+that part of the governance-integrity decision from contingent to
+confirmed. Still design/research — no `src/`, no implementation, no
+dependency installed. Approval of these recommendations is not itself the
+start of CORE ENGINE.**
 
 The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
 + REVISION 1) was committed and pushed as **`8a40207`** ("design: ARCHITECTURE
@@ -777,17 +783,21 @@ DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
   -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done, committed + pushed
                                 (`19d0135`). design/foundations/ = README +
                                 12 technology-independent contracts
-  -> TECHNOLOGY SELECTION    <-- MISSION 001 done, committed + pushed
-                                (`b40b3b7`). design/technology/ = README +
-                                synthesis + 10 category evaluations +
-                                adversarial review + experiment plan +
-                                decision log. Recommends, does not mandate;
-                                6 decision areas await explicit human
-                                sign-off (see TECHNOLOGY_SELECTION.md §14,
-                                or the one-sitting checklist in
-                                HUMAN_DECISION_PACKAGE.md) before CORE
-                                ENGINE may build against them
-  -> CORE ENGINE
+  -> TECHNOLOGY SELECTION    <-- MISSION 001 done, committed
+                                (`b40b3b7`). All 6 flagged decision areas
+                                APPROVED by the human 2026-09-13
+                                (HUMAN_DECISION_PACKAGE.md) — Chronicle
+                                conditionally, pending the not-yet-run
+                                crash experiment (CHRONICLE_CRASH_
+                                EXPERIMENT_PROTOCOL.md). TPM 2.0 confirmed
+                                present on the target machine.
+  -> [gate] Chronicle crash/power-loss experiment <-- protocol prepared,
+                                NOT yet run; NOT yet decided whether to
+                                proceed (needs your go-ahead — no new
+                                installs required for Phase 1)
+  -> CORE ENGINE                (blocked on the gate above for anything
+                                touching the Chronicle; otherwise clear
+                                to begin against the approved stack)
   -> STORAGE
   -> INTERFACE
   -> AI / ASSISTANT LAYER
@@ -822,10 +832,10 @@ recorded justification in `decisions/`.
   written before any language evaluation existed. TECHNOLOGY SELECTION
   MISSION 001 has since evaluated 8 candidates and recommends **Rust**
   primary, with C/C++ explicitly rejected as the core language on
-  memory-safety grounds — `design/technology/LANGUAGE_EVALUATION.md`. This
-  is a recommendation pending human approval, not yet a made decision — see
-  §8 — but the C/C++ placeholder above no longer reflects the project's
-  actual analysis and should not be treated as still in effect.)*
+  memory-safety grounds — `design/technology/LANGUAGE_EVALUATION.md`. **This
+  was approved by the human on 2026-09-13** — see
+  `design/technology/HUMAN_DECISION_PACKAGE.md` Decision 1 — so the C/C++
+  placeholder above is now superseded, not merely a stale recommendation.)*
 - **CLI / native interfaces before heavy web abstractions.**
 - **Extensibility without architectural bloat.**
 - **Understand before assembling.** The user wants to understand the system
@@ -862,7 +872,7 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 | `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
 | `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, committed + pushed (`8a40207`). |
 | `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, committed + pushed (`19d0135`). |
-| `design/technology/` | Technology recommendations (TECHNOLOGY SELECTION MISSION 001). README + synthesis + 10 category evaluations + adversarial review + experiment plan + decision log, committed + pushed (`b40b3b7`). Recommendations, not yet human-approved — see §8. |
+| `design/technology/` | Technology recommendations (TECHNOLOGY SELECTION MISSION 001). README + synthesis + 10 category evaluations + adversarial review + experiment plan + decision log + `HUMAN_DECISION_PACKAGE.md` (all six decision areas approved, Chronicle conditionally) + `CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md` (prepared, not yet run). |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -887,25 +897,27 @@ SYSTEM DESIGN / ARCHITECTURE and later, and only after HUMAN / CENTRAL MODEL.
 - The neutral primitive set / life model (`requirements/OPEN_QUESTIONS.md` OQ-1)
   — resolved by the E²CI model (`model/HUMAN_CENTRAL_MODEL.md`); listed here
   historically, not actually still open.
-- **Core language(s) and their boundaries** — a **recommendation** now exists
-  (Rust primary, single-language core) from TECHNOLOGY SELECTION MISSION 001,
-  but is **not yet human-approved**; see
-  `design/technology/LANGUAGE_EVALUATION.md` and `TECHNOLOGY_SELECTION.md` §14.
-- **Storage substrate** — a **recommendation** now exists (a custom append-only
-  log as the authoritative Chronicle + SQLite/WAL as the rebuildable cache),
-  **not yet human-approved**, pending the crash-injection experiment in
-  `design/technology/TECHNOLOGY_EXPERIMENT_PLAN.md`; see
-  `design/technology/CHRONICLE_EVALUATION.md`.
+- **Core language(s) and their boundaries** — **APPROVED 2026-09-13**: Rust
+  primary, single-language core — `design/technology/LANGUAGE_EVALUATION.md`,
+  `HUMAN_DECISION_PACKAGE.md` Decision 1. No longer an open decision.
+- **Storage substrate** — **APPROVED WITH CONDITION 2026-09-13**: a custom
+  append-only log as the authoritative Chronicle + SQLite/WAL as the
+  rebuildable cache — `design/technology/CHRONICLE_EVALUATION.md`,
+  `HUMAN_DECISION_PACKAGE.md` Decision 2. Real data withheld from the custom
+  log until the crash/power-loss experiment
+  (`design/technology/CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`) passes — that
+  experiment is prepared but not yet run.
 - Interface medium(s) — requirements say only "multi-modal, user-choosable,
   consistent with the CLI-first leaning"; still genuinely open.
 - Which local reasoning components / model sizes (OQ-11) — the *engine*
   (`llama.cpp`/GGUF) is recommended; *which model(s)* is explicitly deferred,
   not decided by Technology Selection at all.
 - **The permission-grant mechanism** — object-capability *style* was already
-  required by `MEL-REQ-180`; TECHNOLOGY SELECTION MISSION 001 adds a concrete
-  finding (not yet approved): OS-resource-shaped grants can be realised as
-  `SCM_RIGHTS`-passed file descriptors, giving them kernel-enforced
-  unforgeability — `design/technology/PROCESS_AND_IPC_EVALUATION.md` §4.
+  required by `MEL-REQ-180`; TECHNOLOGY SELECTION MISSION 001 adds a concrete,
+  **APPROVED 2026-09-13** finding: OS-resource-shaped grants can be realised
+  as `SCM_RIGHTS`-passed file descriptors, giving them kernel-enforced
+  unforgeability — `design/technology/PROCESS_AND_IPC_EVALUATION.md` §4,
+  `HUMAN_DECISION_PACKAGE.md` Decision 4.
 - The default consequential/routine action boundary (OQ-12) — still open;
   Technology Selection does not touch this, it is governance content (F8),
   not a technology choice.
@@ -1316,3 +1328,50 @@ decided.
   `b40b3b7` itself (added above). No design, requirements, model, or
   foundation content was altered — this was a `PROJECT_STATE.md` accuracy
   pass only, ahead of starting the next mission.
+- **2026-09-13** — **`design/technology/HUMAN_DECISION_PACKAGE.md` created
+  (committed as `5914fe2`).** A one-sitting, plain-language checklist for
+  the six decision areas Technology Selection flagged, since a literal
+  "twelve decisions" count (used in the prior checkpoint's own prose) did
+  not correspond to an actual tally — corrected to "six decision areas, ~16
+  individual choices in the decision log" everywhere it appeared.
+- **2026-09-13** — **All six decision areas reviewed and marked by the
+  human.** Recorded verbatim in `HUMAN_DECISION_PACKAGE.md`, with matching
+  status updates in `TECHNOLOGY_SELECTION.md` §14, `TECHNOLOGY_DECISION_LOG.md`,
+  `LANGUAGE_EVALUATION.md`, `CHRONICLE_EVALUATION.md`, `ISOLATION_EVALUATION.md`,
+  `PROCESS_AND_IPC_EVALUATION.md`, `CRYPTO_GOVERNANCE_EVALUATION.md`, and
+  `REASONING_COMPUTATION_EVALUATION.md`:
+  - **Decision 1 (primary language) — APPROVE.** Rust.
+  - **Decision 2 (Chronicle substrate) — APPROVE WITH CONDITION.** The
+    two-tier architecture stands; real data withheld from the custom log
+    until the crash/power-loss experiment passes. Protocol written:
+    `design/technology/CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md` — **prepared,
+    not run.** LMDB remains the named fallback.
+  - **Decision 3 (Ring-3 isolation) — APPROVE.** Landlock+seccomp+namespaces+
+    cgroups default, Firecracker-class microVM escalated tier.
+  - **Decision 4 (Reference Monitor process boundary + IPC) — APPROVE.**
+  - **Decision 5 (governance integrity) — APPROVE BASELINE + upgrades.**
+    Ed25519/SHA-256 approved; a **hardware signing key** (not required on
+    the runtime machine) approved in preference to a plain offline key
+    file; **TPM presence independently checked**, per the constraint to use
+    only already-installed system facilities and install nothing —
+    **confirmed present**: `/sys/class/tpm/tpm0` (`tpm_version_major: 2`,
+    `device/description: TPM 2.0 Device`, backed by an Intel PTT firmware
+    TPM, `INTC6001:00`), `/dev/tpm0` and `/dev/tpmrm0` both present, host
+    confirmed not a VM (`systemd-detect-virt` → `none`). `tpm2-tools` is
+    **not** installed and was **not** installed to reach this finding — its
+    installation is deferred to CORE ENGINE. The TPM-backed rollback
+    protection in `CRYPTO_GOVERNANCE_EVALUATION.md` §5 is therefore the
+    live recommendation for this machine, not the fallback.
+  - **Decision 6 (local AI runtime) — APPROVE.** `llama.cpp`/GGUF engine;
+    model selection remains unapproved/deferred.
+  **No dependency was installed. No production code was written. `src/`
+  untouched.** The Chronicle crash-experiment protocol was *written* (see
+  `CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`) but **not run** — Phase 1
+  (process-crash fault injection) needs no new installs (the Rust toolchain
+  is already present) but writing and executing even a throwaway program
+  under `experiments/` is being held for an explicit go-ahead, per the
+  session's own instruction to stop before running anything. Phase 2 (true
+  power-loss/disk-barrier simulation) and frame-parser fuzzing both need new
+  tooling installed and are explicitly blocked pending a decision on that.
+  **CORE ENGINE proper does not begin yet** — this session recorded
+  approvals and prepared (not executed) the next validation step.

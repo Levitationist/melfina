@@ -169,7 +169,7 @@ sets a high bar this project does not yet have evidence to clear.
   This is a CORE ENGINE-phase experiment (`TECHNOLOGY_EXPERIMENT_PLAN.md`),
   not a decision made here.
 
-## 6. Human review required
+## 6. Human review required — **APPROVED 2026-09-13** (`HUMAN_DECISION_PACKAGE.md` Decision 1)
 
 Per mission §46, the primary language is one of the decisions requiring
 explicit human sign-off. **Recommendation: Rust, HIGH confidence, with the

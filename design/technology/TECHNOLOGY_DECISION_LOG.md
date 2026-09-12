@@ -1,6 +1,12 @@
 # MELFINA — TECHNOLOGY SELECTION: DECISION LOG
 
-**Phase:** TECHNOLOGY SELECTION MISSION 001. First pass, pending human review.
+**Phase:** TECHNOLOGY SELECTION MISSION 001. **UPDATED 2026-09-13: the six
+decision areas marked `**YES**` in the "Human approval required?" column
+below have been reviewed and approved (Chronicle conditionally) — full
+record in `HUMAN_DECISION_PACKAGE.md`.** The per-row "Human approval
+required?" column below is left as originally written (it answers "did this
+need approval," not "has it been approved") — read it alongside
+`HUMAN_DECISION_PACKAGE.md` for current status.
 Scope: mission §44 — an auditable record of every recommendation made in
 this mission. **Format note:** the full Context/Criteria/Evidence/Reasoning
 for each decision is written out in its own evaluation document (linked in
@@ -33,8 +39,8 @@ reversal cost stated, approval requirement explicit).
 | 16 | Resource limiting/watchdog | **cgroups v2 + `rlimit` + a wall-clock deadline watchdog in P1's Supervisor** | N/A — this composes mechanisms already selected elsewhere | LOW | HIGH | No | `TERMINAL_GUI_EVALUATION.md` §4 |
 | 17 | Signature scheme | **Ed25519 (`ed25519-dalek`)** | RSA-PSS (deferred, no current reason to prefer), a threshold scheme (deferred, single-signer for now) | MEDIUM — governance versions are rare so a scheme change is a contained, low-frequency migration | HIGH | **YES** (bundled with governance integrity, mission §46) | `CRYPTO_GOVERNANCE_EVALUATION.md` §1 |
 | 18 | Hash function | **SHA-256** | BLAKE3 (deferred, only if a measured performance need arises) | LOW | HIGH | Bundled with #17 | `CRYPTO_GOVERNANCE_EVALUATION.md` §2 |
-| 19 | Signing-key custody | **Offline key, standalone minimal signing tool** | A hardware token (FIDO2/TPM-backed key) — explicitly left `[OPEN]` for the human's own risk decision | LOW — custody procedure can be upgraded without changing the signature scheme itself | HIGH for the baseline; the hardware upgrade is the human's own decision | **YES** — the human decides whether to adopt the hardware upgrade | `CRYPTO_GOVERNANCE_EVALUATION.md` §3–4 |
-| 20 | Current-head marker / rollback protection | **TPM 2.0 monotonic counter where available; signed-marker-plus-human-vigilance fallback otherwise** | A remote transparency-log service — rejected (requires network) | MEDIUM — depends on target hardware's actual TPM presence, `[ID]` pending a concrete check | HIGH if TPM present; MEDIUM (honestly disclosed) if not | **YES** (bundled with #17, mission §46) | `CRYPTO_GOVERNANCE_EVALUATION.md` §5 |
+| 19 | Signing-key custody | **APPROVED, upgraded: a hardware signing token (e.g. YubiKey), not present on the runtime machine, used at the offline signing step only** | A plain offline key file (the prior baseline) remains the fallback description of the *principle*; superseded as the *chosen* mechanism by the human's explicit preference for hardware | LOW — custody procedure can be upgraded without changing the signature scheme itself | HIGH | **APPROVED 2026-09-13** — `HUMAN_DECISION_PACKAGE.md` Decision 5 | `CRYPTO_GOVERNANCE_EVALUATION.md` §3–4 |
+| 20 | Current-head marker / rollback protection | **APPROVED: TPM 2.0 monotonic counter** — presence independently confirmed on the current machine (`/sys/class/tpm/tpm0`, `/dev/tpm0`, `/dev/tpmrm0`, Intel PTT `INTC6001:00`) via already-installed system facilities, nothing installed to check | A remote transparency-log service — rejected (requires network); the signed-marker-plus-human-vigilance fallback remains documented for a future TPM-less machine, not needed here | LOW now that presence is confirmed (was MEDIUM, `[ID]`, pending a concrete check) | HIGH — the `[ID]` pending-check status is resolved | **APPROVED 2026-09-13** — `HUMAN_DECISION_PACKAGE.md` Decision 5 | `CRYPTO_GOVERNANCE_EVALUATION.md` §5 |
 | 21 | Verifier execution mechanism | **Ordinary Ring-3 sandboxed process, read-only/empty grant, deliberately-diverse implementations per independent verifier** | N/A — this follows directly from the isolation-tier choice, no separate mechanism needed | LOW | HIGH | No | `REASONING_COMPUTATION_EVALUATION.md` §1 |
 | 22 | Mathematical/symbolic substrate | **SymPy via a sandboxed Python subprocess** | A native Rust CAS crate (preferred where it already suffices for simple cases) | LOW — an isolated capability's internal implementation is swappable without touching the core | MEDIUM | No | `REASONING_COMPUTATION_EVALUATION.md` §2 |
 | 23 | Numerical/scientific substrate | **Rust-native crates first (`nalgebra`, `ndarray`, `statrs`), sandboxed Python (NumPy/SciPy) fallback; Z3 for formal/constraint checks** | Full proof assistants (Lean 4, Coq) — deferred | LOW | MEDIUM–HIGH | No | `REASONING_COMPUTATION_EVALUATION.md` §3 |
@@ -68,9 +74,15 @@ explicitly named categories.
   simply composes already-chosen mechanisms.
 - **MEDIUM-confidence, genuinely close calls or pending validation:** #1
   (Rust vs. the Zig-at-1.0 contingency), #3 (pending the crash-injection
-  experiment), #7–8, #15 (the Wayland gap), #19–20 (contingent on actual
-  hardware), #22, #25.
-- **Explicitly `[OPEN]`, left to the human:** the hardware-key-custody
-  upgrade (#19), and — not a technology decision at all but worth restating
-  here — *which* governance-content risk classes escalate to the microVM
-  tier (#7), which is F8 content-authoring, not a technology choice.
+  experiment — see `CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`), #7–8, #15 (the
+  Wayland gap), #22, #25.
+- **Resolved since the first pass (2026-09-13):** #19–20 were `[OPEN]`/
+  contingent-on-hardware pending the human's own decision; both are now
+  **APPROVED** — the human chose a hardware signing key over the plain
+  offline-key baseline, and TPM 2.0 presence was independently confirmed on
+  the actual target machine (no longer contingent — see rows 19–20 above and
+  `HUMAN_DECISION_PACKAGE.md` Decision 5).
+- **Still not a technology decision at all, worth restating:** *which*
+  governance-content risk classes escalate to the microVM tier (#7) is F8
+  content-authoring, not something this log or the human-approval pass
+  resolves.

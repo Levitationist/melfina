@@ -270,26 +270,28 @@ item 13.
   both WASI's sandbox *and* an OS effect (flagged, not designed, in
   `TERMINAL_GUI_EVALUATION.md` §5).
 
-## 14. Confidence and the human-decision boundary (mission §19, §46)
+## 14. Confidence and the human-decision boundary (mission §19, §46) —
+**UPDATED 2026-09-13: all six decision areas below have been reviewed and
+marked by the human. Full record: `HUMAN_DECISION_PACKAGE.md`.**
 
-This document and its eleven companions **recommend**; they do not declare
-a final, irrevocable stack. Per mission §46 and §19, the following remain
-explicit **human decisions**, listed with their status:
+This document and its companions **recommended**; the human has since
+decided. Per mission §46 and §19, the following were the explicit **human
+decisions**, listed with their recorded status:
 
 | Decision | Status |
 |---|---|
-| Primary language (Rust) | **RECOMMENDED**, high confidence |
-| Chronicle substrate (custom log + SQLite cache) | **CONDITIONALLY RECOMMENDED** — pending the crash-injection experiment |
-| Isolation mechanism (Landlock/seccomp/ns/cgroups default; microVM escalated) | **RECOMMENDED**, high confidence |
-| Reference Monitor as its own process | **RECOMMENDED**, high confidence |
-| Governance integrity (Ed25519/SHA-256, offline key, TPM counter) | **RECOMMENDED** for the algorithms; **REQUIRES HUMAN DECISION** on the hardware-key upgrade and on confirming TPM availability |
-| AI runtime boundary (`llama.cpp`) | **RECOMMENDED**, engine only; **UNRESOLVED** on model selection (deliberately, per mission scope) |
-| GUI mechanism (AT-SPI2 + portal fallback) | **RECOMMENDED**, with the Wayland gap disclosed for awareness |
-| Everything else in §2's table | **RECOMMENDED**, offered for review, not blocking |
+| Primary language (Rust) | **APPROVED** |
+| Chronicle substrate (custom log + SQLite cache) | **APPROVED WITH CONDITION** — real data withheld pending the crash-injection experiment; protocol written (`CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`), not yet run |
+| Isolation mechanism (Landlock/seccomp/ns/cgroups default; microVM escalated) | **APPROVED** |
+| Reference Monitor as its own process | **APPROVED** |
+| Governance integrity (Ed25519/SHA-256, offline key, TPM counter) | **APPROVED**, plus a hardware signing key approved, plus TPM 2.0 independently confirmed present on the current machine — see `HUMAN_DECISION_PACKAGE.md` Decision 5 |
+| AI runtime boundary (`llama.cpp`) | **APPROVED**, engine only; model selection remains **UNRESOLVED** (deliberately, per mission scope) |
+| GUI mechanism (AT-SPI2 + portal fallback) | Not a blocking decision; recommendation stands, Wayland gap disclosed |
+| Everything else in §2's table | Not blocking; offered for review |
 
 **No implementation has been performed. No dependency has been installed.
-No `src/` file has been created or modified.** This mission ends at the
-recommendation boundary described above.
+No `src/` file has been created or modified.** Approval records the
+accepted basis for CORE ENGINE; it is not itself the start of CORE ENGINE.
 
 ## 15. Human review boundary statement
 

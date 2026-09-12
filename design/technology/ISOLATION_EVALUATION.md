@@ -188,7 +188,7 @@ technology
   whether a local-model inference process needs its own isolation tier
   (recommended: yes, default tier, treated as any other Ring-3 process).
 
-## 8. Human review required
+## 8. Human review required — **APPROVED 2026-09-13** (`HUMAN_DECISION_PACKAGE.md` Decision 3)
 
 Per mission §46, the isolation mechanism is one of the decisions requiring
 explicit sign-off. **Recommendation: the tiered design above.** The specific

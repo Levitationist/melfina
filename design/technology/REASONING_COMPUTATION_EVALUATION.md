@@ -158,7 +158,7 @@ using the native OS sandbox directly for that lane.
   pinning/vendoring discipline applied to both, not waived for the smaller
   one.
 
-## 7. Human review required
+## 7. Human review required — **APPROVED 2026-09-13** (engine only — `HUMAN_DECISION_PACKAGE.md` Decision 6; model selection remains unresolved)
 
 Per mission §46 (the AI runtime boundary is explicitly listed).
 **Recommendation: `llama.cpp`/GGUF for local inference (model selection

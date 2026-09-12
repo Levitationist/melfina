@@ -147,7 +147,7 @@ warns must "earn its place."
   simpler policy: P0 accepts connections only from P1's known socket path,
   with peer-credential checks on every connection).
 
-## 8. Human review required
+## 8. Human review required — **APPROVED 2026-09-13** (`HUMAN_DECISION_PACKAGE.md` Decision 4)
 
 Per mission §46 (the Monitor's implementation boundary is explicitly listed).
 **Recommendation: the 4-process-class topology (P0/P1/P2/P3ₙ) with Unix

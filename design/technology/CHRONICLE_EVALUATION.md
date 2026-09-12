@@ -186,13 +186,16 @@ until a concrete retrieval-latency problem is measured (mission §33,
   bindings (`rusqlite` for SQLite; the custom log is native Rust code by
   construction) — no FFI-safety concession is required by this pairing.
 
-## 8. Human review required
+## 8. Human review required — **APPROVED WITH CONDITION, 2026-09-13**
 
-Per mission §46. **Recommendation: the two-tier design (custom authoritative
-log + SQLite cache), HIGH confidence in the shape, MEDIUM confidence in the
-custom-log implementation specifically pending the crash/corruption
-experiment plan.** The LMDB-as-authoritative fallback is a concrete,
-named alternative if that experiment plan finds problems.
+Per mission §46. **Approved: the two-tier design (custom authoritative log +
+SQLite cache).** Full confidence in the shape; the custom-log
+implementation specifically remains conditional on the crash/power-loss
+experiment now protocolled in
+`CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md` — **real MELFINA data must not be
+trusted to the custom log until that experiment passes.** The LMDB-as-
+authoritative fallback remains the concrete, named alternative if it does
+not. Full record: `HUMAN_DECISION_PACKAGE.md` Decision 2.
 
 ## 9. Sources
 

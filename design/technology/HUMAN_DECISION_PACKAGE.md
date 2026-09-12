@@ -1,5 +1,15 @@
 # MELFINA — HUMAN DECISION PACKAGE: TECHNOLOGY SELECTION MISSION 001
 
+**STATUS: ALL SIX DECISIONS RECORDED (2026-09-13).** Decisions 1, 3, 4, 6 —
+approved as recommended. Decision 2 — approved, conditional on the Chronicle
+crash/power-loss experiment passing (see the gate note under Decision 2 and
+`design/technology/CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`). Decision 5 —
+baseline approved, plus a hardware signing key approved, plus a TPM 2.0
+device independently confirmed present on this machine (see that section).
+**None of this constitutes CORE ENGINE implementation** — no dependency has
+been installed, no code written against these decisions yet, beyond the
+not-yet-run Chronicle experiment protocol.
+
 **Purpose of this file.** `TECHNOLOGY_SELECTION.md` and its ten companion
 documents are the *evidence and reasoning*. This file is the **thing to
 actually read and decide on** — six decision areas, each with what you'd be
@@ -58,7 +68,8 @@ programming ecosystem).
 
 **Full detail:** `LANGUAGE_EVALUATION.md`.
 
-**Your call:** ☐ Approve ☐ Approve with changes: _____ ☐ Reject ☐ Need more info
+**RECORDED DECISION (2026-09-13): ☑ APPROVE.** Rust is approved as the
+primary implementation language for the trusted MELFINA core.
 
 ---
 
@@ -93,7 +104,17 @@ disappears).
 
 **Full detail:** `CHRONICLE_EVALUATION.md`.
 
-**Your call:** ☐ Approve ☐ Approve with changes: _____ ☐ Reject ☐ Need more info
+**RECORDED DECISION (2026-09-13): ☑ APPROVE WITH CONDITION.** The two-tier
+architecture (custom authoritative log + SQLite/WAL cache) is approved. **The
+custom Chronicle log must not be trusted with real MELFINA data until the
+crash/power-loss experiment (`TECHNOLOGY_EXPERIMENT_PLAN.md` item 1) has
+been run and its results satisfy F6's durability and integrity
+requirements.** LMDB remains the explicitly approved fallback if that
+experiment finds an unacceptable weakness. **This is a condition on data
+trust, not a rejection of the architecture** — the protocol for that
+experiment is now written up in
+`CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`; it has not yet been run (see the
+stop-and-report note there).
 
 ---
 
@@ -131,7 +152,11 @@ directly anyway.
 
 **Full detail:** `ISOLATION_EVALUATION.md`.
 
-**Your call:** ☐ Approve ☐ Approve with changes: _____ ☐ Reject ☐ Need more info
+**RECORDED DECISION (2026-09-13): ☑ APPROVE.** Landlock + seccomp +
+namespaces + cgroups is approved as the default Ring-3 isolation
+composition, with a Firecracker-class microVM as the escalated tier for
+sufficiently high-risk effects. The documented kernel-compromise/sandbox-
+escape residual risk is preserved as-is, not treated as closed.
 
 ---
 
@@ -153,7 +178,11 @@ talking to each other over a narrow, authenticated local channel.
 
 **Full detail:** `PROCESS_AND_IPC_EVALUATION.md`.
 
-**Your call:** ☐ Approve ☐ Approve with changes: _____ ☐ Reject ☐ Need more info
+**RECORDED DECISION (2026-09-13): ☑ APPROVE.** The Reference Monitor as its
+own separate process, with a narrow, authenticated local IPC boundary to
+the rest of the core, is approved. The THINK→DECIDE→PROPOSE→AUTHORISE→
+EXECUTE→VERIFY pipeline and the F1/F3/F4 boundaries it realises are
+preserved unchanged; reasoning remains unable to grant itself authority.
 
 ---
 
@@ -189,7 +218,40 @@ standard, boring choices, deliberately not exotic) + an offline key.
 
 **Full detail:** `CRYPTO_GOVERNANCE_EVALUATION.md`.
 
-**Your call:** ☐ Approve baseline ☐ Also want hardware key: _____ ☐ TPM present: yes/no/unsure ☐ Need more info
+**RECORDED DECISION (2026-09-13):**
+
+- **☑ APPROVE BASELINE** — Ed25519 signatures, SHA-256 hashing, an offline
+  signing authority, human-controlled governance changes, and the
+  cryptographic version chain are approved.
+- **☑ HARDWARE SIGNING KEY: YES.** A dedicated hardware signing key (e.g. a
+  YubiKey/security token) is approved and preferred over a plain offline key
+  file for the human signing operation, while retaining the offline-key
+  principle (the key — hardware or file — never touches the machine MELFINA
+  runs on). **Explicit constraint recorded:** the hardware key is **not**
+  required to be physically present on, or attached to, the MELFINA runtime
+  machine — it is used only at the separate, offline signing step (§3 of
+  `CRYPTO_GOVERNANCE_EVALUATION.md`), exactly as the plain-offline-key
+  baseline was already designed to work. Choosing a specific hardware token
+  model/vendor is deferred to CORE ENGINE, not decided here.
+- **TPM presence — independently checked, not assumed:** this machine (a
+  Linux "Nitro" host, Ubuntu 24.04, kernel 6.14, not a VM per
+  `systemd-detect-virt` → `none`) **does have a TPM 2.0 device**, confirmed
+  via already-present system facilities with nothing installed:
+  `/sys/class/tpm/tpm0` exists (`tpm_version_major: 2`,
+  `device/description: TPM 2.0 Device`, backed by `INTC6001:00` — an Intel
+  Platform Trust Technology firmware TPM), and both `/dev/tpm0` and
+  `/dev/tpmrm0` device nodes are present and owned by the standard `tss`
+  group. **`tpm2-tools` (the userspace CLI needed to actually exercise a
+  monotonic counter) is not installed** — checked, absent, and **not**
+  installed as part of this check, per the constraint not to install
+  anything just to determine presence. **Conclusion: TPM-backed
+  rollback protection (F9 C7) is available on this machine** and is the
+  approved mechanism for the current-head marker; installing `tpm2-tools`
+  (or an equivalent Rust TPM crate) is deferred to CORE ENGINE, when the
+  governance-integrity component is actually built. The documented weaker
+  fallback (a signed marker + human vigilance) remains recorded in
+  `CRYPTO_GOVERNANCE_EVALUATION.md` for a future machine that lacks a TPM,
+  but is not needed for this one.
 
 ---
 
@@ -208,25 +270,33 @@ regardless of which model runs inside it or how it behaves.
 
 **Full detail:** `REASONING_COMPUTATION_EVALUATION.md`.
 
-**Your call:** ☐ Approve ☐ Approve with changes: _____ ☐ Reject ☐ Need more info
+**RECORDED DECISION (2026-09-13): ☑ APPROVE.** `llama.cpp`/GGUF is approved
+as the local AI runtime boundary. The specific model remains a separate,
+future, unapproved decision. Preserved unchanged: AI is optional/bounded, is
+not the source of truth, has no authority, cannot issue grants, cannot
+bypass Ring 0, cannot directly produce effects, and the core remains fully
+functional without it.
 
 ---
 
-## What happens after you mark these
+## Status now that all six are marked
 
-- Anything marked **Approve** becomes the accepted basis for CORE ENGINE.
-- Anything marked **Approve with changes** gets folded back into the
-  relevant evaluation document and re-checked against the foundation
-  contracts before being treated as accepted.
-- Anything marked **Reject** stays open — either I re-run that category's
-  evaluation against different constraints you specify, or you tell me
-  what to use instead and I check *that* against the foundation contracts
-  (F1–F10) for compatibility, the same way every recommendation here was
-  checked.
-- **CORE ENGINE does not begin, and no dependency gets installed, until
-  this package has your marks on it.** The recommended very first piece of
-  actual work, once approved, is the crash/power-loss test on the Chronicle
-  log (Decision 2) — before any real data ever touches it.
+- **Decisions 1, 3, 4, 6** are approved outright and are the accepted basis
+  for CORE ENGINE once it begins.
+- **Decision 2** (Chronicle) is approved **conditionally** — the accepted
+  architecture, but real data may not be trusted to the custom log until
+  the crash/power-loss experiment passes. See
+  `CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`.
+- **Decision 5** (governance integrity) is approved with an added hardware
+  key and a confirmed TPM finding, both recorded above.
+- **CORE ENGINE general implementation still does not begin, and no
+  dependency gets installed, yet.** The one piece of preparatory work
+  authorised so far is *writing the protocol* for the Chronicle
+  crash/power-loss experiment (done — see
+  `CHRONICLE_CRASH_EXPERIMENT_PROTOCOL.md`); actually **running** it (which
+  means writing and compiling a small throwaway Rust program under
+  `experiments/`) is queued behind an explicit go-ahead, per that
+  document's own stop-and-report note.
 
 ## Everything NOT in this package
 

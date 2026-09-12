@@ -67,15 +67,25 @@ parent-version-id` with the offline key, and write the signature out. Its
 smallness is itself a security property (a smaller TCB for the one tool that
 ever touches the actual secret key).
 
-## 4. Hardware-backed key custody — an `[OPEN]` upgrade, not a requirement
+## 4. Hardware-backed key custody — **RESOLVED 2026-09-13: APPROVED**
 
 An offline software key already satisfies F9's contract. A hardware token
 (FIDO2/U2F device supporting Ed25519, e.g. a security key, or a TPM-backed
-key) would additionally protect against a **stolen offline-key file** being
-usable without the physical device present. This is recorded as `AU-6`'s
-upgrade path, genuinely optional: **`[OPEN]`**, to be decided by the human
-based on their own risk tolerance and hardware availability — this mission
-does not mandate it.
+key) additionally protects against a **stolen offline-key file** being
+usable without the physical device present. This was recorded as `AU-6`'s
+upgrade path, genuinely optional, `[OPEN]` pending the human's own risk
+decision.
+
+**The human has approved adopting a hardware signing key**
+(`HUMAN_DECISION_PACKAGE.md` Decision 5), in preference to the plain
+offline-key-file baseline. **This does not change T1/T4's requirement that
+the key stay off the running MELFINA machine** — the hardware token is used
+only at the offline signing step (§3), exactly where the plain key file
+would have been used; it is explicitly **not** meant to be plugged into or
+otherwise reachable from the MELFINA runtime machine. The specific hardware
+token model/vendor is deferred to CORE ENGINE, not decided here — any
+Ed25519-capable FIDO2/security-key device satisfying that constraint is
+compatible with this recommendation.
 
 ## 5. The current-head marker / rollback protection (F9 C7) — the one place
 hardware genuinely earns a recommendation
@@ -95,8 +105,24 @@ own analysis:
 monotonic counter for the current-head marker if present; fall back to the
 signed-marker-plus-human-vigilance scheme if not, with the fallback's weaker
 guarantee explicitly surfaced to the human at install time (not silently
-accepted as equivalent).** `[ID]` pending a concrete availability check on
-the target hardware, `[OPEN]` on whether the human wants to rely on it.
+accepted as equivalent).**
+
+**RESOLVED 2026-09-13: the concrete availability check has been run, and the
+TPM path is APPROVED.** On the actual target machine, a TPM 2.0 device was
+independently confirmed present using only already-installed system
+facilities (no package installed to check): `/sys/class/tpm/tpm0` exists
+with `tpm_version_major: 2` and `device/description: TPM 2.0 Device`,
+backed by `INTC6001:00` (an Intel Platform Trust Technology firmware TPM),
+and both `/dev/tpm0` and `/dev/tpmrm0` device nodes are present, owned by
+the standard `tss` group; the host is confirmed not a VM
+(`systemd-detect-virt` → `none`). **The `[ID]`-pending-check status is
+resolved to confirmed-present; this is no longer contingent.** `tpm2-tools`
+(the userspace CLI needed to actually exercise the counter) is not
+installed yet — that is a CORE ENGINE-time step, not part of this
+determination, and was deliberately not installed just to check presence.
+The signed-marker-plus-human-vigilance fallback remains documented in this
+section for a future machine that lacks a TPM, but is not needed for the
+current one.
 
 ## 6. The trusted loader itself (build/language note)
 
@@ -133,14 +159,13 @@ as its logical scope.
   requires this independence, and the technology choice preserves it by
   construction (no shared storage engine between the two).
 
-## 8. Human review required
+## 8. Human review required — **APPROVED 2026-09-13**
 
-Per mission §46, explicitly listed. **Recommendation: Ed25519
-(`ed25519-dalek`) + SHA-256; an offline key with a small standalone signing
-tool; a TPM 2.0 monotonic counter for the current-head marker where
-available, with an explicitly weaker fallback otherwise.** The
-hardware-key-for-signing question (§4) is left open for the human's own risk
-decision.
+Per mission §46, explicitly listed. **Approved: Ed25519 (`ed25519-dalek`) +
+SHA-256; a hardware signing key used at an offline signing step (upgraded
+from the plain-offline-key baseline, §4); a TPM 2.0 monotonic counter for
+the current-head marker, confirmed present on the target machine (§5).**
+Full record: `HUMAN_DECISION_PACKAGE.md` Decision 5.
 
 ## 9. Sources
 
