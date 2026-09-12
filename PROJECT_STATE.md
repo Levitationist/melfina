@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-11 (REQUIREMENTS EXPANSION MISSION 002 — first pass; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
+Last updated: 2026-09-12 (TECHNOLOGY SELECTION MISSION 001 — first pass; REQUIREMENTS EXPANSION MISSION 002 committed + pushed as `4f5e97c`; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
 
 ---
 
@@ -19,23 +19,88 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 (first pass) complete and
-committed. REQUIREMENTS EXPANSION MISSION 002 (first pass) complete, NOT yet
-committed, awaiting user review. Still design/research — no `src/`, no language,
-no storage, no sandbox mechanism, no cryptographic primitive chosen.**
+**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 and REQUIREMENTS EXPANSION
+MISSION 002 both complete and committed. TECHNOLOGY SELECTION — MISSION 001
+(first pass) complete, NOT yet committed, awaiting user review. Still
+design/research — no `src/`, no implementation, no dependency installed;
+technology is *recommended*, not yet adopted.**
 
 The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
 + REVISION 1) was committed and pushed as **`8a40207`** ("design: ARCHITECTURE
 MISSION 001 + adversarial review 001 + revision 1") — 11 `design/*.md` files +
 this file. The LOW-LEVEL FOUNDATIONS MISSION 001 checkpoint (README.md + 12
 technology-independent contracts in `design/foundations/`) was committed and
-pushed as **`19d0135`** ("design: LOW-LEVEL FOUNDATIONS MISSION 001").
-`origin/main` is at `19d0135`.
+pushed as **`19d0135`** ("design: LOW-LEVEL FOUNDATIONS MISSION 001"). The
+REQUIREMENTS EXPANSION MISSION 002 checkpoint (PART IV-C + companion file +
+conflicts/open-questions updates) was committed and pushed as **`4f5e97c`**
+("requirements: REQUIREMENTS EXPANSION MISSION 002"). `origin/main` is at
+`4f5e97c`.
 
 Research Missions 001 + 002, PERSONAL REQUIREMENTS MISSION 001 (+ correction), and
 HUMAN / CENTRAL MODEL MISSION 001 are done and pushed (commit `f3093fc`).
 
-**REQUIREMENTS EXPANSION MISSION 002 (2026-09-11, NOT yet committed):**
+**TECHNOLOGY SELECTION MISSION 001 (2026-09-11/12, NOT yet committed):**
+determined which concrete technologies can satisfy the already-committed
+requirements, architecture, and foundation contracts — this mission chooses
+**candidates**, not new invariants, and was explicitly forbidden from
+implementing anything. Output: `design/technology/` — `README.md` +
+`TECHNOLOGY_SELECTION.md` (the cross-cutting synthesis) + 10 category
+evaluations (`LANGUAGE_EVALUATION.md`, `CHRONICLE_EVALUATION.md`,
+`ISOLATION_EVALUATION.md`, `PROCESS_AND_IPC_EVALUATION.md`,
+`TERMINAL_GUI_EVALUATION.md`, `CRYPTO_GOVERNANCE_EVALUATION.md`,
+`REASONING_COMPUTATION_EVALUATION.md`, `BUILD_AND_SUPPLY_CHAIN.md`,
+`MIGRATION_PORTABILITY.md`) + `TECHNOLOGY_ADVERSARIAL_REVIEW.md` (36 named
+attacks against the specific technologies chosen) + `TECHNOLOGY_EXPERIMENT_
+PLAN.md` (prioritised pre-trust experiments + formal-verification
+opportunities) + `TECHNOLOGY_DECISION_LOG.md` (an auditable index of every
+recommendation, its alternative, reversal cost, and confidence).
+
+**Proposed stack (full detail + confidence levels: `design/technology/
+TECHNOLOGY_SELECTION.md` §2, §14):** Rust as the primary language (single-
+language core; isolated capabilities may use another runtime); a two-tier
+Chronicle (a purpose-built append-only framed log as the authoritative
+store, SQLite/WAL as the disposable, rebuildable current-state cache); a
+two-tier Ring-3 isolation model (Landlock + seccomp-bpf + namespaces +
+cgroups v2 as the default, unprivileged tier; a Firecracker-class microVM
+reserved for governance-flagged high-risk capability classes); the Reference
+Monitor as its own OS process, separate from the rest of Ring 1, with Ring 2
+(reasoning) also its own process holding no capability grant — realising
+RC-7's three must-be-real boundaries as actual process boundaries; Unix
+domain sockets + `SCM_RIGHTS` file-descriptor passing for IPC (which gives
+OS-resource-shaped capability grants a kernel-enforced, `[SEN]`-strength
+unforgeability property — a concrete finding for F1 §19's previously
+`[ID]`-only grant-representation question); `execve`-only terminal
+invocation with `openat2` TOCTOU defence; AT-SPI2 for structured GUI
+targeting with a disclosed Wayland coordinate-fallback gap; Ed25519 +
+SHA-256 for governance integrity, an offline signing key, and a TPM 2.0
+monotonic counter for rollback protection where available; `llama.cpp`/GGUF
+for local inference (model selection explicitly deferred). **Twelve
+decisions are flagged as requiring explicit human sign-off before CORE
+ENGINE proceeds** (language, Chronicle substrate, isolation, the Monitor's
+process boundary, governance integrity, and the AI runtime boundary — the
+exact set the mission's own instructions named); everything else is offered
+as a reviewable, non-blocking recommendation.
+
+**Verified in this mission:** compatibility against all ten LOW-LEVEL
+FOUNDATIONS contracts (F1–F10) with no invariant weakened or bypassed; the
+offline-core test (no technology choice requires network reachability at
+runtime, with build-time package resolution correctly distinguished from
+runtime behaviour); the AI-boundary test (the reasoning process holds zero
+ambient authority regardless of model behaviour, and Ring 1 remains fully
+functional with it absent); the dynamic-capability/self-modification
+boundary (more computational power never becomes more authority, because
+authority is gated by grant-possession and effect-class membership, neither
+a function of compute power); a 36-attack adversarial review specific to the
+chosen technologies, surfacing exactly one new gap (debug/introspection
+interfaces must be gated like any other effect and disabled by default in
+non-development builds) which is closed with a concrete recommendation, not
+left open. **`src/` untouched, no dependency installed, no implementation
+performed.** A note of record: this mission's resume instructions
+momentarily conflated a validation claim ("VC1–VC18 clean") from the
+*prior*, already-committed REQUIREMENTS EXPANSION MISSION 002 with this
+mission's own scope; independently re-verified as accurate for that prior
+mission and explicitly not this mission's own artifact
+(`design/technology/TECHNOLOGY_SELECTION.md`, opening note).
 retroactively expands the already-committed requirements phase with **PART
 IV-C — GENERAL REASONING, KNOWLEDGE, AND WISDOM**
 (`requirements/REQUIREMENTS_MASTER.md` §56–76, `MEL-REQ-254`…`MEL-REQ-364`, 111
@@ -693,8 +758,8 @@ was judged unnecessary to proceed.
 DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
   -> PERSONAL REQUIREMENTS   <-- MISSION 001 (+ correction) done, pushed;
                                 REQUIREMENTS EXPANSION MISSION 002 (PART IV-C,
-                                general reasoning/knowledge/wisdom) done (1st
-                                pass), NOT committed; awaiting review
+                                general reasoning/knowledge/wisdom) done,
+                                committed + pushed (`4f5e97c`)
   -> HUMAN / CENTRAL MODEL   <-- MISSION 001 done, pushed (f3093fc)
   -> SYSTEM DESIGN /         <-- MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1
      ARCHITECTURE                done, committed + pushed (`8a40207`)
@@ -702,11 +767,13 @@ DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
   -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done, committed + pushed
                                 (`19d0135`). design/foundations/ = README +
                                 12 technology-independent contracts
-  -> TECHNOLOGY SELECTION    <-- next: score candidates against
-                                design/foundations/TECHNOLOGY_SELECTION_CRITERIA.md
-                                (language, storage, isolation, crypto, process,
-                                IPC, GUI, terminal) — human-reviewed, not
-                                autonomous
+  -> TECHNOLOGY SELECTION    <-- MISSION 001 done (1st pass), NOT committed;
+                                awaiting review. design/technology/ = README +
+                                synthesis + 10 category evaluations +
+                                adversarial review + experiment plan +
+                                decision log. Recommends, does not mandate;
+                                12 decisions flagged for explicit human
+                                sign-off (see TECHNOLOGY_SELECTION.md §14)
   -> CORE ENGINE
   -> STORAGE
   -> INTERFACE
@@ -770,10 +837,11 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 | Path            | Holds                                                        |
 |-----------------|-------------------------------------------------------------|
 | `research/`     | Deep-research findings (Missions 001 + 002). Complete for now. |
-| `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001 + REQUIREMENTS EXPANSION MISSION 002). First pass done for both; MISSION 002 not yet committed. |
+| `requirements/` | Requirements spec (PERSONAL REQUIREMENTS MISSION 001 + REQUIREMENTS EXPANSION MISSION 002). Both committed + pushed (`4f5e97c`). |
 | `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
 | `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, committed + pushed (`8a40207`). |
-| `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, first pass done, **not yet committed**. |
+| `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, committed + pushed (`19d0135`). |
+| `design/technology/` | Technology recommendations (TECHNOLOGY SELECTION MISSION 001). README + synthesis + 10 category evaluations + adversarial review + experiment plan + decision log, first pass done, **not yet committed**. |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -1125,3 +1193,65 @@ decided.
   reviews this expansion (particularly §74–76 and VC13–VC18/OQ-22–32), then it
   is committed as its own checkpoint, then TECHNOLOGY SELECTION proceeds using
   `design/foundations/TECHNOLOGY_SELECTION_CRITERIA.md` as planned.
+- **2026-09-11/12** — **REQUIREMENTS EXPANSION MISSION 002 committed + pushed
+  (`4f5e97c`, "requirements: REQUIREMENTS EXPANSION MISSION 002").**
+  `origin/main` advanced from `19d0135` to `4f5e97c`. Next phase: TECHNOLOGY
+  SELECTION, as recommended.
+- **2026-09-11/12** — **TECHNOLOGY SELECTION MISSION 001 complete (first
+  pass, NOT committed, NOT pushed).** This session ran across an interruption
+  and a resume; the resume instructions briefly conflated this mission's own
+  scope with a validation claim ("VC1–VC18 clean") that actually belonged to
+  the prior, already-committed REQUIREMENTS EXPANSION MISSION 002 — that
+  claim was independently re-checked here (still accurate for `4f5e97c`, and
+  explicitly not restated as this mission's own artifact,
+  `design/technology/TECHNOLOGY_SELECTION.md` opening note). Determined which
+  concrete technologies satisfy the already-committed requirements,
+  architecture, and foundation contracts. Created `design/technology/`:
+  `README.md`, `TECHNOLOGY_SELECTION.md` (the synthesis), and ten category
+  evaluations — `LANGUAGE_EVALUATION.md` (Rust primary; Zig recorded as the
+  fallback pending 1.0; single-language core), `CHRONICLE_EVALUATION.md` (a
+  custom append-only framed log as the authoritative store + SQLite/WAL as
+  the disposable, rebuildable current-state cache), `ISOLATION_EVALUATION.md`
+  (Landlock + seccomp-bpf + namespaces + cgroups v2 as the default tier; a
+  Firecracker-class microVM as the escalated tier for governance-flagged
+  high-risk capability classes), `PROCESS_AND_IPC_EVALUATION.md` (the
+  Reference Monitor and the reasoning process each as their own OS process —
+  realising RC-7's three must-be-real boundaries as actual process
+  boundaries; Unix domain sockets + `SCM_RIGHTS` for IPC, which gives
+  OS-resource-shaped grants a kernel-enforced unforgeability property — a
+  concrete finding for F1 §19's previously open grant-representation
+  question), `TERMINAL_GUI_EVALUATION.md` (`execve`-only invocation +
+  `openat2` TOCTOU defence; AT-SPI2 for structured GUI targeting with a
+  disclosed Wayland coordinate-fallback gap), `CRYPTO_GOVERNANCE_EVALUATION.md`
+  (Ed25519 + SHA-256, an offline signing key, a TPM 2.0 monotonic counter for
+  rollback protection where available), `REASONING_COMPUTATION_EVALUATION.md`
+  (verifiers as ordinary sandboxed processes with deliberately diverse
+  implementations; SymPy/SciPy for math; `llama.cpp`/GGUF for local
+  inference, model selection deferred; a two-lane WASI/native capability
+  packaging model), `BUILD_AND_SUPPLY_CHAIN.md`, `MIGRATION_PORTABILITY.md`
+  (portable state vs. non-portable authority strictly separated; the TPM
+  counter explicitly does not transfer automatically). Plus
+  `TECHNOLOGY_ADVERSARIAL_REVIEW.md` (36 named attacks against the specific
+  technologies chosen — verdict: no attack defeats a foundation-contract
+  invariant; one genuinely new gap surfaced and closed, debug/introspection
+  interfaces must be gated like any other effect and disabled by default in
+  non-development builds), `TECHNOLOGY_EXPERIMENT_PLAN.md` (13 prioritised
+  pre-trust experiments, headed by crash-injection testing of the new
+  Chronicle log, plus formal-verification opportunities), and
+  `TECHNOLOGY_DECISION_LOG.md` (an auditable index of all 28 recommendations
+  with alternatives, reversal cost, and confidence). **Verified:**
+  compatibility against all of F1–F10 with no invariant weakened; the
+  offline-core test; the AI-boundary test (zero ambient authority regardless
+  of model behaviour); the dynamic-capability/self-modification boundary
+  ("more computational power never becomes more authority", concretely true
+  here because authority is gated by grant-possession and effect-class
+  membership, neither a function of compute power); no hard MUST/MUST-NOT
+  gate was rescued by a SHOULD-tier advantage anywhere. **No implementation
+  performed, no dependency installed, `src/` untouched.** 12 decisions
+  flagged for explicit human sign-off (language, Chronicle substrate,
+  isolation, the Monitor's process boundary, governance integrity, the AI
+  runtime boundary); everything else offered as a reviewable, non-blocking
+  recommendation (`TECHNOLOGY_SELECTION.md` §14). **Not committed, not
+  pushed.** Recommended: human review of the flagged decisions, then this
+  checkpoint is committed, then CORE ENGINE begins with the experiment
+  plan's priority-1 item (crash-injection testing of the Chronicle log).
