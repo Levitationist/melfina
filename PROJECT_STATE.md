@@ -3,7 +3,7 @@
 Single source of truth for where this project is and the rules it operates under.
 Update this file whenever the phase changes or a principle is added, removed, or revised.
 
-Last updated: 2026-09-12 (TECHNOLOGY SELECTION MISSION 001 — first pass; REQUIREMENTS EXPANSION MISSION 002 committed + pushed as `4f5e97c`; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
+Last updated: 2026-09-13 (TECHNOLOGY SELECTION MISSION 001 committed + pushed as `b40b3b7`; REQUIREMENTS EXPANSION MISSION 002 committed + pushed as `4f5e97c`; LOW-LEVEL FOUNDATIONS MISSION 001 committed + pushed as `19d0135`; architecture checkpoint committed + pushed as `8a40207`)
 
 ---
 
@@ -19,11 +19,12 @@ MELFINA is the official project name (set 2026-09-09). Earlier notes may say
 
 ## 2. Current phase
 
-**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001 and REQUIREMENTS EXPANSION
-MISSION 002 both complete and committed. TECHNOLOGY SELECTION — MISSION 001
-(first pass) complete, NOT yet committed, awaiting user review. Still
-design/research — no `src/`, no implementation, no dependency installed;
-technology is *recommended*, not yet adopted.**
+**Phase: LOW-LEVEL FOUNDATIONS — MISSION 001, REQUIREMENTS EXPANSION
+MISSION 002, and TECHNOLOGY SELECTION — MISSION 001 are all complete and
+committed. The technology stack is *recommended*, not yet human-approved —
+12 decisions in `design/technology/TECHNOLOGY_SELECTION.md` §14 remain open
+for explicit sign-off. Still design/research — no `src/`, no implementation,
+no dependency installed.**
 
 The SYSTEM DESIGN / ARCHITECTURE checkpoint (MISSION 001 + ADVERSARIAL REVIEW 001
 + REVISION 1) was committed and pushed as **`8a40207`** ("design: ARCHITECTURE
@@ -33,13 +34,16 @@ technology-independent contracts in `design/foundations/`) was committed and
 pushed as **`19d0135`** ("design: LOW-LEVEL FOUNDATIONS MISSION 001"). The
 REQUIREMENTS EXPANSION MISSION 002 checkpoint (PART IV-C + companion file +
 conflicts/open-questions updates) was committed and pushed as **`4f5e97c`**
-("requirements: REQUIREMENTS EXPANSION MISSION 002"). `origin/main` is at
-`4f5e97c`.
+("requirements: REQUIREMENTS EXPANSION MISSION 002"). The TECHNOLOGY
+SELECTION MISSION 001 checkpoint (`design/technology/` — 14 files) was
+committed and pushed as **`b40b3b7`** ("design: TECHNOLOGY SELECTION
+MISSION 001"). `origin/main` is at `b40b3b7`.
 
 Research Missions 001 + 002, PERSONAL REQUIREMENTS MISSION 001 (+ correction), and
 HUMAN / CENTRAL MODEL MISSION 001 are done and pushed (commit `f3093fc`).
 
-**TECHNOLOGY SELECTION MISSION 001 (2026-09-11/12, NOT yet committed):**
+**TECHNOLOGY SELECTION MISSION 001 (2026-09-11/12, since committed as
+`b40b3b7`; narrative below is preserved as written at the time):**
 determined which concrete technologies can satisfy the already-committed
 requirements, architecture, and foundation contracts — this mission chooses
 **candidates**, not new invariants, and was explicitly forbidden from
@@ -101,7 +105,10 @@ momentarily conflated a validation claim ("VC1–VC18 clean") from the
 mission's own scope; independently re-verified as accurate for that prior
 mission and explicitly not this mission's own artifact
 (`design/technology/TECHNOLOGY_SELECTION.md`, opening note).
-retroactively expands the already-committed requirements phase with **PART
+
+**REQUIREMENTS EXPANSION MISSION 002 (2026-09-11, since committed as
+`4f5e97c` — see §9's checkpoint log; narrative below is preserved as written
+at the time):** retroactively expands the already-committed requirements phase with **PART
 IV-C — GENERAL REASONING, KNOWLEDGE, AND WISDOM**
 (`requirements/REQUIREMENTS_MASTER.md` §56–76, `MEL-REQ-254`…`MEL-REQ-364`, 111
 new requirements) + 8 new anti-requirements (`MEL-AR-20`…`27`) + a new companion
@@ -767,13 +774,14 @@ DEEP RESEARCH            <-- MISSION 001 + 002 done, pushed
   -> LOW-LEVEL FOUNDATIONS   <-- MISSION 001 done, committed + pushed
                                 (`19d0135`). design/foundations/ = README +
                                 12 technology-independent contracts
-  -> TECHNOLOGY SELECTION    <-- MISSION 001 done (1st pass), NOT committed;
-                                awaiting review. design/technology/ = README +
+  -> TECHNOLOGY SELECTION    <-- MISSION 001 done, committed + pushed
+                                (`b40b3b7`). design/technology/ = README +
                                 synthesis + 10 category evaluations +
                                 adversarial review + experiment plan +
                                 decision log. Recommends, does not mandate;
-                                12 decisions flagged for explicit human
-                                sign-off (see TECHNOLOGY_SELECTION.md §14)
+                                12 decisions await explicit human sign-off
+                                (see TECHNOLOGY_SELECTION.md §14) before
+                                CORE ENGINE may build against them
   -> CORE ENGINE
   -> STORAGE
   -> INTERFACE
@@ -804,7 +812,15 @@ recorded justification in `decisions/`.
 - **No unnecessary cloud dependency.**
 - **No unnecessary frameworks or abstraction layers.**
 - **Low-level implementation where technically justified** — not everywhere for
-  its own sake. C / C++ are the eventual core implementation candidates.
+  its own sake. *(Superseded placeholder, corrected 2026-09-13: this line
+  originally named C/C++ as "the eventual core implementation candidates" —
+  written before any language evaluation existed. TECHNOLOGY SELECTION
+  MISSION 001 has since evaluated 8 candidates and recommends **Rust**
+  primary, with C/C++ explicitly rejected as the core language on
+  memory-safety grounds — `design/technology/LANGUAGE_EVALUATION.md`. This
+  is a recommendation pending human approval, not yet a made decision — see
+  §8 — but the C/C++ placeholder above no longer reflects the project's
+  actual analysis and should not be treated as still in effect.)*
 - **CLI / native interfaces before heavy web abstractions.**
 - **Extensibility without architectural bloat.**
 - **Understand before assembling.** The user wants to understand the system
@@ -841,7 +857,7 @@ work" is). Music should fall out of those as a case, not bolt on beside them.
 | `model/`        | Human / central life model (HUMAN / CENTRAL MODEL MISSION 001). First pass done, pushed. |
 | `design/`       | System architecture (ARCHITECTURE MISSION 001 + ADVERSARIAL REVIEW 001 + REVISION 1). 11 files, committed + pushed (`8a40207`). |
 | `design/foundations/` | Technology-independent low-level contracts (LOW-LEVEL FOUNDATIONS MISSION 001). README + 12 contracts, committed + pushed (`19d0135`). |
-| `design/technology/` | Technology recommendations (TECHNOLOGY SELECTION MISSION 001). README + synthesis + 10 category evaluations + adversarial review + experiment plan + decision log, first pass done, **not yet committed**. |
+| `design/technology/` | Technology recommendations (TECHNOLOGY SELECTION MISSION 001). README + synthesis + 10 category evaluations + adversarial review + experiment plan + decision log, committed + pushed (`b40b3b7`). Recommendations, not yet human-approved — see §8. |
 | `decisions/`    | Dated, lightweight decision records (one file per decision).|
 | `experiments/`  | Throwaway probes and spikes. Never the real system.         |
 | `src/`          | The eventual implementation. Placeholder only for now.      |
@@ -863,18 +879,36 @@ Facts, for reference. Not commitments.
 Deferred by design. Requirements are implementation-independent; these are for
 SYSTEM DESIGN / ARCHITECTURE and later, and only after HUMAN / CENTRAL MODEL.
 
-- The neutral primitive set / life model (`requirements/OPEN_QUESTIONS.md` OQ-1).
-- Core language(s) and their boundaries.
-- Storage substrate (flat files, embedded DB, custom format, ...).
+- The neutral primitive set / life model (`requirements/OPEN_QUESTIONS.md` OQ-1)
+  — resolved by the E²CI model (`model/HUMAN_CENTRAL_MODEL.md`); listed here
+  historically, not actually still open.
+- **Core language(s) and their boundaries** — a **recommendation** now exists
+  (Rust primary, single-language core) from TECHNOLOGY SELECTION MISSION 001,
+  but is **not yet human-approved**; see
+  `design/technology/LANGUAGE_EVALUATION.md` and `TECHNOLOGY_SELECTION.md` §14.
+- **Storage substrate** — a **recommendation** now exists (a custom append-only
+  log as the authoritative Chronicle + SQLite/WAL as the rebuildable cache),
+  **not yet human-approved**, pending the crash-injection experiment in
+  `design/technology/TECHNOLOGY_EXPERIMENT_PLAN.md`; see
+  `design/technology/CHRONICLE_EVALUATION.md`.
 - Interface medium(s) — requirements say only "multi-modal, user-choosable,
-  consistent with the CLI-first leaning".
-- Which local reasoning components / model sizes (OQ-11).
-- The permission-grant mechanism (object-capability *style* is required by
-  `MEL-REQ-180`; the mechanism is not chosen).
-- The default consequential/routine action boundary (OQ-12).
+  consistent with the CLI-first leaning"; still genuinely open.
+- Which local reasoning components / model sizes (OQ-11) — the *engine*
+  (`llama.cpp`/GGUF) is recommended; *which model(s)* is explicitly deferred,
+  not decided by Technology Selection at all.
+- **The permission-grant mechanism** — object-capability *style* was already
+  required by `MEL-REQ-180`; TECHNOLOGY SELECTION MISSION 001 adds a concrete
+  finding (not yet approved): OS-resource-shaped grants can be realised as
+  `SCM_RIGHTS`-passed file descriptors, giving them kernel-enforced
+  unforgeability — `design/technology/PROCESS_AND_IPC_EVALUATION.md` §4.
+- The default consequential/routine action boundary (OQ-12) — still open;
+  Technology Selection does not touch this, it is governance content (F8),
+  not a technology choice.
 - Whether an isolated network add-on is ever built (OQ-11; `MEL-REQ-167`).
 - Whether any optional progress representation ships (OQ-6).
-- Licensing (deferred).
+- Licensing (deferred) — `design/technology/BUILD_AND_SUPPLY_CHAIN.md` §6
+  flags license-review items (dependency licenses, model-weight licenses)
+  for whenever this is picked back up, without resolving it.
 
 The AI/assistant layer's *role* is now specified at requirements level (Parts II,
 IV, V of `REQUIREMENTS_MASTER.md`): under the permission model, not owner; the
@@ -1255,3 +1289,25 @@ decided.
   pushed.** Recommended: human review of the flagged decisions, then this
   checkpoint is committed, then CORE ENGINE begins with the experiment
   plan's priority-1 item (crash-injection testing of the Chronicle log).
+- **2026-09-12** — **TECHNOLOGY SELECTION MISSION 001 committed + pushed
+  (`b40b3b7`, "design: TECHNOLOGY SELECTION MISSION 001").** `origin/main`
+  advanced from `4f5e97c` to `b40b3b7`. The 12 flagged decisions
+  (`design/technology/TECHNOLOGY_SELECTION.md` §14) remain **recommendations
+  awaiting explicit human approval** — committing the checkpoint records the
+  research and analysis, it does not itself constitute that approval.
+- **2026-09-13** — Resumed after a session boundary. Verified the
+  TECHNOLOGY SELECTION checkpoint (`b40b3b7`) is present, clean, and pushed;
+  independently re-confirmed `requirements/CONFLICTS.md`'s VC1–VC18 (no
+  dupes, no gaps) as belonging to the *already-committed* REQUIREMENTS
+  EXPANSION MISSION 002 (`4f5e97c`), not to Technology Selection, correcting
+  a conflation introduced by an intervening resume prompt. Found and fixed
+  three small `PROJECT_STATE.md` staleness/formatting defects introduced
+  while editing across the TECHNOLOGY SELECTION mission's own resume: an
+  orphaned, headerless paragraph fragment (the REQUIREMENTS EXPANSION
+  MISSION 002 narrative lost its bold lead-in when a later edit's
+  find-and-replace consumed it — header restored, no narrative content
+  changed), a stale "not yet committed" `design/technology/` row in the §6
+  repository-layout table, and the missing checkpoint-log entry for
+  `b40b3b7` itself (added above). No design, requirements, model, or
+  foundation content was altered — this was a `PROJECT_STATE.md` accuracy
+  pass only, ahead of starting the next mission.
