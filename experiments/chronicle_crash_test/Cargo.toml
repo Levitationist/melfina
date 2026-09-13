@@ -1,0 +1,15 @@
+[package]
+name = "chronicle_crash_test"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Deliberately zero dependencies (std library only): this is a throwaway
+# spike (see experiments/README.md), and the human authorization for this
+# experiment was explicit that it must involve zero dependency installation
+# and zero network access. CRC-32 and a small PRNG are hand-implemented in
+# main.rs rather than pulled from crates.io for exactly that reason.
+
+[[bin]]
+name = "chronicle_crash_test"
+path = "src/main.rs"
