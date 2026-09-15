@@ -13,9 +13,9 @@
 use std::collections::HashSet;
 use std::env;
 use std::fs::{self, File, OpenOptions};
-use std::io::{self, Read, Write};
+use std::io::{self, Read, Seek, SeekFrom, Write};
 use std::process::{Command, Stdio};
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
 // ---------------------------------------------------------------- CRC-32 --
 
@@ -338,6 +338,235 @@ fn run_bitflip_check(path: &str) -> Result<(), String> {
     Ok(())
 }
 
+// =====================================================================
+// MECHANISM A — device-mapper (dm-flakey) fault injection support
+// =====================================================================
+//
+// Everything above this line is Phase 1 (process-crash) and is unchanged.
+// Everything below is new, additive code for Phase 2 Mechanism A. It is
+// designed to run against EITHER:
+//   (a) a fixed-size regular file used as a stand-in, for pre-validating
+//       this code with zero privilege and zero real device involved, or
+//   (b) the real /dev/mapper/<flakey-device> node, once a human has
+//       created it and made it accessible (see the procedure document).
+//
+// Why this needs different logic from Phase 1's writer/reader:
+//
+// Phase 1 opened a REGULAR FILE with `append(true)` and relied on the
+// kernel's O_APPEND behaviour (each write goes to the current end-of-file,
+// which grows) and on `read_to_end` (which stops exactly at the real EOF).
+//
+// A block device (or a fixed-size stand-in file used to imitate one) does
+// NOT have a growing "end of file" in that sense — its size is fixed from
+// the moment it's created. O_APPEND on such a target does not do what we
+// want (it would keep seeking to the fixed, constant end-of-device rather
+// than tracking "how far our own appends have gotten"), and a naive
+// `read_to_end` would read the entire fixed size, including whatever
+// never-written space follows our real data — which, being zero-filled,
+// would misparse as a stream of spurious zero-length "valid" frames
+// (crc32 of an empty payload is 0, which matches a zeroed 4-byte stored
+// CRC). Both problems are handled explicitly below:
+//
+//   - the writer tracks its own byte offset and does an explicit `seek`
+//     before every write, rather than relying on O_APPEND;
+//   - the reader treats a frame whose tag byte is not the expected
+//     sentinel (1) as "end of written data", not as a valid empty frame.
+
+const RECORD_TAG: u8 = 1;
+
+/// Append one record at an explicit offset (no O_APPEND — see module note
+/// above). Returns the offset one past the end of the frame just written,
+/// i.e. the offset the *next* record should be written at.
+fn append_record_at(path: &str, offset: u64, seq: u64) -> io::Result<u64> {
+    let payload = format!("{{\"seq\":{}}}", seq);
+    let payload_bytes = payload.as_bytes();
+    let len = payload_bytes.len() as u32;
+    let crc = crc32(payload_bytes);
+
+    let mut header = Vec::with_capacity(9);
+    header.extend_from_slice(&len.to_le_bytes());
+    header.push(RECORD_TAG);
+    header.extend_from_slice(&crc.to_le_bytes());
+
+    // Opened fresh per call so this also works correctly against a block
+    // device node, which some tooling prefers to open non-persistently.
+    let mut f = OpenOptions::new().write(true).open(path)?;
+    f.seek(SeekFrom::Start(offset))?;
+    f.write_all(&header)?;
+    f.write_all(payload_bytes)?;
+    f.sync_all()?; // fsync — the claimed durability point, exactly as Phase 1
+
+    Ok(offset + 9 + payload_bytes.len() as u64)
+}
+
+/// Runs for `duration` (or until `path` reports it is out of room, per
+/// `capacity`), starting at `base_offset`, logging `seq,offset` to
+/// `ledger_path` (fsynced) after each successful append — same ground-
+/// truth-ledger design as Phase 1, extended with the offset each record
+/// was actually written at, since Mechanism A verifies records directly
+/// by their known position rather than by sequential replay alone.
+fn mecha_write(path: &str, base_offset: u64, capacity: u64, duration: Duration, ledger_path: &str) {
+    let mut offset = base_offset;
+    let mut seq: u64 = 0;
+    let start = Instant::now();
+    loop {
+        if start.elapsed() >= duration {
+            break;
+        }
+        // Leave headroom so we never write past our assigned range.
+        if offset + 32 > base_offset + capacity {
+            break;
+        }
+        match append_record_at(path, offset, seq) {
+            Ok(new_offset) => {
+                // Record the ledger entry only after append_record_at's
+                // own fsync returned Ok, exactly mirroring Phase 1's
+                // durability-claim discipline.
+                let mut lf = OpenOptions::new()
+                    .create(true)
+                    .append(true)
+                    .open(ledger_path)
+                    .expect("open ledger");
+                writeln!(lf, "{},{}", seq, offset).expect("write ledger");
+                lf.flush().ok();
+                lf.sync_all().ok();
+                offset = new_offset;
+                seq += 1;
+            }
+            Err(e) => {
+                eprintln!("mecha_write: append failed at seq {seq}, offset {offset}: {e}");
+                break;
+            }
+        }
+    }
+    println!("mecha_write: finished — {seq} records attempted, final offset {offset}");
+}
+
+#[derive(Debug)]
+enum MechaCheck {
+    Ok,
+    ChecksumMismatch,
+    LengthOrTagMismatch { expected_len: u32, got_len: u32, got_tag: u8 },
+    IoError(String),
+}
+
+/// Ledger-driven direct verification: for each (seq, offset) the writer
+/// claimed was durable, seek to exactly that offset and check the frame
+/// that is actually there — independent of whatever is or isn't readable
+/// before or after it. This is the primary Mechanism A check: it directly
+/// answers "did this specific acknowledged-durable write survive", which
+/// is the property dm-flakey's drop_writes feature specifically threatens,
+/// without being confused by an unrelated hole earlier in the range.
+fn mecha_verify_ledger(path: &str, ledger_path: &str) -> Vec<(u64, u64, MechaCheck)> {
+    let mut results = Vec::new();
+    let ledger = fs::read_to_string(ledger_path).unwrap_or_default();
+    let mut f = match File::open(path) {
+        Ok(f) => f,
+        Err(e) => {
+            results.push((0, 0, MechaCheck::IoError(format!("open {path}: {e}"))));
+            return results;
+        }
+    };
+    for line in ledger.lines() {
+        let mut parts = line.trim().splitn(2, ',');
+        let seq: u64 = match parts.next().and_then(|s| s.parse().ok()) {
+            Some(v) => v,
+            None => continue,
+        };
+        let offset: u64 = match parts.next().and_then(|s| s.parse().ok()) {
+            Some(v) => v,
+            None => continue,
+        };
+        let expected_payload = format!("{{\"seq\":{}}}", seq);
+        let expected_len = expected_payload.as_bytes().len() as u32;
+        let expected_crc = crc32(expected_payload.as_bytes());
+
+        let check = (|| -> io::Result<MechaCheck> {
+            let mut header = [0u8; 9];
+            f.seek(SeekFrom::Start(offset))?;
+            f.read_exact(&mut header)?;
+            let len = u32::from_le_bytes([header[0], header[1], header[2], header[3]]);
+            let tag = header[4];
+            let crc_stored = u32::from_le_bytes([header[5], header[6], header[7], header[8]]);
+            if tag != RECORD_TAG || len != expected_len {
+                return Ok(MechaCheck::LengthOrTagMismatch {
+                    expected_len,
+                    got_len: len,
+                    got_tag: tag,
+                });
+            }
+            let mut payload = vec![0u8; len as usize];
+            f.read_exact(&mut payload)?;
+            let crc_actual = crc32(&payload);
+            if crc_actual != crc_stored || crc_actual != expected_crc || payload != expected_payload.as_bytes() {
+                return Ok(MechaCheck::ChecksumMismatch);
+            }
+            Ok(MechaCheck::Ok)
+        })();
+
+        results.push((
+            seq,
+            offset,
+            check.unwrap_or_else(|e| MechaCheck::IoError(format!("{e}"))),
+        ));
+    }
+    results
+}
+
+fn run_mecha_verify(path: &str, ledger_path: &str) {
+    let results = mecha_verify_ledger(path, ledger_path);
+    let mut ok = 0usize;
+    let mut bad = 0usize;
+    for (seq, offset, check) in &results {
+        match check {
+            MechaCheck::Ok => ok += 1,
+            other => {
+                bad += 1;
+                println!("MISMATCH seq={seq} offset={offset}: {other:?}");
+            }
+        }
+    }
+    println!();
+    println!("=== MECHANISM A LEDGER VERIFICATION ===");
+    println!("ledgered (claimed-durable) records checked: {}", results.len());
+    println!("verified intact:                            {ok}");
+    println!("LOST or CORRUPTED (should be 0 for PASS):    {bad}");
+    if results.is_empty() {
+        println!("MECHA_RESULT=INCONCLUSIVE (empty ledger — nothing was recorded as durable)");
+    } else if bad == 0 {
+        println!("MECHA_RESULT=PASS");
+    } else {
+        println!("MECHA_RESULT=FAIL");
+    }
+}
+
+/// Pre-validation self-test: exercises the Mechanism A code path (explicit
+/// offset writer + ledger-driven verifier) against a synthetic, fixed-size
+/// REGULAR FILE standing in for a device — no privilege, no real device,
+/// no dm-flakey involved. On ordinary hardware with nothing dropping
+/// writes, this should always come back 100% verified; a failure here
+/// would mean the new Mechanism A code itself has a bug, unrelated to
+/// dm-flakey, and must be fixed before pointing it at a real flakey
+/// device.
+fn run_mecha_selftest(dir: &str) {
+    let path = format!("{}/mecha_selftest.bin", dir);
+    let ledger = format!("{}/mecha_selftest.ledger", dir);
+    let _ = fs::remove_file(&path);
+    let _ = fs::remove_file(&ledger);
+
+    let capacity: u64 = 4 * 1024 * 1024; // 4 MiB stand-in "device"
+    let f = OpenOptions::new()
+        .create(true)
+        .write(true)
+        .open(&path)
+        .expect("create stand-in file");
+    f.set_len(capacity).expect("preallocate stand-in file"); // fixed size, zero-filled — like a fresh device
+    drop(f);
+
+    mecha_write(&path, 0, capacity, Duration::from_millis(500), &ledger);
+    run_mecha_verify(&path, &ledger);
+}
+
 // ---------------------------------------------------------------- main --
 
 fn run_trials(n: usize, trial_dir: &str) {
@@ -445,10 +674,35 @@ fn main() {
                 Err(e) => println!("BITFLIP_CHECK_RESULT=FAIL: {e}"),
             }
         }
+        // --- Mechanism A (Phase 2, dm-flakey) ---
+        Some("mecha_write") => {
+            // mecha_write <path> <base_offset> <capacity_bytes> <duration_secs> <ledger_path>
+            let path = args.get(2).expect("mecha_write needs <path>");
+            let base_offset: u64 = args.get(3).and_then(|s| s.parse().ok()).expect("<base_offset>");
+            let capacity: u64 = args.get(4).and_then(|s| s.parse().ok()).expect("<capacity_bytes>");
+            let duration_secs: u64 = args.get(5).and_then(|s| s.parse().ok()).expect("<duration_secs>");
+            let ledger = args.get(6).expect("mecha_write needs <ledger_path>");
+            mecha_write(path, base_offset, capacity, Duration::from_secs(duration_secs), ledger);
+        }
+        Some("mecha_verify") => {
+            // mecha_verify <path> <ledger_path>
+            let path = args.get(2).expect("mecha_verify needs <path>");
+            let ledger = args.get(3).expect("mecha_verify needs <ledger_path>");
+            run_mecha_verify(path, ledger);
+        }
+        Some("mecha_selftest") => {
+            // mecha_selftest <scratch_dir>  -- no privilege, no real device;
+            // validates the Mechanism A code path against a regular file.
+            let dir = args.get(2).map(|s| s.as_str()).unwrap_or(".");
+            run_mecha_selftest(dir);
+        }
         _ => {
             eprintln!("usage: chronicle_crash_test writer <chron-path> <ledger-path>");
             eprintln!("       chronicle_crash_test run_trials <n> <trial-dir>");
             eprintln!("       chronicle_crash_test bitflip_check <path>");
+            eprintln!("       chronicle_crash_test mecha_write <path> <base_offset> <capacity_bytes> <duration_secs> <ledger_path>");
+            eprintln!("       chronicle_crash_test mecha_verify <path> <ledger_path>");
+            eprintln!("       chronicle_crash_test mecha_selftest <scratch_dir>");
             std::process::exit(2);
         }
     }
